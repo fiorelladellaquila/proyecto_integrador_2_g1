@@ -1,6 +1,6 @@
 
 import { useRouter } from 'next/router';
-import LoginComponent from '../../components/login/LoginComponent';
+import LoginComponent from '../../components/login/template/LoginComponent';
 
 export default function Auth() {
   const router = useRouter();

@@ -1,71 +1,27 @@
 import React, { useState } from 'react';
 import { Formik } from 'formik';
-import styled from 'styled-components';
 import {
   FormHelperText,
-  FormControl,
-  InputLabel,
-  OutlinedInput,
   IconButton,
   InputAdornment,
   Grid,
   Box,
-  Button,
-  Typography,
   useTheme,
 } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import * as Yup from 'yup';
-
-
-const FormContainer = styled.div`
-// flex: 1;
-display: flex;
-flex-direction: column; 
-align-items: center;
-justify-content: center;
-height: 100vh;
-// padding: 0 rem;
-`;
-
-const Logo = styled.img`
-  /* Estilos para el logo, como el tamaño y la posición */
-`;
-
-const StyledFormControl = styled(FormControl)`
-width: 100%;
-margin: 0; /* Establecer márgenes a 0 */
-padding: 0; /* Establecer relleno a 0 */
-`;
-
-const StyledInputLabel = styled(InputLabel)`
-margin: 0rem 3rem;
-
-`;
-
-const StyledInput = styled(OutlinedInput)`
-    margin: 1rem 3rem;
-    background-color: #FBFCFC;
-`;
-
-const ButtonContainer = styled.div`
-//   margin: 1rem 1rem;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-`;
-
-const StyledButton = styled(Button)`
-    background-color: #566158 !important; 
-    color: white;
-`;
-
-const Text = styled.div`
-  font-size: 1.2rem; 
-  color: white;
-  font-family:sans-serif;
-`;
+import {
+  FormContainer,
+  Logo,
+  StyledFormControl,
+  StyledInputLabel,
+  StyledInput,
+  ButtonContainer,
+  StyledButton,
+  Text,
+  StyledValidationMessages,
+} from './loginFormContainer.style';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -109,12 +65,13 @@ const LoginForm = () => {
               handleSubmit();
             }}
           >
-            <StyledInputLabel htmlFor="outlined-adornment-email-login">Email</StyledInputLabel>
+            <StyledInputLabel htmlFor="outlined-adornment-email-login" style={{ color: 'white' }}>Email</StyledInputLabel>
            <StyledFormControl error={Boolean(touched.email && errors.email)}>
                 
                 <StyledInput
                     id="outlined-adornment-email-login"
                     type="email"
+                    placeholder='Ingresá tu email'
                     value={values.email}
                     name="email"
                     onBlur={handleBlur}
@@ -122,19 +79,14 @@ const LoginForm = () => {
                     inputProps={{}}
                     label="Email"
                 />
-                {touched.email && errors.email && (
-                    <FormHelperText error id="standard-weight-helper-text-email-login">
-                    {errors.email}
-                    </FormHelperText>
-                )}
             </StyledFormControl>
 
-            <StyledInputLabel htmlFor="outlined-adornment-password-login">Contraseña</StyledInputLabel>
+            <StyledInputLabel htmlFor="outlined-adornment-password-login" style={{ color: 'white' }}>Contraseña</StyledInputLabel>
             <StyledFormControl fullWidth error={Boolean(touched.password && errors.password)}>
-                {/* <StyledInputLabel htmlFor="outlined-adornment-password-login">Contraseña</StyledInputLabel> */}
                 <StyledInput
                     id="outlined-adornment-password-login"
                     type={showPassword ? 'text' : 'password'}
+                    placeholder='Ingresá tu contraseña'
                     value={values.password}
                     name="password"
                     onBlur={handleBlur}
@@ -155,11 +107,6 @@ const LoginForm = () => {
                     inputProps={{}}
                     label="Password"
                 />
-                {touched.password && errors.password && (
-                <FormHelperText error id="standard-weight-helper-text-password-login">
-                  {errors.password}
-                </FormHelperText>
-              )}
             </StyledFormControl>
 
             <Grid container alignItems="center" justifyContent="space-between">
@@ -171,14 +118,38 @@ const LoginForm = () => {
                 <FormHelperText error>{errors.submit}</FormHelperText>
               </Box>
             )}
-            <Box sx={{ width: '80%', display: "flex", alignItems: "center", justifyContent:"center" }}>
+            <Box sx={{ width: '100%', display: "flex", alignItems: "center", justifyContent:"center" }}>
             <ButtonContainer>
               <StyledButton fullWidth size="large" type="submit" variant="contained">
                 Iniciar sesión
               </StyledButton>
             </ButtonContainer>
             </Box>
-            
+           
+            {((touched.email && errors.email) || (touched.password && errors.password)) && (
+  <Box sx={{ 
+    width: '80%', 
+    display: "flex", 
+    flexDirection: "column", 
+    justifyContent: "center",
+    alignItems: "center", 
+    background: "#E6B0AA", 
+    borderRadius: '8px', 
+    margin: '0 auto',
+  }}>
+    <StyledValidationMessages>
+      <ul>
+        {touched.email && errors.email && (
+          <li>{errors.email}</li>
+        )}
+        {touched.password && errors.password && (
+          <li>{errors.password}</li>
+        )}
+      </ul>
+    </StyledValidationMessages>
+  </Box>
+)}
+           
           </form>
         )}
       </Formik>

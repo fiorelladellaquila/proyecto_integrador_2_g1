@@ -39,9 +39,9 @@ const LayoutGeneral: FC<Props> = ({children, title, description, keywords}: Prop
 				<meta charSet='utf-8' />
             </Head>
             <Stack direction={"column"} height={'100%'}>
-                {/* <Box display={'flex'} flexGrow={1} justifyContent={'center'}> */}
+                <Box display={'flex'} flexGrow={1} justifyContent={'center'}>
                     {children}
-                {/* </Box> */}
+                </Box>
             </Stack>
         </>
     );

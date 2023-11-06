@@ -1,28 +1,28 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 import {
   ImageContainerWrapper,
   OverlappingImage,
   BackgroundImage,
   TextContainer,
   LineBreak,
-  Text,
-} from './imageContainer.style';
+  Text
+} from './imageContainer.style'
 
-const calculateWidth = () => (window.innerWidth * 0.6);
+const calculateWidth = () => (window.innerWidth * 0.6)
 
 const ImageContainer = () => {
-  const [imageWidth, setImageWidth] = useState(calculateWidth());
+  const [imageWidth, setImageWidth] = useState(calculateWidth())
 
   useEffect(() => {
     const handleResize = () => {
-      setImageWidth(calculateWidth());
-    };
+      setImageWidth(calculateWidth())
+    }
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize)
     return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
 
   return (
     <ImageContainerWrapper>
@@ -34,7 +34,7 @@ const ImageContainer = () => {
         <Text>AHORA!</Text>
       </TextContainer>
     </ImageContainerWrapper>
-  );
-};
+  )
+}
 
-export default ImageContainer;
+export default ImageContainer

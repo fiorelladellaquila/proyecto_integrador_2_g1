@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import Image from 'next/image';
+import styled from 'styled-components'
+import Image from 'next/image'
 
 export const ImageContainerWrapper = styled.div`
   position: relative;
@@ -7,7 +7,7 @@ export const ImageContainerWrapper = styled.div`
   align-items: center;
   justify-content: center;
   max-height: 100vh; /* Evita desbordamiento vertical */
-`;
+`
 
 export const OverlappingImage = styled(Image)`
   position: absolute;
@@ -27,7 +27,7 @@ export const OverlappingImage = styled(Image)`
   @media (max-width: 480px) {
     display: none;
   }
-`;
+`
 
 export const BackgroundImage = styled(Image)`
   object-fit: cover;
@@ -41,7 +41,7 @@ export const BackgroundImage = styled(Image)`
   @media (max-width: 480px) {
     width: 100%;
   }
-`;
+`
 
 export const TextContainer = styled.div`
   position: absolute;
@@ -60,11 +60,11 @@ export const TextContainer = styled.div`
     top: 50%;
     left: 50%;
   }
-`;
+`
 
 export const LineBreak = styled.div`
   margin-top: 10px;
-`;
+`
 
 export const Text = styled.div`
   font-size: 1.5rem;
@@ -78,4 +78,4 @@ export const Text = styled.div`
   @media (max-width: 480px) {
     font-size: 0.5rem;
   }
-`;
+`

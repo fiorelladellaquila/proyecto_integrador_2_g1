@@ -7,6 +7,7 @@ import {
   Grid,
   Box,
   useTheme,
+  FormControlLabel,
 } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -22,10 +23,12 @@ import {
   Text,
   StyledValidationMessages,
 } from './loginFormContainer.style';
+import Checkbox from '@mui/material/Checkbox';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
 
   const theme = useTheme();
   const [showPassword, setShowPassword] = useState(false);
@@ -111,6 +114,21 @@ const LoginForm = () => {
 
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item>{/* Lógica de "Recuérdame" aquí */}</Grid>
+              <StyledFormControl>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={rememberMe}
+                      onChange={(e) => setRememberMe(e.target.checked)}
+                      name="rememberMe"
+                      color="primary"
+                      style={{ marginLeft: '3rem', color: "white" }}
+                    />
+                  }
+                  label="Recuérdame"
+                  style={{ color: 'white' }}
+                />
+              </StyledFormControl>
             </Grid>
 
             {errors.submit && (

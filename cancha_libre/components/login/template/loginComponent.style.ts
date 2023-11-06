@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
@@ -9,7 +9,7 @@ export const Container = styled.div`
   @media (min-width: 768px) {
     flex-direction: row;
   }
-`;
+`
 
 export const ContainerImage = styled.div`
   background-color: #0A711B;
@@ -19,7 +19,7 @@ export const ContainerImage = styled.div`
   @media (max-width: 767px) {
     flex: 1;
   }
-`;
+`
 
 export const ContainerLoginForm = styled.div`
   background: rgb(10, 113, 27);
@@ -30,4 +30,4 @@ export const ContainerLoginForm = styled.div`
   @media (max-width: 767px) {
     flex: 1;
   }
-`;
+`

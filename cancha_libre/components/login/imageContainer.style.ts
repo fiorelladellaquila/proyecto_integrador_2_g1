@@ -43,39 +43,3 @@ export const BackgroundImage = styled(Image)`
   }
 `
 
-export const TextContainer = styled.div`
-  position: absolute;
-  top: 30%;
-  left: 30%;
-  transform: translate(-50%, -50%);
-  z-index: 3;
-
-  @media (max-width: 767px) {
-    top: 40%;
-    left: 33%;
-    transform: translate(-50%, -50%);
-  }
-
-  @media (max-width: 480px) {
-    top: 50%;
-    left: 50%;
-  }
-`
-
-export const LineBreak = styled.div`
-  margin-top: 10px;
-`
-
-export const Text = styled.div`
-  font-size: 1.5rem;
-  color: white;
-//   width: 100%;
-
-  @media (max-width: 767px) {
-    font-size: 0.7rem;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 0.5rem;
-  }
-`

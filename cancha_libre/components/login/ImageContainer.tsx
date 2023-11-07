@@ -3,9 +3,6 @@ import {
   ImageContainerWrapper,
   OverlappingImage,
   BackgroundImage,
-  TextContainer,
-  LineBreak,
-  Text
 } from './imageContainer.style'
 
 const calculateWidth = () => (window.innerWidth * 0.6)
@@ -27,12 +24,7 @@ const ImageContainer = () => {
   return (
     <ImageContainerWrapper>
       <BackgroundImage src="/auth.png" alt="Fondo" width={imageWidth} height={window.innerHeight} />
-      <OverlappingImage src="/screenLogin.png" alt="Superpuesta" width={imageWidth} height={window.innerHeight} />
-      <TextContainer>
-        <Text>RESERVA</Text>
-        <LineBreak />
-        <Text>AHORA!</Text>
-      </TextContainer>
+      <OverlappingImage src="/notbCL.png" alt="Superpuesta" width={imageWidth} height={window.innerHeight} />
     </ImageContainerWrapper>
   )
 }

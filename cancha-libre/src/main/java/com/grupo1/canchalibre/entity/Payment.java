@@ -1,23 +1,31 @@
 package com.grupo1.canchalibre.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
-@Getter
-@Setter
+//@Getter
+//@Setter
+@Data
+@Entity
+@Table(name="payments")
+@NoArgsConstructor
 public class Payment {
 
-    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private int prepayment;
     private boolean paymentStatus;
-    private long userId;
-    private long shiftId;
+    //private Long userId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "shift_id", referencedColumnName = "id")
+    private Shift shiftID;
 
-    public Payment(long id, int prepayment, boolean paymentStatus, long userId, long shiftId) {
+    public Payment(Long id, int prepayment, boolean paymentStatus, Shift shiftID) {
         this.id = id;
         this.prepayment = prepayment;
         this.paymentStatus = paymentStatus;
-        this.userId = userId;
-        this.shiftId = shiftId;
+        //this.userId = userId;
+        this.shiftID = shiftID;
     }
 }

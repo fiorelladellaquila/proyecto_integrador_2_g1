@@ -54,4 +54,26 @@ public class ShiftService {
         // Save the updated shift to the database
         return iShiftRepository.save(existingShift);
     }
+
+    public List<Shift> listAllByCancha(Long canchaId){
+        List<Shift> shifts = this.list();
+        List<Shift> shiftsByCancha = new ArrayList<>();
+        for(Shift shift : shifts){
+            if(shift.getCanchaId()==canchaId){
+                shiftsByCancha.add(shift);
+            }
+        }
+        return shiftsByCancha;
+    }
+
+    public List<Shift> listAvailableByCancha(Long canchaId){
+        List<Shift> shifts = this.list();
+        List<Shift> shiftsAvailableByCancha = new ArrayList<>();
+        for(Shift shift : shifts){
+            if(shift.getCanchaId()==canchaId && !shift.isReserved()){
+                shiftsAvailableByCancha.add(shift);
+            }
+        }
+        return shiftsAvailableByCancha;
+    }
 }

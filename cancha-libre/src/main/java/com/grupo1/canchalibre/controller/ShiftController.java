@@ -44,4 +44,14 @@ public class ShiftController {
     public ResponseEntity<Shift> update(@PathVariable(name = "id")Long id, @RequestBody ShiftDTO shift) {
         return ResponseEntity.ok(shiftService.update(id, shift));
     }
+
+    @GetMapping("/cancha/{id}")
+    public ResponseEntity<List<Shift>> listAllByCancha(@PathVariable Long id) {
+        return ResponseEntity.ok(shiftService.listAllByCancha(id));
+    }
+
+    @GetMapping("/cancha/{id}/libre")
+    public ResponseEntity<List<Shift>> listAvailableByCancha(@PathVariable Long id) {
+        return ResponseEntity.ok(shiftService.listAvailableByCancha(id));
+    }
 }

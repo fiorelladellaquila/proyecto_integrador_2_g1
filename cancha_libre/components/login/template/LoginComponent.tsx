@@ -7,10 +7,13 @@ import {
   ContainerImage,
   ContainerLoginForm,
 } from './loginComponent.style';
+import { Provider } from 'react-redux';
+import store from '../../../redux/store';
 
 const Login = () => {
   return (
-    <LayoutGeneral title={'Login'}>
+    <Provider store={store}>
+        <LayoutGeneral title={'Login'}>
       <Container>
         <ContainerImage>
             <ImageContainer />
@@ -20,6 +23,8 @@ const Login = () => {
         </ContainerLoginForm>  
       </Container>
     </LayoutGeneral>
+    </Provider>
+    
   );
 };
 

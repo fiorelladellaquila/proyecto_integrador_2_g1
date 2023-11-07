@@ -14,9 +14,13 @@ public class ShiftDTO implements Serializable {
 
     private Date dateTime;
     private boolean reserved;
+    private long canchaId;
+    private long userId;
 
     public ShiftDTO(Shift shift) {
         this.dateTime = shift.getDateTime();
         this.reserved = shift.isReserved();
+        this.canchaId = shift.getCanchaId();
+        this.userId = shift.getUserId();
     }
 }

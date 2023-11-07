@@ -9,8 +9,8 @@ import lombok.Setter;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
-//@Getter
-//@Setter
+@Getter
+@Setter
 @Data
 @Entity
 @Table(name="shifts")
@@ -29,6 +29,13 @@ public class Shift {
 
     public Shift(Long id, Date dateTime, boolean reserved, long canchaId, long userId) {
         this.id = id;
+        this.dateTime = dateTime;
+        this.reserved = reserved;
+        this.canchaId = canchaId;
+        this.userId = userId;
+    }
+
+    public Shift(Date dateTime, boolean reserved, long canchaId, long userId) {
         this.dateTime = dateTime;
         this.reserved = reserved;
         this.canchaId = canchaId;

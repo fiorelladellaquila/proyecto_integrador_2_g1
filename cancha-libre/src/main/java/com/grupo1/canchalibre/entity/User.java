@@ -2,12 +2,10 @@ package com.grupo1.canchalibre.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-//@Getter
-//@Setter
+import java.util.Set;
+
 @Data
 @Entity
 @Table(name="users")
@@ -21,6 +19,9 @@ public class User {
     private String email;
     private int phone;
     private String password;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name ="user_id")
+    private Set<Shift> shifts;
 
     public User(Long id, String name, String lastName, String email, int phone, String password) {
         this.id = id;

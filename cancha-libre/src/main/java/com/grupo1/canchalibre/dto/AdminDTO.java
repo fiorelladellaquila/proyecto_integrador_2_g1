@@ -13,7 +13,7 @@ public class AdminDTO implements Serializable {
     private String name;
     private String lastName;
     private String email;
-    private  int phone;
+    private int phone;
 
     public AdminDTO(Admin admin) {
         this.name = admin.getName();

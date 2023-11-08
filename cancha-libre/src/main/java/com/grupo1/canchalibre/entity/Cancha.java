@@ -1,18 +1,29 @@
 package com.grupo1.canchalibre.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+import java.util.Set;
+
+
+@Data
+@Entity
+@Table(name="soccer-fields")
+@NoArgsConstructor
 public class Cancha {
 
-    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String description;
     private float price;
     private String size;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name ="cancha_id")
+    private Set<Shift> shifts;
 
-    public Cancha(long id, String description, float price, String size) {
+    public Cancha(Long id, String description, float price, String size) {
         this.id = id;
         this.description = description;
         this.price = price;

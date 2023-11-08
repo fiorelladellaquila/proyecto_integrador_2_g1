@@ -1,25 +1,27 @@
 package com.grupo1.canchalibre.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.time.ZonedDateTime;
+import java.util.Date;
 
-@Getter
-@Setter
+@Data
+@Entity
+@Table(name="shifts")
+@NoArgsConstructor
 public class Shift {
 
-    private long id;
-    private ZonedDateTime dateTime;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateTime;
     private boolean reserved;
-    private long canchaId;
-    private long userId;
 
-    public Shift(long id, ZonedDateTime dateTime, boolean reserved, long canchaId, long userId) {
+    public Shift(Long id, Date dateTime, boolean reserved) {
         this.id = id;
         this.dateTime = dateTime;
         this.reserved = reserved;
-        this.canchaId = canchaId;
-        this.userId = userId;
     }
 }

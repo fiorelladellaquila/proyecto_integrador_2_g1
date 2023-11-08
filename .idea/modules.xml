@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/cancha-libre/cancha-libre.iml" filepath="$PROJECT_DIR$/cancha-libre/cancha-libre.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/proyecto_integrador_2_g1.iml" filepath="$PROJECT_DIR$/.idea/proyecto_integrador_2_g1.iml" />
+    </modules>
+  </component>
+</project>

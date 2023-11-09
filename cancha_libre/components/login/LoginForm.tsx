@@ -79,7 +79,8 @@ const LoginForm: React.FC = () => {
               if (typeof decodedToken === 'object' && 'email' in decodedToken) {
                 console.log('entraaaa')
                 if (decodedToken.email === values.email) {
-                  router.push('/home');
+                  return '200'
+                  // router.push('/home');
               
                 } else {
                   console.error('Los datos del usuario no coinciden con el token JWT');
@@ -177,30 +178,41 @@ const LoginForm: React.FC = () => {
               </StyledButton>
             </ButtonContainer>
             </Box>
-           
+            <Box sx={{ width: '100%', display: "flex", alignItems: "center", justifyContent: "center", marginTop: 2 }}>
+              <Text style={{ color: 'white' }}>
+                <a href="#" style={{ color: 'white' }}>¿Olvidaste tu contraseña?</a>
+              </Text>
+            </Box>
+
+            <Box sx={{ width: '100%', display: "flex", alignItems: "center", justifyContent: "center", marginTop: 2 }}>
+              <Text style={{ color: 'white', marginBottom: '1rem' }}>
+                <span style={{ fontSize: '14px' }}>¿No tienes cuenta?</span> <a href="#" style={{ color: 'white', textDecoration: 'underline' }}>Regístrate</a>
+              </Text>
+            </Box>
+
             {((touched.email && errors.email) || (touched.password && errors.password)) && (
-  <Box sx={{ 
-    width: '80%', 
-    display: "flex", 
-    flexDirection: "column", 
-    justifyContent: "center",
-    alignItems: "center", 
-    background: "#E6B0AA", 
-    borderRadius: '8px', 
-    margin: '0 auto',
-  }}>
-    <StyledValidationMessages>
-      <ul>
-        {touched.email && errors.email && (
-          <li>{errors.email}</li>
-        )}
-        {touched.password && errors.password && (
-          <li>{errors.password}</li>
-        )}
-      </ul>
-    </StyledValidationMessages>
-  </Box>
-)}
+            <Box sx={{ 
+              width: '80%', 
+              display: "flex", 
+              flexDirection: "column", 
+              justifyContent: "center",
+              alignItems: "center", 
+              background: "#E6B0AA", 
+              borderRadius: '8px', 
+              margin: '0 auto',
+            }}>
+          <StyledValidationMessages>
+                  <ul>
+                    {touched.email && errors.email && (
+                      <li>{errors.email}</li>
+                    )}
+                    {touched.password && errors.password && (
+                      <li>{errors.password}</li>
+                    )}
+                  </ul>
+          </StyledValidationMessages>
+              </Box>
+            )}
            
           </form>
         )}

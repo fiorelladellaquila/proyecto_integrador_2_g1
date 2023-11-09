@@ -1,20 +1,30 @@
 package com.grupo1.canchalibre.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+import java.util.Set;
+
+@Data
+@Entity
+@Table(name="administrators")
+@NoArgsConstructor
 public class Admin {
-
-    private long id;
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String lastName;
     private String email;
-    private  int phone;
+    @Column(name="telephoneNumber", nullable = false, length=20, unique = true)
+    private int phone;
     private String password;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name ="admin_id")
+    private Set<SoccerFields> SoccerFields;
 
-    public Admin(Integer id, String name, String lastName, String email, int phone, String password) {
+    public Admin(Long id, String name, String lastName, String email, int phone, String password) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -22,4 +32,5 @@ public class Admin {
         this.phone = phone;
         this.password = password;
     }
+
 }

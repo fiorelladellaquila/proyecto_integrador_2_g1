@@ -12,6 +12,8 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="cancha-libre" target="17" />
+      <module name="discovery" target="17" />
+      <module name="Gateway" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

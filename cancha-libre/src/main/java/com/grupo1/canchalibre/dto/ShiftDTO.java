@@ -6,12 +6,13 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.util.Date;
 
 @Getter
 @Setter
 public class ShiftDTO implements Serializable {
 
-    private ZonedDateTime dateTime;
+    private Date dateTime;
     private boolean reserved;
 
     public ShiftDTO(Shift shift) {

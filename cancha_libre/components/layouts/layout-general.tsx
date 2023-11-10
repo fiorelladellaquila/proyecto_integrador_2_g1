@@ -2,9 +2,9 @@ import * as React from 'react';
 import {FC, PropsWithChildren} from "react";
 import {Stack} from "@mui/material";
 import Box from "@mui/material/Box";
-import GeneralHeader from "../layouts/header/general-header.component";
-import GeneralFooter from "../layouts/footer/general-footer.component";
+// import GeneralFooter from "../layouts/footer/general-footer.component";
 import Head from "next/head";
+import GeneralHeader from './header/general-header.component'
 
 interface Props {
     children: React.ReactNode;
@@ -38,11 +38,12 @@ const LayoutGeneral: FC<Props> = ({children, title, description, keywords}: Prop
 				<link rel="icon" href="/favicon.ico" />
 				<meta charSet='utf-8' />
             </Head>
-            <Stack direction={"column"} height={'100%'}>
-                <Box display={'flex'} flexGrow={1} justifyContent={'center'}>
-                    {children}
-                </Box>
-            </Stack>
+			<GeneralHeader />
+				<Stack direction={"column"} height={'100%'}>
+					<Box display={'flex'} flexGrow={1} justifyContent={'center'}>
+						{children}
+					</Box>
+				</Stack>
         </>
     );
 };

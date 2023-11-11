@@ -11,7 +11,7 @@ import java.util.Set;
 @Entity
 @Table(name="soccer-fields")
 @NoArgsConstructor
-public class Cancha {
+public class SoccerFields {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,14 +19,16 @@ public class Cancha {
     private String description;
     private float price;
     private String size;
+    private Long admin_id;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name ="cancha_id")
+    @JoinColumn(name ="soccer-fields_id")
     private Set<Shift> shifts;
 
-    public Cancha(Long id, String description, float price, String size) {
+    public SoccerFields(Long id, String description, float price, String size, Long admin_id) {
         this.id = id;
         this.description = description;
         this.price = price;
         this.size = size;
+        this.admin_id = admin_id;
     }
 }

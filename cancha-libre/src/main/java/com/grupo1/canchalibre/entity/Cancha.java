@@ -2,12 +2,11 @@ package com.grupo1.canchalibre.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-//@Getter
-//@Setter
+import java.util.Set;
+
+
 @Data
 @Entity
 @Table(name="soccer-fields")
@@ -20,6 +19,9 @@ public class Cancha {
     private String description;
     private float price;
     private String size;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name ="cancha_id")
+    private Set<Shift> shifts;
 
     public Cancha(Long id, String description, float price, String size) {
         this.id = id;

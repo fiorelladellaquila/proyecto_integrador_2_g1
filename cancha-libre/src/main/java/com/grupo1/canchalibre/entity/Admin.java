@@ -2,14 +2,10 @@ package com.grupo1.canchalibre.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.Set;
 
-//@Getter
-//@Setter
 @Data
 @Entity
 @Table(name="administrators")

@@ -3,8 +3,6 @@ package com.grupo1.canchalibre.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-//@Getter
-//@Setter
 @Data
 @Entity
 @Table(name="payments")
@@ -16,7 +14,6 @@ public class Payment {
     private Long id;
     private int prepayment;
     private boolean paymentStatus;
-    //private Long userId;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "shift_id", referencedColumnName = "id")
     private Shift shiftID;
@@ -25,7 +22,6 @@ public class Payment {
         this.id = id;
         this.prepayment = prepayment;
         this.paymentStatus = paymentStatus;
-        //this.userId = userId;
         this.shiftID = shiftID;
     }
 }

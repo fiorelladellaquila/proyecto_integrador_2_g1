@@ -11,6 +11,7 @@ import com.grupo1.canchalibre.repository.IShiftRepository;
 import jakarta.persistence.EntityNotFoundException;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -38,6 +39,10 @@ public class ShiftService {
     public void delete(Long id){
         this.find(id);
         iShiftRepository.deleteById(id);
+    }
+
+    public List<Shift> findShiftsByCanchaIdAndDateTime(Long canchaId, Date dateTime) {
+        return iShiftRepository.findByCanchaIdAndDateTime(canchaId, dateTime);
     }
 
     public Shift update(Long shiftId, ShiftDTO updatedShiftDTO) {

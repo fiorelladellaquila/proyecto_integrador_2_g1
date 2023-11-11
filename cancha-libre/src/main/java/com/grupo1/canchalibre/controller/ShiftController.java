@@ -10,6 +10,7 @@ import com.grupo1.canchalibre.entity.Shift;
 import com.grupo1.canchalibre.dto.ShiftDTO;
 
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -22,6 +23,13 @@ public class ShiftController {
     @PostMapping
     public ResponseEntity<Shift> save(@RequestBody ShiftDTO shift) {
         return ResponseEntity.ok(shiftService.save(shift));
+    }
+    @GetMapping("/byCanchaIdAndDateTime/{canchaId}/{dateTime}")
+    public List<Shift> getShiftsByCanchaIdAndDateTime(
+            @PathVariable Long canchaId,
+            @PathVariable Date dateTime
+    ) {
+        return shiftService.findShiftsByCanchaIdAndDateTime(canchaId, dateTime);
     }
 
     @GetMapping

@@ -45,6 +45,10 @@ public class ShiftService {
         return iShiftRepository.findByCanchaIdAndDateTime(canchaId, dateTime);
     }
 
+    public List<Shift> findShiftsByCanchaIdAndDateTimeRange(long canchaId, Date startDate, Date endDate) {
+        return iShiftRepository.findByCanchaIdAndDateTimeBetween(canchaId, startDate, endDate);
+    }
+
     public Shift update(Long shiftId, ShiftDTO updatedShiftDTO) {
         // Check if the shift with the given ID exists
         Shift existingShift = iShiftRepository.findById(shiftId)

@@ -1,6 +1,7 @@
 package com.grupo1.canchalibre.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,12 +25,21 @@ public class ShiftController {
     public ResponseEntity<Shift> save(@RequestBody ShiftDTO shift) {
         return ResponseEntity.ok(shiftService.save(shift));
     }
-    @GetMapping("/byCanchaIdAndDateTime/{canchaId}/{dateTime}")
+    @GetMapping("/byCanchaAndDateTime/{canchaId}/{dateTime}")
     public List<Shift> getShiftsByCanchaIdAndDateTime(
             @PathVariable Long canchaId,
             @PathVariable Date dateTime
     ) {
         return shiftService.findShiftsByCanchaIdAndDateTime(canchaId, dateTime);
+    }
+
+    @GetMapping("/byCanchaAndTimeRange")
+    public List<Shift> searchShifts(
+            @RequestParam long canchaId,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") Date startDate,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") Date endDate) {
+
+        return shiftService.findShiftsByCanchaIdAndDateTimeRange(canchaId, startDate, endDate);
     }
 
     @GetMapping

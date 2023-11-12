@@ -21,6 +21,8 @@ public class Shift {
     private Long id;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateTime;
+    private long canchaId;
+    private long userId;
     private boolean reserved;
 
     public Shift(Long id, Date dateTime, boolean reserved) {

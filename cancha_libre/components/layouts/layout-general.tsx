@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 // import GeneralFooter from "../layouts/footer/general-footer.component";
 import Head from "next/head";
 import GeneralHeader from './header/general-header.component'
+import GeneralFooter from './footer/general-footer.component'
 
 interface Props {
     children: React.ReactNode;
@@ -44,6 +45,7 @@ const LayoutGeneral: FC<Props> = ({children, title, description, keywords}: Prop
 						{children}
 					</Box>
 				</Stack>
+			<GeneralFooter/>
         </>
     );
 };

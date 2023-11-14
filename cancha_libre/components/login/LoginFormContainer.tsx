@@ -30,7 +30,7 @@ import { login } from '../../redux/actions/auth';
 import {jwtDecode} from 'jwt-decode';
 import { useRouter } from 'next/router';
 
-const LoginForm: React.FC = () => {
+const LoginFormContainer: React.FC = () => {
   // const [email, setEmail] = useState('');
   // const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
@@ -222,4 +222,4 @@ const LoginForm: React.FC = () => {
   );
 };
 
-export default LoginForm;
+export default LoginFormContainer;

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FC } from 'react';
 import LayoutGeneral from '../components/layouts/layout-general';
 import HeaderHome from '../components/layouts/header/header-home.component';
-import HomeContent from '../components/home/homeContent.component'
+import HomeContent from '../components/home/HomeContent.component';
 import { Box, Stack } from '@mui/material';
 
 const Home: FC = () => {

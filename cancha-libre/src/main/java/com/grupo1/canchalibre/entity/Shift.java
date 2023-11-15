@@ -21,8 +21,8 @@ public class Shift {
     private Long id;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateTime;
-    private long canchaId;
-    private long userId;
+    private long soccer_field_id;
+    private long user_id;
     private boolean reserved;
 
     public Shift(Long id, Date dateTime, boolean reserved) {
@@ -31,10 +31,10 @@ public class Shift {
         this.reserved = reserved;
     }
 
-    public Shift(Date dateTime, boolean reserved, long canchaId, long userId) {
+    public Shift(Date dateTime, boolean reserved, long soccer_field_id, long user_id) {
         this.dateTime = dateTime;
         this.reserved = reserved;
-        this.canchaId = canchaId;
-        this.userId = userId;
+        this.soccer_field_id = soccer_field_id;
+        this.user_id = user_id;
     }
 }

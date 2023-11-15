@@ -1,14 +1,13 @@
 package com.grupo1.canchalibre.service;
+
 import com.grupo1.canchalibre.dto.ShiftDTO;
 import com.grupo1.canchalibre.entity.Shift;
+import com.grupo1.canchalibre.repository.IShiftRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
-import com.grupo1.canchalibre.repository.IShiftRepository;
-
-import jakarta.persistence.EntityNotFoundException;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,37 +15,37 @@ import java.util.List;
 
 @Service
 public class ShiftService {
-    private IShiftRepository iShiftRepository;
+    private final IShiftRepository iShiftRepository;
 
     @Autowired
-    public ShiftService(IShiftRepository iShiftRepository){
+    public ShiftService(IShiftRepository iShiftRepository) {
         this.iShiftRepository = iShiftRepository;
     }
 
-    public List<Shift> list(){
+    public List<Shift> list() {
         return iShiftRepository.findAll();
     }
-    
-    public Shift save(ShiftDTO shift){
-        Shift s =new Shift(shift.getDateTime(),shift.isReserved(),shift.getCanchaId(),shift.getUserId());
+
+    public Shift save(ShiftDTO shift) {
+        Shift s = new Shift(shift.getDateTime(), shift.isReserved(), shift.getSoccer_field_id(), shift.getUser_id());
         return iShiftRepository.save(s);
     }
 
-    public Shift find(Long id){
+    public Shift find(Long id) {
         return iShiftRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    public void delete(Long id){
+    public void delete(Long id) {
         this.find(id);
         iShiftRepository.deleteById(id);
     }
 
-    public List<Shift> findShiftsByCanchaIdAndDateTime(Long canchaId, Date dateTime) {
-        return iShiftRepository.findByCanchaIdAndDateTime(canchaId, dateTime);
+    public List<Shift> findShiftsBySoccerFieldIdAndDateTime(Long soccerField_id, Date dateTime) {
+        return iShiftRepository.findBySoccerFieldIdAndDateTime(soccerField_id, dateTime);
     }
 
-    public List<Shift> findShiftsByCanchaIdAndDateTimeRange(long canchaId, Date startDate, Date endDate) {
-        return iShiftRepository.findByCanchaIdAndDateTimeBetween(canchaId, startDate, endDate);
+    public List<Shift> findShiftsBySoccerFieldIdAndDateTimeRange(long soccerField_id, Date startDate, Date endDate) {
+        return iShiftRepository.findBySoccerFieldIdAndDateTimeBetween(soccerField_id, startDate, endDate);
     }
 
     public Shift update(Long shiftId, ShiftDTO updatedShiftDTO) {
@@ -57,32 +56,32 @@ public class ShiftService {
         // Update the properties of the existing shift with the values from the DTO
         existingShift.setDateTime(updatedShiftDTO.getDateTime());
         existingShift.setReserved(updatedShiftDTO.isReserved());
-        existingShift.setCanchaId(updatedShiftDTO.getCanchaId());
-        existingShift.setUserId(updatedShiftDTO.getUserId());
+        existingShift.setSoccer_field_id(updatedShiftDTO.getSoccer_field_id());
+        existingShift.setUser_id(updatedShiftDTO.getUser_id());
 
         // Save the updated shift to the database
         return iShiftRepository.save(existingShift);
     }
 
-    public List<Shift> listAllByCancha(Long canchaId){
+    public List<Shift> listAllBySoccerField(Long soccerField_id) {
         List<Shift> shifts = this.list();
-        List<Shift> shiftsByCancha = new ArrayList<>();
-        for(Shift shift : shifts){
-            if(shift.getCanchaId()==canchaId){
-                shiftsByCancha.add(shift);
+        List<Shift> shiftsBySoccerField = new ArrayList<>();
+        for (Shift shift : shifts) {
+            if (shift.getSoccer_field_id() == soccerField_id) {
+                shiftsBySoccerField.add(shift);
             }
         }
-        return shiftsByCancha;
+        return shiftsBySoccerField;
     }
 
-    public List<Shift> listAvailableByCancha(Long canchaId){
+    public List<Shift> listAvailableBySoccerFields(Long soccerField_id) {
         List<Shift> shifts = this.list();
-        List<Shift> shiftsAvailableByCancha = new ArrayList<>();
-        for(Shift shift : shifts){
-            if(shift.getCanchaId()==canchaId && !shift.isReserved()){
-                shiftsAvailableByCancha.add(shift);
+        List<Shift> shiftsAvailableBySoccerField = new ArrayList<>();
+        for (Shift shift : shifts) {
+            if (shift.getSoccer_field_id() == soccerField_id && !shift.isReserved()) {
+                shiftsAvailableBySoccerField.add(shift);
             }
         }
-        return shiftsAvailableByCancha;
+        return shiftsAvailableBySoccerField;
     }
 }

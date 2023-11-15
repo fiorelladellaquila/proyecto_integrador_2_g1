@@ -12,10 +12,4 @@ public class CanchaLibreApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CanchaLibreApplication.class, args);
 	}
-
-	@GetMapping
-	public String HolaMundo(){
-		return "Hola Mundo";
-	}
-
 }

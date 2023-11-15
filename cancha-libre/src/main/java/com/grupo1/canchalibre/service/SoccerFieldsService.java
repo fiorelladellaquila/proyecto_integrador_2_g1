@@ -40,10 +40,10 @@ public class SoccerFieldsService {
         iSoccerFieldsRepository.deleteById(id);
     }
 
-    public SoccerFields update(Long SoccerFieldsId, SoccerFieldsDTO updatedSoccerFieldsDTO) {
+    public SoccerFields update(Long SoccerFields_id, SoccerFieldsDTO updatedSoccerFieldsDTO) {
 
-        SoccerFields existingSoccerFields = iSoccerFieldsRepository.findById(SoccerFieldsId)
-                .orElseThrow(() -> new EntityNotFoundException("SoccerFields with id " + SoccerFieldsId + " not found"));
+        SoccerFields existingSoccerFields = iSoccerFieldsRepository.findById(SoccerFields_id)
+                .orElseThrow(() -> new EntityNotFoundException("SoccerFields with id " + SoccerFields_id + " not found"));
 
         existingSoccerFields.setDescription(updatedSoccerFieldsDTO.getDescription());
         existingSoccerFields.setPrice(updatedSoccerFieldsDTO.getPrice());

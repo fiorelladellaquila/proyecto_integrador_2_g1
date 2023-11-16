@@ -1,27 +1,14 @@
 import * as React from 'react';
 import { FC } from 'react';
 import LayoutGeneral from '../components/layouts/layout-general';
-import HeaderHome from '../components/layouts/header/header-home.component';
-import HomeContent from '../components/home/HomeContent.component';
-import { Box, Stack } from '@mui/material';
+import LandingComponent from '../components/landing/template/LandingComponent';
+import { Stack } from '@mui/material';
 
 const Home: FC = () => {
   return (
     <LayoutGeneral title={'Login'}>
       <Stack direction="column" width= '100%'>
-        {/* <Box>
-          <HeaderHome />
-        </Box> */}
-        <Box>
-           <HomeContent />
-        </Box>
-        {/* Resto del contenido */}
-        <Box sx={{ flexGrow: 1, overflow: 'auto' }}>
-          <Box>
-            {/* Contenido adicional */}
-            {/* ... */}
-          </Box>
-        </Box>
+           <LandingComponent />
       </Stack>
     </LayoutGeneral>
   );

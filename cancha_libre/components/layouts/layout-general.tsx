@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import Head from "next/head";
 import GeneralHeader from './header/general-header.component'
 import GeneralFooter from './footer/general-footer.component'
+import HeaderHome from './header/header-home.component';
 
 interface Props {
     children: React.ReactNode;
@@ -40,12 +41,12 @@ const LayoutGeneral: FC<Props> = ({children, title, description, keywords}: Prop
 				<meta charSet='utf-8' />
             </Head>
 			<GeneralHeader />
+			<HeaderHome />
 				<Stack direction={"column"} height={'100%'}>
 					<Box display={'flex'} flexGrow={1} justifyContent={'center'}>
 						{children}
 					</Box>
 				</Stack>
-			<GeneralFooter/>
         </>
     );
 };

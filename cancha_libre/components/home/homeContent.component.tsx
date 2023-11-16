@@ -1,6 +1,7 @@
 import { Box, Button, Grid, TextField, Typography  } from "@mui/material";
 import Image from 'next/image';
 import { FC } from "react";
+import GeneralFooter from "../layouts/footer/general-footer.component";
 
 const HomeContent: FC = () => {
   return (
@@ -272,6 +273,7 @@ const HomeContent: FC = () => {
           ))}
         </Grid>
         </Box>
+        <GeneralFooter/>
     </>
     
 

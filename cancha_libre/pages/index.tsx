@@ -9,9 +9,9 @@ const Home: FC = () => {
   return (
     <LayoutGeneral title={'Login'}>
       <Stack direction="column" width= '100%'>
-        <Box>
+        {/* <Box>
           <HeaderHome />
-        </Box>
+        </Box> */}
         <Box>
            <HomeContent />
         </Box>

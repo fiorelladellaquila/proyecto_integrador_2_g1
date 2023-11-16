@@ -11,7 +11,8 @@ export const FormContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  margin: 2rem;
+  width: 35rem;
 `
 
 export const Logo = styled.img``
@@ -24,28 +25,33 @@ export const StyledFormControl = styled(FormControl)`
 
 export const StyledInputLabel = styled(InputLabel)`
   margin: 0rem 3rem;
-  color: white;
+  color: black;
 `
 
 export const StyledInput = styled(OutlinedInput)`
-  margin: 1rem 3rem;
+  margin: 0.6rem 3rem;
   background-color: #FBFCFC;
 `
 
 export const ButtonContainer = styled.div`
-  margin: 1.5rem 1rem;
-  width: 85%;
+  // margin: 1.5rem 1rem;
+  width: 100%;
   display: flex;
   justify-content: center;
 `
 
 export const StyledButton = styled(Button)`
-  background-color: #566158 !important;
+  background-color: #00CC00 !important;
   color: white;
+`
+export const StyledButtonGoogle  = styled(Button)`
+margin: 1rem 0;
+background-color: #D9D9D9 !important;
+color: black;
 `
 
 export const Text = styled.div`
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: white;
   font-family: sans-serif;
 `

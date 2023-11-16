@@ -2,7 +2,10 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: column;
+  // flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  background-color: #BDFFBD;
   width: 100vw;
   max-height: 100vh;
 
@@ -12,9 +15,11 @@ export const Container = styled.div`
 `
 
 export const ContainerImage = styled.div`
-  background-color: #0A711B;
-  max-height: 100%;
-  flex: 3;
+  background-color: #BDFFBD;
+  margin: 2.6rem 0;
+  width: 40rem;
+  height: 30rem;
+  // flex: 3;
 
   @media (max-width: 767px) {
     flex: 1;

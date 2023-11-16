@@ -13,16 +13,13 @@ import store from '../../../redux/store';
 const Login = () => {
   return (
     <Provider store={store}>
-        {/* <LayoutGeneral title={'Login'}> */}
+        <LayoutGeneral title={'Login'}>
       <Container>
-        <ContainerImage>
-            <ImageContainer />
-        </ContainerImage>
-        <ContainerLoginForm>
-            <LoginFormContainer />
-        </ContainerLoginForm>  
+        {/* <ContainerImage> */}
+          <LoginFormContainer />
+        {/* </ContainerImage> */}
       </Container>
-    {/* </LayoutGeneral> */}
+      </LayoutGeneral>
     </Provider>
     
   );

@@ -13,10 +13,12 @@ const NewsSectionContainer: FC = () => {
         }}
       >
         <Typography
+          fontFamily={'Aleo'}
+          fontWeight={'600'}
           variant="h4"
           color="#FFFFFF"
           sx={{
-            borderBottom: "3px solid #FFFFFF",
+            borderBottom: "4px solid #FFFFFF",
             margin: "0 auto 3rem auto",
             display: "inline-block",
           }}

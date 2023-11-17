@@ -13,10 +13,12 @@ const ContactUsSectionContainer: FC = () => {
         }}
       >
         <Typography
+          fontFamily={'Aleo'}
+          fontWeight={'600'}
           variant="h4"
           color="#3A3A3A"
           sx={{
-            borderBottom: "3px solid #3A3A3A",
+            borderBottom: "4px solid #3A3A3A",
             margin: "0 auto 3rem auto",
             display: "inline-block",
           }}

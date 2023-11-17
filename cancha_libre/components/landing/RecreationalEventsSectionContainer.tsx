@@ -13,10 +13,12 @@ const RecreationalEventsSectionContainer: FC = () => {
         }}
       >
         <Typography
+          fontFamily={'Aleo'}
+          fontWeight={'600'}
           variant="h4"
           color="#3A3A3A"
           sx={{
-            borderBottom: "3px solid #3A3A3A",
+            borderBottom: "4px solid #3A3A3A",
             margin: "0 auto 16px auto",
             display: "inline-block",
           }}
@@ -32,16 +34,20 @@ const RecreationalEventsSectionContainer: FC = () => {
           Valores a Noviembre 2023
         </Typography>
         <Grid container spacing={2} justifyContent="center">
-          <Grid item xs={12} md={6}>
-            <Box sx={{ width: "100%", textAlign: "center" }}>
+        <Grid item xs={12} md={6}>
+            <Box
+              sx={{
+                width: "40rem",
+                height: "45rem",
+                textAlign: "center",
+                position: "relative",
+              }}
+            >
               <Image
                 src={`/cumpleInfantil.png`}
                 alt={"Imagen"}
-                layout="responsive"
-                width={500}
-                height={700}
+                layout="fill"
                 objectFit="cover"
-                style={{ width: "100%", height: "100%" }}
               />
             </Box>
           </Grid>

@@ -15,27 +15,27 @@ const HeaderHome: FC = () => {
        <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: 'center', alignItems: 'center', height: '100%' }}>
           <MUILink href="#" underline="none" color={linkColor} sx={{ mx: 2, textTransform: 'uppercase' }}>
-            <Typography variant="body2" sx={{ fontFamily: 'Montserrat' }}>Nosotros</Typography>
+            <Typography variant="body2" sx={{ fontFamily:"Montserrat, sans-serif" }}>Nosotros</Typography>
           </MUILink>
           <MUILink href="#" underline="none" color={linkColor} sx={{ mx: 2, textTransform: 'uppercase' }}>
-            <Typography variant="body2" sx={{ fontFamily: 'Montserrat' }}>Canchas</Typography>
+            <Typography variant="body2" sx={{ fontFamily:"Montserrat, sans-serif" }}>Canchas</Typography>
           </MUILink>
           <MUILink href="#" underline="none" color={linkColor} sx={{ mx: 2, textTransform: 'uppercase' }}>
-            <Typography variant="body2" sx={{ fontFamily: 'Montserrat' }}>Calendario</Typography>
+            <Typography variant="body2" sx={{ fontFamily: "Montserrat, sans-serif" }}>Calendario</Typography>
           </MUILink>
-          <MUILink href="#" underline="none" color={linkColor} sx={{ mx: 2, textTransform: 'uppercase' }}>
+          <MUILink href="/" underline="none" color={linkColor} sx={{ mx: 2, textTransform: 'uppercase' }}>
             <Box sx={{ height: '100%', display: 'flex', alignItems: 'center', margin: '1rem' }}>
               <Image src="/cancha_libreLogo.png" alt="Cancha Libre logo" width={150} height={70} />
             </Box>
           </MUILink>
           <MUILink href="#" underline="none" color={linkColor} sx={{ mx: 2, textTransform: 'uppercase' }}>
-            <Typography variant="body2" sx={{ fontFamily: 'Montserrat' }}>Novedades</Typography>
+            <Typography variant="body2" sx={{ fontFamily:"Montserrat, sans-serif" }}>Novedades</Typography>
           </MUILink>
           <MUILink href="#" underline="none" color={linkColor} sx={{ mx: 2, textTransform: 'uppercase' }}>
-            <Typography variant="body2" sx={{ fontFamily: 'Montserrat' }}>Eventos</Typography>
+            <Typography variant="body2" sx={{ fontFamily: "Montserrat, sans-serif" }}>Eventos</Typography>
           </MUILink>
           <MUILink href="#" underline="none" color={linkColor} sx={{ mx: 2, textTransform: 'uppercase' }}>
-            <Typography variant="body2" sx={{ fontFamily: 'Montserrat' }}>Contacto</Typography>
+            <Typography variant="body2" sx={{ fontFamily: "Montserrat, sans-serif" }}>Contacto</Typography>
           </MUILink>
         </Toolbar>
       </Container>

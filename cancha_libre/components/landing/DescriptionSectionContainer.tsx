@@ -6,7 +6,7 @@ const DescriptionSectionContainer: FC = () => {
   return (
     <>
       <Box>
-        <Typography variant="h4" color="#3A3A3A" textAlign="center" mt={4}>
+        <Typography variant="h4" color="#3A3A3A" textAlign="center" fontFamily={'Aleo'} fontWeight={'600'} mt={4}>
           COMPLEJO DEPORTIVO CANCHA LIBRE
         </Typography>
         <Typography variant="h5" color="#787B81" textAlign="center" mt={2}>
@@ -75,15 +75,20 @@ const DescriptionSectionContainer: FC = () => {
             {/* Cuatro imágenes en el lado derecho */}
             {["cancha_1", "cancha_2", "cancha_3", "cancha_4"].map((index) => (
               <Grid item xs={6} key={index}>
-                <Image
-                  src={`/${index}.jpg`}
-                  alt={`Imagen ${index}`}
-                  layout="responsive"
-                  width={1}
-                  height={1}
-                  objectFit="cover"
-                  style={{ width: "100%", height: "100%" }}
-                />
+                <Box
+                  sx={{
+                    position: "relative",
+                    width: "100%",
+                    paddingTop: "55%", // Hace que el contenedor tenga una relación de aspecto 1:1
+                  }}
+                >
+                  <Image
+                    src={`/${index}.jpg`}
+                    alt={`Imagen ${index}`}
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </Box>
               </Grid>
             ))}
           </Grid>

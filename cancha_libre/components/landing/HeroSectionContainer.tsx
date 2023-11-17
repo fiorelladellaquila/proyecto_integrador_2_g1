@@ -14,7 +14,7 @@ const HeroSectionContainer: FC = () => {
             width: "100%",
           }}
         >
-          <Typography variant="h4" color="#fff" mt={4}>
+          <Typography variant="h3" color="#fff" mt={4}>
             Vení a darlo todo por tu equipo.
           </Typography>
           <Box textAlign="center" mt={2}>
@@ -57,13 +57,15 @@ const HeroSectionContainer: FC = () => {
             </svg>
           </Box>
         </Box>
-        <Image
-          src="/teamHome.png"
-          alt="Tu imagen"
-          layout="responsive"
-          width={1}
-          height={1}
-        />
+         <video
+          autoPlay
+          muted
+          loop
+          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+        >
+          <source src="/videoFondo.mp4" type="video/mp4" />
+          Tu navegador no soporta el tag de video.
+        </video>
       </Box>
     </>
   );

@@ -15,9 +15,7 @@ const Login = () => {
     <Provider store={store}>
         <LayoutGeneral title={'Login'}>
       <Container>
-        {/* <ContainerImage> */}
           <LoginFormContainer />
-        {/* </ContainerImage> */}
       </Container>
       </LayoutGeneral>
     </Provider>

@@ -15,6 +15,7 @@ public class Admin {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @Column(name="last_name")
     private String lastName;
     private String email;
     @Column(name="telephoneNumber", nullable = false, length=20, unique = true)
@@ -33,4 +34,10 @@ public class Admin {
         this.password = password;
     }
 
+    public Admin(String name, String lastName, String email, int phone) {
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+    }
 }

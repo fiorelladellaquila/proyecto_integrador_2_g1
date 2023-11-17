@@ -21,5 +21,8 @@ public class AdminDTO implements Serializable {
         this.email = admin.getEmail();
         this.phone = admin.getPhone();
     }
+    public AdminDTO() {
+        // Default constructor with no arguments
+    }
 }
 

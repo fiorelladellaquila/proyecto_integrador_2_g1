@@ -1,24 +1,20 @@
 package com.grupo1.canchalibre.dto;
 
-import com.grupo1.canchalibre.entity.User;
-import lombok.Getter;
-import lombok.Setter;
+import com.grupo1.canchalibre.entity.Rol;
+import lombok.Data;
 
 import java.io.Serializable;
 
-@Getter
-@Setter
+@Data
 public class UserDTO implements Serializable {
 
+    private Long id;
+    private String username;
     private String name;
     private String lastName;
     private String email;
     private  int phone;
+    private Rol rol;
 
-    public UserDTO(User user) {
-        this.name = user.getName();
-        this.lastName = user.getLastName();
-        this.email = user.getEmail();
-        this.phone = user.getPhone();
-    }
+
 }

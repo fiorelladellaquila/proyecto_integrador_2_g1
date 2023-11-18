@@ -15,6 +15,7 @@ spring:
           predicates:
             - Path=/soccer-fields/**
             - Path=/shift/**
+            - Path=/auth/**
 
 info:
   app:

@@ -54,8 +54,8 @@ const LoginFormContainer: React.FC = () => {
       <Box sx={{ width: '100%' }}>
       <Formik
         initialValues={{
-          email: process.env.NODE_ENV === 'development' ? 'testing2@mail.com' : 'testing@email.com',
-          password: process.env.NODE_ENV === 'development' ? 'testing2' : 'testing',
+          email: '',
+          password: '',
           submit: null,
         }}
         validationSchema={Yup.object().shape({
@@ -64,31 +64,37 @@ const LoginFormContainer: React.FC = () => {
         })}
         onSubmit={async (values) => {
           try {
-            const response = await axios.post('https://run.mocky.io/v3/bbad14ad-42a4-4c85-854b-cd185451c37f', {
-              email: `${values.email}`,
-              password: `${values.password}`,
-            });
-            const token = response.data.result.accessToken
-            if (token) {
-              dispatch(login(token));
-              const decodedToken: { [key: string]: any } = jwtDecode(token);
+            // const response = await axios.post('https://run.mocky.io/v3/bbad14ad-42a4-4c85-854b-cd185451c37f', {
+            //   email: `${values.email}`,
+            //   password: `${values.password}`,
+            // });
+            // const token = response.data.result.accessToken
+            // if (token) {
+            //   dispatch(login(token));
+            //   const decodedToken: { [key: string]: any } = jwtDecode(token);
 
-              console.log('decoded', decodedToken);
+            //   console.log('decoded', decodedToken);
       
-              if (typeof decodedToken === 'object' && 'email' in decodedToken) {
-                console.log('entraaaa')
-                if (decodedToken.email === values.email) {
-                  return '200'
-                  // router.push('/home');
+            //   if (typeof decodedToken === 'object' && 'email' in decodedToken) {
+            //     console.log('entraaaa')
+            //     if (decodedToken.email === values.email) {
+            //       return '200'
+            //       // router.push('/home');
               
-                } else {
-                  console.error('Los datos del usuario no coinciden con el token JWT');
-                }
-              } else {
-                console.error('El token JWT no contiene una propiedad "email" válida');
-              }
-            } else {
-              console.error('No se recibió un token JWT en la respuesta');
+            //     } else {
+            //       console.error('Los datos del usuario no coinciden con el token JWT');
+            //     }
+            //   } else {
+            //     console.error('El token JWT no contiene una propiedad "email" válida');
+            //   }
+            // } else {
+            //   console.error('No se recibió un token JWT en la respuesta');
+            // }
+
+            if (values.email === 'test@mail.com' && values.password === 'test') {
+              // Redirigir al usuario al template "home"
+              router.push('/home');
+              return;
             }
           } catch (error) {
             console.error('Error de inicio de sesión:', error);

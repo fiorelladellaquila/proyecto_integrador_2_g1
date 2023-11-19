@@ -10,6 +10,12 @@ export default function Auth() {
   if (slug === 'login') {
     return <LoginComponent />;
   }
+  if( slug === 'createdUser') {
+    return <LoginComponent />
+  }
+  if( slug === 'reset') {
+    return <LoginComponent />
+  }
 
   // Maneja otros casos o valores de slug según sea necesario
 

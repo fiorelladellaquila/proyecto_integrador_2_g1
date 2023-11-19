@@ -70,7 +70,13 @@ const ContactUsSectionContainer: FC = () => {
                   }}
                 />
               </Box>
-              <Button variant="contained" sx={{ backgroundColor: "#00CC00" }}>
+              <Button variant="contained" sx={{
+                  backgroundColor: "#00CC00",
+                  "&:hover": {
+                    backgroundColor: "rgba(0,204,0, 0.8)",
+                  },
+                  textTransform: "capitalize",
+                }}>
                 Enviar
               </Button>
             </form>

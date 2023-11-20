@@ -1,5 +1,4 @@
 import { Box, Button, Typography } from "@mui/material";
-import Image from "next/image";
 import { FC } from "react";
 
 const HeroSectionContainer: FC = () => {
@@ -18,7 +17,13 @@ const HeroSectionContainer: FC = () => {
             Vení a darlo todo por tu equipo.
           </Typography>
           <Box textAlign="center" mt={2}>
-            <Button variant="contained" sx={{ backgroundColor: "#00CC00" }}>
+            <Button variant="contained" sx={{
+                  backgroundColor: "#00CC00",
+                  "&:hover": {
+                    backgroundColor: "rgba(0,204,0, 0.8)",
+                  },
+                  textTransform: "capitalize",
+                }}>
               ¡Reserva ahora!
             </Button>
           </Box>

@@ -1,15 +1,19 @@
 import { Box, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import { FC } from "react";
-
+import{Aleo} from 'next/font/google'
+import { Amiko} from 'next/font/google'
+const amiko = Amiko({ subsets: ['latin'], weight: "400" })
+const aleo = Aleo({ subsets: ['latin'], weight: "400" })
 const DescriptionSectionContainer: FC = () => {
+  
   return (
     <>
       <Box>
-        <Typography variant="h4" color="#3A3A3A" textAlign="center" fontFamily={'Aleo'} fontWeight={'600'} mt={4}>
+        <Typography variant="h4" color="#3A3A3A" textAlign="center" fontFamily={`${aleo}`} fontWeight={'600'} mt={4}>
           COMPLEJO DEPORTIVO CANCHA LIBRE
         </Typography>
-        <Typography variant="h5" color="#787B81" textAlign="center" mt={2}>
+        <Typography variant="h5" color="#787B81" textAlign="center" mt={2} fontFamily={`${amiko}`}>
           Deportes + Recreación
         </Typography>
 

@@ -59,7 +59,7 @@ const Header: FC<Props> = ({ variant }: Props) => {
                   </Button>
                 </MUILink>
               </NextLink>
-              <NextLink href="/auth/createdUser" passHref>
+              <NextLink href="/auth/SignUp" passHref>
                 <MUILink underline="none" component="a">
                   <Button
                     sx={{

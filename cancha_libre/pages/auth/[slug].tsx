@@ -1,7 +1,7 @@
 
 import { useRouter } from 'next/router';
 import LoginComponent from '../../components/login/template/LoginComponent';
-import SignUpComponent from '../../components/login copy/template/SingUpComponent';
+import SignUpComponent from '../../components/signup/template/SingUpComponent';
 import RecoverPassword from '../../components/recoverPassword/template/recoverPasswordComponent'
 export default function Auth() {
   const router = useRouter();

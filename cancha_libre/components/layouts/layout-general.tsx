@@ -7,7 +7,7 @@ import Head from "next/head";
 import GeneralHeader from './header/general-header.component'
 import GeneralFooter from './footer/general-footer.component'
 import HeaderHome from './header/header-home.component';
-
+import { amiko } from './fonts';
 interface Props {
     children: React.ReactNode;
     title: string

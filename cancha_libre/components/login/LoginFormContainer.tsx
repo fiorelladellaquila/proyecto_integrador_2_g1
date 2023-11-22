@@ -217,7 +217,7 @@ const LoginFormContainer: React.FC = () => {
             </Box>
             <Box sx={{ width: '100%', display: "flex", alignItems: "center", justifyContent: "center", marginTop: 2 }}>
               <Text style={{ color: 'white',  marginBottom: '1rem' }}>
-                <a href="#" style={{ color: 'black',}}>¿Olvidaste tu contraseña?</a>
+                <a href="RecoverPassword" style={{ color: 'black',}}>¿Olvidaste tu contraseña?</a>
               </Text>
             </Box>
 

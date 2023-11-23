@@ -10,7 +10,7 @@ import {
   toggleAppointment,
   clearAppointments,
 } from "../../redux/reducers/booking";
-import { Button } from "@mui/material";
+import { Button, Input, Typography } from "@mui/material";
 
 interface Appointment {
   date: string | null;
@@ -20,18 +20,24 @@ interface Appointment {
 
 const generateTimeSlots = () => {
   const timeSlots: string[] = [];
-  const startTime = moment().hour(8).minute(0);
-  const endTime = moment().hour(18).minute(0);
+  const startTime = moment().hour(10).minute(0);
+  const endTime = moment().hour(24).minute(0);
 
   while (startTime.isBefore(endTime)) {
-    timeSlots.push(startTime.format("HH:mm"));
+    timeSlots.push(startTime.format("HH"));
     startTime.add(1, "hour");
   }
 
   return timeSlots;
 };
 
-const generateCourts = () => ["Cancha 1", "Cancha 2", "Cancha 3"];
+const generateCourts = () => [
+  "Cancha 1 F5",
+  "Cancha 2 F5",
+  "Cancha 3 F5",
+  "Cancha 4 F5",
+  "Cancha 5 F5",
+];
 
 interface Props {
   handleNext: () => void;
@@ -62,61 +68,142 @@ const Calendar: React.FC<Props> = ({ handleNext }) => {
   };
 
   return (
-    <div>
-      <h2>Calendario de Reservas</h2>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Typography
+          fontFamily={'Aleo'}
+          fontWeight={'500'}
+          variant="h5"
+          color="#FFFFFF"
+          sx={{
+            borderBottom: "3px solid #FFFFFF",
+            // margin: "0 auto 1rem auto",
+            display: "inline-block",
+          }}
+        >
+          CALENDARIO DE RESERVAS
+        </Typography>
 
       {/* Calendario para seleccionar la fecha */}
-      <label>Fecha:</label>
-      <input
-        type="date"
-        value={selectedDate || ""}
-        onChange={(e) => {
-          setSelectedDate(e.target.value);
-          dispatch(selectDate(e.target.value));
-        }}
-      />
+      <div
+        style={{ display: "flex", justifyContent: "center", margin: "2rem" }}
+      >
+        {/* <Label>Fecha:</label> */}
+        <Typography style={{color:"#2E2F33", fontWeight: 'bold',  padding: '0 1rem'}}>Seleccciona una fecha: </Typography>
+        <Input
+          type="date"
+          value={selectedDate || ""}
+          onChange={(e) => {
+            setSelectedDate(e.target.value);
+            dispatch(selectDate(e.target.value));
+          }}
+        />
+      </div>
 
       {/* Calendario de Reservas */}
       <div style={{ display: "flex", flexDirection: "column" }}>
         {/* Encabezado de los horarios */}
-        <div style={{ display: "flex", marginBottom: "10px" }}>
-          <div style={{ width: "80px" }} />
-          {timeSlots.map((time) => (
+        <div style={{ display: "flex" }}>
+          {/* Espacio en la intersección */}
+          <div
+            style={{
+              width: "10rem",
+              height: "5rem", // Altura añadida para visualizar la diagonal
+              background: `linear-gradient(26deg, #222222 49.5%, transparent 49.5%, transparent 50.5%, #B4FA8A 50.5%)`,
+              color: "#B4FA8A",
+              border: "0.1px solid #4B4B4B",
+              textAlign: "center",
+            }}
+          >
             <div
+              style={{
+                transform: "rotate(0deg)",
+                position: "relative",
+                top: "15%",
+                left: "20%",
+                color: "#4B4B4B",
+                fontFamily: "Amiko,sans-serif",
+                fontSize: "15px",
+                fontWeight: "bold",
+              }}
+            >
+              Horarios
+            </div>
+            <div
+              style={{
+                transform: "rotate(0deg)",
+                position: "relative",
+                top: "40%",
+                right: "20%",
+                color: "#B4FA8A",
+                fontFamily: "Amiko,sans-serif",
+                fontSize: "15px",
+                fontWeight: "bold",
+              }}
+            >
+              Canchas
+            </div>
+          </div>
+          {timeSlots.map((time) => (
+            <Typography
               key={time}
               style={{
-                width: "80px",
-                marginRight: "10px",
+                width: "50px",
                 textAlign: "center",
+                backgroundColor: "#B4FA8A",
+                color: "#4B4B4B",
+                fontWeight: 'bold',
+                padding: "1rem 0",
+                border: "0.1px solid #4B4B4B",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
               {time}
-            </div>
+            </Typography>
           ))}
         </div>
 
         {/* Celdas del calendario */}
         {courts.map((court) => (
-          <div key={court} style={{ display: "flex", marginBottom: "10px" }}>
+          <div key={court} style={{ display: "flex" }}>
             {/* Nombre de la cancha */}
-            <div style={{ width: "80px", marginRight: "10px" }}>{court}</div>
+            <Typography
+              style={{
+                width: "10rem",
+                color: "#B4FA8A",
+                backgroundColor: "#222222",
+                textAlign: "center",
+                padding: "0.2rem 0 0 0",
+                border: "0.1px solid #B4FA8A",
+              }}
+            >
+              {court}
+            </Typography>
 
             {/* Celdas de horarios */}
             {timeSlots.map((time) => (
               <div
                 key={time}
                 style={{
-                  width: "80px",
+                  width: "50px",
                   height: "30px",
-                  border: "1px solid #ccc",
+                  border: "0.1px solid #2E2F33",
                   backgroundColor: selectedAppointments.some(
                     (appointment) =>
                       appointment.date === selectedDate &&
                       appointment.time === time &&
                       appointment.court === court
                   )
-                    ? "lightgreen"
-                    : "white",
+                    ? "#00CC00"
+                    : "#4B4B4B",
                   cursor: "pointer",
                 }}
                 onClick={() => handleCellClick(time, court)}
@@ -127,21 +214,16 @@ const Calendar: React.FC<Props> = ({ handleNext }) => {
       </div>
 
       {/* Botón de Reserva */}
-      <Button variant="contained" type="submit" onClick={handleNextButton}>
-        {" "}
-        Siguiente
-      </Button>
-
-      {/* Lista de citas */}
-      <div>
-        <h3>Citas Agendadas</h3>
-        <ul>
-          {selectedAppointments.map((appointment, index) => (
-            <li key={index}>
-              {`Fecha: ${appointment.date}, Horario: ${appointment.time}, Cancha: ${appointment.court}`}
-            </li>
-          ))}
-        </ul>
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <Button
+          variant="contained"
+          type="submit"
+          onClick={handleNextButton}
+          style={{ backgroundColor: "#2E2F33", margin: "1rem 0 0 0" }}
+        >
+          {" "}
+          Siguiente
+        </Button>
       </div>
     </div>
   );

@@ -35,9 +35,10 @@ export default function HorizontalLinearStepper({ result }: Props) {
         display: "flex",
         flexDirection: "column",
         alignCenter: "center",
+        backgroundColor:'#555659'
       }}
     >
-      <Stepper activeStep={activeStep}>
+      <Stepper activeStep={activeStep} alternativeLabel style={{margin: '5rem 1rem 1rem 1rem'}}>
         {steps.map((label) => {
           return (
             <Step key={label}>

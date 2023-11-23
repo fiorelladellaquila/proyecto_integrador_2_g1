@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Box, Paper } from "@mui/material";
 import CheckShiftStepperContainer from './CheckShiftStepperContainer';
 import Calendar from './ShiftStepperContainer';
+import CheckoutStepperContainer from './CheckoutStepperContainer';
 
 
 interface Props {
@@ -20,15 +21,16 @@ const SteppersSectionContainer: FC<Props> = ({ result, activeStep, handleBack, h
             case 1:
                 return <CheckShiftStepperContainer handleBack={handleBack} handleNext={handleNext} />;
             case 2:
-                return <h1>holaaaaaa</h1>;
+                return <CheckoutStepperContainer handleBack={handleBack} handleNext={handleNext} />;
+                
             default:
                 throw new Error("Paso no válido");
         }
     };
 
     return (
-        <Box sx={{ width: "80%", alignSelf: "center", marginTop: "2rem" }}>
-            <Paper elevation={8} sx={{ p: "32px", display: "flex", flexDirection: "column", gap: 3 }}>
+        <Box sx={{ width: "80%", alignSelf: "center", marginTop: "1rem" }}>
+            <Paper elevation={8} sx={{ p: "32px", display: "flex", flexDirection: "column", gap: 3, background: '#787B81' }}>
                 {renderStepContent(activeStep)}
             </Paper>
         </Box>

@@ -23,10 +23,15 @@ public class AuthenticationService {
 
     public AuthResponseDTO login(UserLoginDTO request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-        UserDetails user=userRepository.findByUsername(request.getUsername()).orElseThrow();
+        User user=userRepository.findByUsername(request.getUsername()).orElseThrow();
         String token=jwtService.getToken(user);
         return AuthResponseDTO.builder()
                 .token(token)
+                .username(user.getUsername())
+                .name(user.getName())
+                .lastName(user.getLastName())
+                .email(user.getEmail())
+                .phone(user.getPhone())
                 .build();
     }
 
@@ -45,6 +50,11 @@ public class AuthenticationService {
 
         return AuthResponseDTO.builder()
                 .token(jwtService.getToken(user))
+                .username(request.getUsername())
+                .name(request.getName())
+                .lastName(request.getLastName())
+                .email(request.getEmail())
+                .phone(request.getPhone())
                 .build();
 
     }

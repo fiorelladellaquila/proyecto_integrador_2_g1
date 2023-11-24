@@ -1,5 +1,5 @@
 package com.grupo1.canchalibre.security;
-
+/*
 import com.grupo1.canchalibre.entity.Rol;
 import com.grupo1.canchalibre.entity.User;
 import com.grupo1.canchalibre.repository.IUserRepository;
@@ -30,4 +30,4 @@ public class CargaDatos implements ApplicationRunner {
         usuarioRepository.save(usuario);*/
 
     }
-}
+}*/

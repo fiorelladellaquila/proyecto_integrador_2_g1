@@ -1,6 +1,7 @@
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import Image from "next/image";
 import { FC } from "react";
+import { aleo } from '../fonts';
 
 const ContactUsSectionContainer: FC = () => {
   return (

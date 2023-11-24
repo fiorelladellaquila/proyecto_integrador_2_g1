@@ -9,7 +9,7 @@ import { theme } from "@/styles/material-theme";
 
 const Login = () => {
   return (
-    <ThemeProvider theme={theme}>
+    // <ThemeProvider theme={theme}>
       <Provider store={store}>
         <LayoutGeneral title={"Login"}>
           <Container>
@@ -17,7 +17,7 @@ const Login = () => {
           </Container>
         </LayoutGeneral>
       </Provider>
-    </ThemeProvider>
+    // </ThemeProvider>
   );
 };
 

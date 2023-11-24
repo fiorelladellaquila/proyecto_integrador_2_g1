@@ -17,7 +17,7 @@ public class CargaDatos implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+       /* BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String password = "digital";
         String passHash = passwordEncoder.encode(password);
         User usuario = new User();
@@ -27,7 +27,7 @@ public class CargaDatos implements ApplicationRunner {
         usuario.setUsername("nico.monterosabeli@gmail.com");
         usuario.setPassword(passHash);
         usuario.setRol(Rol.ROLE_ADMIN);
-        usuarioRepository.save(usuario);
+        usuarioRepository.save(usuario);*/
 
     }
 }

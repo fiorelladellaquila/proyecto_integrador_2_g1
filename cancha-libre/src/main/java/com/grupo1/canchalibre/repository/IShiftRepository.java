@@ -8,11 +8,11 @@ import java.util.Date;
 import java.util.List;
 
 public interface IShiftRepository extends JpaRepository<Shift, Long>{
-    @Query("SELECT s FROM Shift s WHERE s.soccer_field_id = :soccerField_id AND s.dateTime = :dateTime")
+    @Query("SELECT s FROM Shift s WHERE s.soccer_field_id = :soccerField_id AND s.date_time = :dateTime")
     List<Shift> findBySoccerFieldIdAndDateTime(
             @Param("soccerField_id") long soccerField_id,
             @Param("dateTime") Date dateTime);
-    @Query("SELECT s FROM Shift s WHERE s.soccer_field_id = :soccerField_id AND s.dateTime BETWEEN :startDate AND :endDate")
+    @Query("SELECT s FROM Shift s WHERE s.soccer_field_id = :soccerField_id AND s.date_time BETWEEN :startDate AND :endDate")
     List<Shift> findBySoccerFieldIdAndDateTimeBetween(
             @Param("soccerField_id") long soccerField_id,
             @Param("startDate") Date startDate,

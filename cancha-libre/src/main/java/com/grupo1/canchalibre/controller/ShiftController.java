@@ -36,8 +36,8 @@ public class ShiftController {
     @GetMapping("/bySoccerFieldAndTimeRange")
     public List<Shift> searchShifts(
             @RequestParam long SoccerField_id,
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") Date startDate,
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") Date endDate) {
+            @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") Date startDate,
+            @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") Date endDate) {
 
         return shiftService.findShiftsBySoccerFieldIdAndDateTimeRange(SoccerField_id, startDate, endDate);
     }

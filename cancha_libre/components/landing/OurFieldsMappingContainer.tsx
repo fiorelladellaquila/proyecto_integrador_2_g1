@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Link, Typography } from "@mui/material";
 import { FC } from "react";
 import Image from "next/image";
 
@@ -97,7 +97,8 @@ const OurFieldsMappingContainer: FC<OurFieldsMappingContainerProps> = ({
                   />
                 </Box>
               )}
-               {inLandingTemplate ? ( <Button
+               {inLandingTemplate ? ( 
+               <Button
                 variant="contained"
                 sx={{
                   backgroundColor: "#00CC00",
@@ -109,7 +110,9 @@ const OurFieldsMappingContainer: FC<OurFieldsMappingContainerProps> = ({
                 }}
               >
                 Reservá
-              </Button>):( <Button
+              </Button>):( 
+              <Link href="/shifts/1">
+                 <Button
                 variant="contained"
                 sx={{
                   backgroundColor: "#EA4335",
@@ -118,11 +121,12 @@ const OurFieldsMappingContainer: FC<OurFieldsMappingContainerProps> = ({
                   },
                   textTransform: "capitalize",
                   width: "100%",
-                }}
-                
+                }}    
               >
                 Reservá
-              </Button>)}
+              </Button>
+              </Link>
+             )}
              
             </Box>
           </Grid>

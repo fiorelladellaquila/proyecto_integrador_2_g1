@@ -4,6 +4,7 @@ import { SteppersContext } from "./context/SteppersContext";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import QRCode from "qrcode.react";
+import { useRouter } from 'next/router';
 
 interface Props {
   handleBack: () => void;
@@ -15,6 +16,7 @@ const CheckoutStepperContainer: FC<Props> = ({ handleBack, handleNext }) => {
   const selectedAppointments = useSelector(
     (state: RootState) => state.booking.selectedAppointments
   );
+  const router = useRouter();
 
   const center = {
     lat: -31.436677932739258,
@@ -45,6 +47,10 @@ const CheckoutStepperContainer: FC<Props> = ({ handleBack, handleNext }) => {
   const handleNextButton = () => {
     handleNext();
   };
+
+  const handleConfirmShift = () => {
+    router.push('/confirmShift');
+  }
 
   const qrUrl = `link.mercadopago.com.ar/canchalibre`;
 
@@ -143,8 +149,9 @@ const CheckoutStepperContainer: FC<Props> = ({ handleBack, handleNext }) => {
         </Button>
         <Button
           variant="contained"
-          onClick={handleNextButton}
+          onClick={handleConfirmShift}
           style={{ backgroundColor: "#2E2F33" }}
+         
         >
           Finalizar
         </Button>

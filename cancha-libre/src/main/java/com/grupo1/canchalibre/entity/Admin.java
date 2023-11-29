@@ -22,7 +22,7 @@ public class Admin {
     private String password;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name ="admin_id")
-    private Set<Cancha> canchas;
+    private Set<SoccerFields> SoccerFields;
 
     public Admin(Long id, String name, String lastName, String email, int phone, String password) {
         this.id = id;

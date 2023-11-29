@@ -12,11 +12,15 @@ import java.util.Date;
 @Setter
 public class ShiftDTO implements Serializable {
 
-    private Date dateTime;
+    private Date date_time;
     private boolean reserved;
+    private long soccer_field_id;
+    private long user_id;
 
     public ShiftDTO(Shift shift) {
-        this.dateTime = shift.getDateTime();
+        this.date_time = shift.getDate_time();
         this.reserved = shift.isReserved();
+        this.soccer_field_id = shift.getSoccer_field_id();
+        this.user_id = shift.getUser_id();
     }
 }

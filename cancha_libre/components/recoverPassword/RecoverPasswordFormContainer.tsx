@@ -26,7 +26,7 @@ const RecoverPasswordFormContainer: React.FC = () => {
   const router = useRouter();
 
   return (
-    <FormContainer>
+    <FormContainer >
       <Box sx={{ width: '100%' }}>
       <Formik
         initialValues={{
@@ -125,7 +125,7 @@ const RecoverPasswordFormContainer: React.FC = () => {
             </Box>
             <Box sx={{ width: '100%', display: "flex", alignItems: "center", justifyContent: "center", marginTop: 2 }}>
               <Text style={{ color: 'white',  marginBottom: '1rem' }}>
-                <a style={{  display: "flex", justifyContent: "center", alignItems: "center",  color: 'black',}}>Si pasados 10 minutos aún no te llegó el mail, por las dudas revisá la papelera o la carpeta spam.</a>
+                <a style={{  alignItems: "center",  color: 'black',}}>Si pasados 10 minutos aún no te llegó el mail, por las dudas revisá la papelera o la carpeta spam.</a>
               </Text>
             </Box>
           </form>

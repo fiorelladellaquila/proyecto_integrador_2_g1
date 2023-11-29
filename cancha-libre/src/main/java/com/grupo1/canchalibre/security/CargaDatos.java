@@ -28,6 +28,3 @@ public class CargaDatos implements ApplicationRunner {
         usuario.setPassword(passHash);
         usuario.setRol(Rol.ROLE_ADMIN);
         usuarioRepository.save(usuario);*/
-
-    }
-}*/

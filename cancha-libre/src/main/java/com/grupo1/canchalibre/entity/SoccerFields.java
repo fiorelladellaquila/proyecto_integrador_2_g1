@@ -21,7 +21,7 @@ public class SoccerFields {
     private String size;
     private Long admin_id;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name ="soccer-fields_id")
+    @JoinColumn(name ="soccer_field_id")
     private Set<Shift> shifts;
 
     public SoccerFields(Long id, String description, float price, String size, Long admin_id) {

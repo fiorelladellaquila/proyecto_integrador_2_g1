@@ -1,6 +1,7 @@
 package com.grupo1.canchalibre.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,12 +25,21 @@ public class ShiftController {
     public ResponseEntity<Shift> save(@RequestBody ShiftDTO shift) {
         return ResponseEntity.ok(shiftService.save(shift));
     }
-    @GetMapping("/byCanchaIdAndDateTime/{canchaId}/{dateTime}")
-    public List<Shift> getShiftsByCanchaIdAndDateTime(
-            @PathVariable Long canchaId,
+    @GetMapping("/bySoccerFieldAndDateTime/{SoccerFieldId}/{dateTime}")
+    public List<Shift> getShiftsBySoccerFieldIdAndDateTime(
+            @PathVariable Long soccerField_id,
             @PathVariable Date dateTime
     ) {
-        return shiftService.findShiftsByCanchaIdAndDateTime(canchaId, dateTime);
+        return shiftService.findShiftsBySoccerFieldIdAndDateTime(soccerField_id, dateTime);
+    }
+
+    @GetMapping("/bySoccerFieldAndTimeRange")
+    public List<Shift> searchShifts(
+            @RequestParam long SoccerField_id,
+            @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") Date startDate,
+            @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") Date endDate) {
+
+        return shiftService.findShiftsBySoccerFieldIdAndDateTimeRange(SoccerField_id, startDate, endDate);
     }
 
     @GetMapping
@@ -53,13 +63,13 @@ public class ShiftController {
         return ResponseEntity.ok(shiftService.update(id, shift));
     }
 
-    @GetMapping("/cancha/{id}")
-    public ResponseEntity<List<Shift>> listAllByCancha(@PathVariable Long id) {
-        return ResponseEntity.ok(shiftService.listAllByCancha(id));
+    @GetMapping("/SoccerField/{id}")
+    public ResponseEntity<List<Shift>> listAllBySoccerField(@PathVariable Long id) {
+        return ResponseEntity.ok(shiftService.listAllBySoccerField(id));
     }
 
-    @GetMapping("/cancha/{id}/libre")
-    public ResponseEntity<List<Shift>> listAvailableByCancha(@PathVariable Long id) {
-        return ResponseEntity.ok(shiftService.listAvailableByCancha(id));
+    @GetMapping("/SoccerField/{id}/libre")
+    public ResponseEntity<List<Shift>> listAvailableBySoccerFields(@PathVariable Long id) {
+        return ResponseEntity.ok(shiftService.listAvailableBySoccerFields(id));
     }
 }

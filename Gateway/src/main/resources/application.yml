@@ -13,7 +13,7 @@ spring:
         - id: canchaLibre
           uri: lb://cancha-libre
           predicates:
-            - Path=/soccer-fields/**
+            - Path=/canchas/**
 
 info:
   app:

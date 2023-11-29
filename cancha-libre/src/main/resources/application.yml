@@ -1,5 +1,7 @@
 server:
   port: ${PORT:${SERVER_PORT:0}}
+  servlet:
+    context-path: /canchas/
 
 idRandom: ${random.value}
 
@@ -9,6 +11,10 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     username: pi21023c02_GRUPO1
     password: Eeth9kai
+#    url: jdbc:mysql://localhost:3306/canchalibre
+#    driverClassName: com.mysql.cj.jdbc.Driver
+#    username: root
+#    password: root
   jpa:
     properties:
       hibernate:
@@ -16,7 +22,7 @@ spring:
         format_sql: true
     show-sql: true
     hibernate:
-      ddl-autocreate: update
+      ddl-auto: update
   application:
     name: cancha-libre
 eureka:

@@ -3,9 +3,13 @@ package com.grupo1.canchalibre.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import lombok.Getter;
+import lombok.Setter;
 import java.util.Date;
 
+
+@Getter
+@Setter
 @Data
 @Entity
 @Table(name="shifts")
@@ -23,5 +27,12 @@ public class Shift {
         this.id = id;
         this.dateTime = dateTime;
         this.reserved = reserved;
+    }
+
+    public Shift(Date dateTime, boolean reserved, long canchaId, long userId) {
+        this.dateTime = dateTime;
+        this.reserved = reserved;
+        this.canchaId = canchaId;
+        this.userId = userId;
     }
 }

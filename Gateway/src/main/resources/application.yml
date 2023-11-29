@@ -1,17 +1,35 @@
 server:
-  port: 8080
-  cloud:
-    gateway:
-      routes:
-        - id: productRoute
-          uri: http://localhost:8081
-          predicates:
-            - Path=
+  port: ${PORT:${SERVER_PORT:8080}}
+
 spring:
   application:
     name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: canchaLibre
+          uri: lb://cancha-libre
+          predicates:
+            - Path=/soccer-fields/**
+
+info:
+  app:
+    name: ${spring.application.name}
 
 eureka:
   client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
+    registerWithEureka: false
+    fetchRegistry: true
+    serviceURL:
+      defaultZone: http://localhost:8761/eureka
+  management:
+    endpoint:
+      gateway:
+        enabled: true
+    endpoints:
+      web:
+        exposure:
+          include: gateway

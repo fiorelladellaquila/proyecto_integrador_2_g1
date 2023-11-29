@@ -21,7 +21,7 @@ jobs:
     - name: Install Dependencies
       run: |
         pwd
-        cd cancha_libre
+        cd proyecto_integrador_2_g1/cancha_libre
         npm install
 
     - name: Build

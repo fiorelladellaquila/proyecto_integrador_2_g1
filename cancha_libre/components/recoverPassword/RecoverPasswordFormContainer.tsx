@@ -26,7 +26,7 @@ const RecoverPasswordFormContainer: React.FC = () => {
   const router = useRouter();
 
   return (
-    <FormContainer>
+    <FormContainer >
       <Box sx={{ width: '100%' }}>
       <Formik
         initialValues={{

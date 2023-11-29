@@ -27,7 +27,7 @@ public class ShiftService {
     }
 
     public Shift save(ShiftDTO shift) {
-        Shift s = new Shift(shift.getDateTime(), shift.isReserved(), shift.getSoccer_field_id(), shift.getUser_id());
+        Shift s = new Shift(shift.getDate_time(), shift.isReserved(), shift.getSoccer_field_id(), shift.getUser_id());
         return iShiftRepository.save(s);
     }
 
@@ -54,7 +54,7 @@ public class ShiftService {
                 .orElseThrow(() -> new EntityNotFoundException("Shift with id " + shiftId + " not found"));
 
         // Update the properties of the existing shift with the values from the DTO
-        existingShift.setDateTime(updatedShiftDTO.getDateTime());
+        existingShift.setDate_time(updatedShiftDTO.getDate_time());
         existingShift.setReserved(updatedShiftDTO.isReserved());
         existingShift.setSoccer_field_id(updatedShiftDTO.getSoccer_field_id());
         existingShift.setUser_id(updatedShiftDTO.getUser_id());

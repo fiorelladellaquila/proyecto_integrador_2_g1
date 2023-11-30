@@ -31,10 +31,8 @@ jobs:
         npm run build
 
     - name: Deploy to AWS S3
-      uses: jakejarvis/s3-sync-action@master
-      with:
-        entryPoint: cancha_libre
-        args: --acl public-read --follow-symlinks --delete
+      run: |
+        aws s3 sync cancha_libre/build s3://grupo1-c2-canchalibre-front --acl public-read --delete
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

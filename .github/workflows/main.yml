@@ -25,7 +25,10 @@ jobs:
         npm install
 
     - name: Build
-      run: npm run build
+      run: |
+        pwd
+        cd cancha_libre
+        npm run build
 
     - name: Deploy to AWS S3
       uses: jakejarvis/s3-sync-action@master

@@ -1,3 +1,4 @@
+/// <reference path="./tsconfig.eslint.json" />
 export default {
     "env": {
         "browser": true,

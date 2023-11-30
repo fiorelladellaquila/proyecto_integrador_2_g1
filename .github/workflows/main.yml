@@ -38,7 +38,7 @@ jobs:
 
     - name: Deploy to AWS S3
       run: |
-        aws s3 sync cancha_libre/build s3://grupo1-c2-canchalibre-front --acl public-read --delete
+        aws s3 sync cancha_libre s3://grupo1-c2-canchalibre-front --acl public-read --delete
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

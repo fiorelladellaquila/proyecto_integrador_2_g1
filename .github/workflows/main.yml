@@ -35,6 +35,5 @@ jobs:
       with:
         aws-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        src: cancha_libre
-        dest: s3://grupo1-c2-canchalibre-front
+        entryPoint: cancha_libre/build
         args: --acl public-read --follow-symlinks --delete

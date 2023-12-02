@@ -1,5 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import { FC } from "react";
+import { URL_IMAGE_AWS } from "../constant/imagesAws";
 
 const HeroSectionContainer: FC = () => {
   return (
@@ -68,7 +69,7 @@ const HeroSectionContainer: FC = () => {
           loop
           style={{ width: "100%", height: "100%", objectFit: "cover" }}
         >
-          <source src="/videoFondo.mp4" type="video/mp4" />
+          <source src={`${URL_IMAGE_AWS}/videoFondo.mp4`} type="video/mp4" />
           Tu navegador no soporta el tag de video.
         </video>
       </Box>

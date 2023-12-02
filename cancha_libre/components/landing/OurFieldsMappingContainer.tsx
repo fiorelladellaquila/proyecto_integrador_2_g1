@@ -1,6 +1,7 @@
 import { Box, Button, Grid, Link, Typography } from "@mui/material";
 import { FC } from "react";
 import Image from "next/image";
+import { URL_IMAGE_AWS } from "../constant/imagesAws";
 
 interface OurFieldsMappingContainerProps {
   inLandingTemplate?: boolean; // Propiedad opcional para determinar el template
@@ -90,7 +91,7 @@ const OurFieldsMappingContainer: FC<OurFieldsMappingContainerProps> = ({
                   }}
                 >
                   <Image
-                    src={card.img}
+                    src={`${URL_IMAGE_AWS}${card.img}`}
                     alt={`Imagen ${card.teamNumber}`}
                     layout="fill"
                     objectFit="cover"

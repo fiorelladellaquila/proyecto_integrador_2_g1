@@ -9,6 +9,7 @@ import OurFieldsMappingContainer from "@/components/landing/OurFieldsMappingCont
 import InformationHomeSectionContainer from "../InformationHomeSectionContainer";
 import CategoriesFieldsSectionContainer from "../CategoriesFieldsSectionContainer";
 import { amiko } from "../../fonts"
+import { URL_IMAGE_AWS } from "@/components/constant/imagesAws";
 const HomeComponent: FC = () => {
   return (
     // <ThemeProvider theme={theme}>
@@ -23,7 +24,7 @@ const HomeComponent: FC = () => {
   >
     <div style={{ height: "5rem", position: "relative", width: "100%" }}>
       <Image
-        src={`/imageHome.png`}
+        src={`${URL_IMAGE_AWS}/imageHome.png`}
         alt={`Imagen Home`}
         layout="fill"
         objectFit="cover"

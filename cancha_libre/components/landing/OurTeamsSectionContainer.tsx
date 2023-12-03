@@ -16,7 +16,7 @@ const OurTeamsSectionContainer: FC = () => {
         }}
       >
         <Typography
-          fontFamily={`${aleo}`}
+          fontFamily={'__Aleo_b421b5'}
           fontWeight={'600'}
           variant="h4"
           color="#FFFFFF"

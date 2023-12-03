@@ -44,7 +44,7 @@ const HomeComponent: FC = () => {
     <GeneralFooter />
   </Box>
 </LayoutGeneral>
-    // </ThemeProvider>
+  </ThemeProvider>
   );
 };
 

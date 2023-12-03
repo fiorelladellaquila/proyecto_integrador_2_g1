@@ -7,6 +7,7 @@ import store from "../../../redux/store";
 import { ThemeProvider } from "@mui/system";
 import { theme } from "@/styles/material-theme";
 
+
 const Login = () => {
   return (
     <ThemeProvider theme={theme}>
@@ -17,7 +18,7 @@ const Login = () => {
           </Container>
         </LayoutGeneral>
       </Provider>
-    </ThemeProvider>
+    // </ThemeProvider>
   );
 };
 

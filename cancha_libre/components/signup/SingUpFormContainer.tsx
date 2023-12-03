@@ -30,6 +30,8 @@ import { useDispatch } from 'react-redux';
 import { login } from '../../redux/actions/auth';
 import {jwtDecode} from 'jwt-decode';
 import { useRouter } from 'next/router';
+import NextLink from "next/link";
+import { amiko } from '../fonts';
 
 const SignUpFormContainer: React.FC = () => {
   // const [email, setEmail] = useState('');
@@ -122,7 +124,7 @@ const SignUpFormContainer: React.FC = () => {
                     inputProps={{}}
                     label="Nombre Completo"
                 />
-            </StyledFormControl>
+            </StyledFormControl >
             {(touched.fullName && errors.fullName) && (
             <Box sx={{ 
               width: '80%', 
@@ -133,13 +135,13 @@ const SignUpFormContainer: React.FC = () => {
               borderRadius: '8px', 
               margin: '0 auto',
             }}>
-          <StyledValidationMessages>
+              <StyledValidationMessages style={{ fontFamily:`${amiko}` }}>
                   <ul>
                     {touched.fullName && errors.fullName && (
                       <li>{errors.fullName}</li>
                     )}
                   </ul>
-          </StyledValidationMessages>
+              </StyledValidationMessages>
               </Box>
             )}
 
@@ -287,9 +289,11 @@ const SignUpFormContainer: React.FC = () => {
             </ButtonContainer>
             </Box>
             <Box sx={{ width: '100%', display: "flex", alignItems: "center", justifyContent: "center", marginTop: 2 }}>
-              <Text style={{ color: 'white',  marginBottom: '1rem' }}>
-                <a href="login" style={{ color: 'black',}}>¿Ya tenés tu cuenta? Iniciá sesión acá</a>
-              </Text>
+                <NextLink href="/auth/login" passHref>
+                  <Text style={{ color: 'white',  marginBottom: '1rem' }}>
+                    <a href="login" style={{ color: 'black',}}>¿Ya tenés tu cuenta? Iniciá sesión acá</a>
+                  </Text>
+                </NextLink>
             </Box>
 
   

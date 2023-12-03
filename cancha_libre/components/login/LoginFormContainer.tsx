@@ -30,6 +30,8 @@ import { useDispatch } from 'react-redux';
 import { login } from '../../redux/actions/auth';
 import {jwtDecode} from 'jwt-decode';
 import { useRouter } from 'next/router';
+import NextLink from "next/link";
+import { amiko } from '../fonts';
 
 const LoginFormContainer: React.FC = () => {
   // const [email, setEmail] = useState('');
@@ -216,15 +218,17 @@ const LoginFormContainer: React.FC = () => {
             )}
             <Box sx={{ width: '100%', display: "flex", alignItems: "center", justifyContent:"center", padding:'1.5rem 0 0 0' }}>
             <ButtonContainer>
-              <StyledButton  size="large" type="submit" variant="contained">
+              <StyledButton  size="large" type="submit" variant="contained" sx={{fontFamily:`${amiko}`}}>
                 Iniciar sesión
               </StyledButton>
             </ButtonContainer>
             </Box>
             <Box sx={{ width: '100%', display: "flex", alignItems: "center", justifyContent: "center", marginTop: 2 }}>
-              <Text style={{ color: 'white',  marginBottom: '1rem' }}>
-                <a href="RecoverPassword" style={{ color: 'black',}}>¿Olvidaste tu contraseña?</a>
-              </Text>
+              <NextLink href="/auth/RecoverPassword" passHref>
+                <Text style={{ color: 'white',  marginBottom: '1rem' }}>
+                  <a style={{ color: 'black',}}>¿Olvidaste tu contraseña?</a>
+                </Text>
+              </NextLink> 
             </Box>
 
             <Box sx={{ width: '100%', display: "flex", alignItems: "center", justifyContent: "center"}}>
@@ -233,11 +237,13 @@ const LoginFormContainer: React.FC = () => {
             <Text style={{ color: 'white', marginBottom: '0.5rem' }}>
                 <span style={{ fontSize: '14px' }}>¿No tienes cuenta?</span>
             </Text>
-              <ButtonContainer>
-                <StyledButton  size="large" type="submit" variant="contained">
-                  Registrate acá
-                </StyledButton>
-              </ButtonContainer>
+              <NextLink href="/auth/SignUp" passHref>
+                <ButtonContainer>
+                  <StyledButton  size="large" type="submit" variant="contained">
+                    Registrate acá
+                  </StyledButton>
+                </ButtonContainer>
+              </NextLink>
             </Box>
           </Box>
             {/* <Box style={{backgroundColor: '#0A711B', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '100%', padding: '1.5rem 0'}}> */}

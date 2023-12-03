@@ -1,6 +1,7 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import { FC } from "react";
+import {aleo} from "../fonts"
 
 const RecreationalEventsSectionContainer: FC = () => {
   return (
@@ -13,7 +14,7 @@ const RecreationalEventsSectionContainer: FC = () => {
         }}
       >
         <Typography
-          fontFamily={'Aleo'}
+          fontFamily={`${aleo}`}
           fontWeight={'600'}
           variant="h4"
           color="#3A3A3A"
@@ -21,6 +22,7 @@ const RecreationalEventsSectionContainer: FC = () => {
             borderBottom: "4px solid #3A3A3A",
             margin: "0 auto 16px auto",
             display: "inline-block",
+           
           }}
         >
           EVENTOS RECREATIVOS

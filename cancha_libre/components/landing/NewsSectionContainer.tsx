@@ -1,6 +1,8 @@
 import { Box, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import { FC } from "react";
+import {aleo} from "../fonts"
+
 
 const NewsSectionContainer: FC = () => {
   return (
@@ -13,7 +15,6 @@ const NewsSectionContainer: FC = () => {
         }}
       >
         <Typography
-          fontFamily={'Aleo'}
           fontWeight={'600'}
           variant="h4"
           color="#FFFFFF"
@@ -21,7 +22,9 @@ const NewsSectionContainer: FC = () => {
             borderBottom: "4px solid #FFFFFF",
             margin: "0 auto 3rem auto",
             display: "inline-block",
+            fontFamily:`${aleo}`
           }}
+          
         >
           NOVEDADES
         </Typography>

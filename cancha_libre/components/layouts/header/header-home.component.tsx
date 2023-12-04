@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import { Container, Link as MUILink, Typography } from '@mui/material';
 import Image from 'next/image';
-import { URL_IMAGE_AWS } from '../../constant/imagesAws'
+import { URL_IMAGE_AWS } from '../../../utils/constant/imagesAws'
 
 const HeaderHome: FC = () => {
   const backgroundColor = '#2E2F33';

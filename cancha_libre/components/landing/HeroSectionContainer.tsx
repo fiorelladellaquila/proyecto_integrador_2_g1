@@ -1,6 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import { FC } from "react";
-import { URL_IMAGE_AWS } from "../constant/imagesAws";
+import { URL_IMAGE_AWS } from "../../utils/constant/imagesAws";
 
 const HeroSectionContainer: FC = () => {
   return (

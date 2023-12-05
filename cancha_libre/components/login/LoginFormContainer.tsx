@@ -27,10 +27,12 @@ import { useRouter } from "next/router";
 import { LOGIN } from "@/redux/types/authActionTypes";
 import { login } from "@/services/auth";
 import { RootState } from "@/redux/store";
+import NotificationModal from "../modal/NotificationModal";
 
 const LoginFormContainer: React.FC = () => {
   const rememberMe = useSelector((state: RootState) => state.auth.rememberMe);
   const [showPassword, setShowPassword] = useState(false);
+  const [isOpen, setisOpen] = useState<boolean>(false);
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -101,6 +103,7 @@ const LoginFormContainer: React.FC = () => {
               router.push("/home");
             } catch (error) {
               console.error("Error de inicio de sesión:", error);
+              setisOpen(true)
             }
           }}
         >
@@ -277,7 +280,16 @@ const LoginFormContainer: React.FC = () => {
             </form>
           )}
         </Formik>
+        <NotificationModal
+                isOpen={isOpen}
+                level="error"
+                title="No hemos podido identificarte"
+                body="Ingresaste mal tu usuario o contraseña. Por favor revisa los mismos y vuelve a intentar."
+                labelOnClick="VOLVER A INTENTAR"
+                setClose={setisOpen}
+            />
       </Box>
+     
     </FormContainer>
   );
 };

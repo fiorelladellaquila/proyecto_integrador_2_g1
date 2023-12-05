@@ -1,6 +1,7 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import { FC } from "react";
+import { URL_IMAGE_AWS } from "../../utils/constant/imagesAws";
 
 const RecreationalEventsSectionContainer: FC = () => {
   return (
@@ -44,7 +45,7 @@ const RecreationalEventsSectionContainer: FC = () => {
               }}
             >
               <Image
-                src={`/cumpleInfantil.png`}
+                src={`${URL_IMAGE_AWS}/cumpleInfantil.png`}
                 alt={"Imagen"}
                 layout="fill"
                 objectFit="cover"

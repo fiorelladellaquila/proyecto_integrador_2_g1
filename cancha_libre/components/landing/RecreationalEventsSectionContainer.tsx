@@ -1,7 +1,7 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import { FC } from "react";
-import { URL_IMAGE_AWS } from "../constant/imagesAws";
+import { URL_IMAGE_AWS } from "../../utils/constant/imagesAws";
 
 const RecreationalEventsSectionContainer: FC = () => {
   return (

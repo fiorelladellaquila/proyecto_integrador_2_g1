@@ -9,7 +9,7 @@ import OurFieldsMappingContainer from "@/components/landing/OurFieldsMappingCont
 import InformationHomeSectionContainer from "../InformationHomeSectionContainer";
 import CategoriesFieldsSectionContainer from "../CategoriesFieldsSectionContainer";
 import { amiko } from "../../fonts"
-import { URL_IMAGE_AWS } from "@/components/constant/imagesAws";
+import { URL_IMAGE_AWS } from "@/utils/constant/imagesAws";
 const HomeComponent: FC = () => {
   return (
     // <ThemeProvider theme={theme}>

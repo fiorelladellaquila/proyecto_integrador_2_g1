@@ -1,7 +1,7 @@
 import { Box, Button, Grid, Link, Typography } from "@mui/material";
 import { FC } from "react";
 import Image from "next/image";
-import { URL_IMAGE_AWS } from "../constant/imagesAws";
+import { URL_IMAGE_AWS } from "../../utils/constant/imagesAws";
 
 interface OurFieldsMappingContainerProps {
   inLandingTemplate?: boolean; // Propiedad opcional para determinar el template

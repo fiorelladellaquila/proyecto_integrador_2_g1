@@ -1,11 +1,20 @@
-import { AuthActionTypes, LOGIN, LOGOUT } from '../actions/auth';
+import {
+  AuthActionTypes,
+  LOGIN,
+  LOGOUT,
+  SET_REMEMBER_ME,
+} from "../types/authActionTypes";
 
-interface AuthState {
-  token: string | null;
+export interface AuthState {
+  isAuthenticated: boolean;
+  token: string;
+  rememberMe: boolean;
 }
 
 const initialState: AuthState = {
-  token: null,
+  isAuthenticated: false,
+  token: "",
+  rememberMe: false,
 };
 
 const authReducer = (state = initialState, action: AuthActionTypes): AuthState => {
@@ -13,12 +22,19 @@ const authReducer = (state = initialState, action: AuthActionTypes): AuthState =
     case LOGIN:
       return {
         ...state,
+        isAuthenticated: true,
         token: action.payload,
       };
     case LOGOUT:
       return {
         ...state,
-        token: null,
+        isAuthenticated: false,
+        token: "",
+      };
+    case SET_REMEMBER_ME:
+      return {
+        ...state,
+        rememberMe: action.payload,
       };
     default:
       return state;

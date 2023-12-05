@@ -3,7 +3,7 @@ import Image from "next/image";
 import { FC } from "react";
 import{Aleo} from 'next/font/google'
 import { Amiko} from 'next/font/google'
-import { URL_IMAGE_AWS } from "../constant/imagesAws";
+import { URL_IMAGE_AWS } from "../../utils/constant/imagesAws";
 const amiko = Amiko({ subsets: ['latin'], weight: "400" })
 const aleo = Aleo({ subsets: ['latin'], weight: "400" })
 const DescriptionSectionContainer: FC = () => {

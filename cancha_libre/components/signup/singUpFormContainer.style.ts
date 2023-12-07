@@ -13,6 +13,7 @@ export const FormContainer = styled.div`
   justify-content: center;
   margin: 2rem;
   width: 35rem;
+  height: 100vh
 `
 
 export const Logo = styled.img``

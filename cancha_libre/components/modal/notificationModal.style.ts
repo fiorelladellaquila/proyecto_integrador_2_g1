@@ -80,6 +80,7 @@ export const StyleBody = styled.p`
   line-height: 18px;
   text-align: center;
   color: #33558B;
+  margin: 1rem
 `;
 
 export const AnimationGifLoading = styled.div`

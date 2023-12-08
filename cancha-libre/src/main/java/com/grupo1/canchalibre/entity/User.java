@@ -32,6 +32,8 @@ public class User implements UserDetails {
     private String email;
     private int phone;
     private String password;
+    private String verificationCode;
+    private boolean enabled;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name ="user_id")
     private Set<Shift> shifts;

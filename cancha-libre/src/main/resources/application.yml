@@ -7,14 +7,14 @@ idRandom: ${random.value}
 
 spring:
   datasource:
-    url: jdbc:mysql://db.ctd.academy:3306/pi21023c02_GRUPO1
-    driverClassName: com.mysql.cj.jdbc.Driver
-    username: pi21023c02_GRUPO1
-    password: Eeth9kai
-#    url: jdbc:mysql://localhost:3306/canchalibre
+#    url: jdbc:mysql://db.ctd.academy:3306/pi21023c02_GRUPO1
 #    driverClassName: com.mysql.cj.jdbc.Driver
-#    username: root
-#    password: root
+#    username: pi21023c02_GRUPO1
+#    password: Eeth9kai
+    url: jdbc:mysql://localhost:3306/canchalibre
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
   jpa:
     properties:
       hibernate:
@@ -25,6 +25,19 @@ spring:
       ddl-auto: update
   application:
     name: cancha-libre
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: canchalibreapp@gmail.com
+    password: ohfhikwgnqdhzrxm
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+          auth: true
+
 eureka:
   instance:
     hostname: localhost

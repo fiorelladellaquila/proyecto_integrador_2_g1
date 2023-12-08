@@ -3,6 +3,7 @@ package com.grupo1.canchalibre.security;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -36,6 +37,11 @@ public class SecurityCofig {
                         authRequest
                                 .requestMatchers("/auth/**").permitAll()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.GET, "/user" ).hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.GET, "/shift" ).hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.POST, "/soccer-fields" ).hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.DELETE, "/soccer-fields/**" ).hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.PUT, "/soccer-fields/**" ).hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManager->

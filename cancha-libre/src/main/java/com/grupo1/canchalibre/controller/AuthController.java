@@ -6,13 +6,12 @@ import com.grupo1.canchalibre.dto.UserLoginDTO;
 import com.grupo1.canchalibre.dto.UserRegisterDTO;
 import com.grupo1.canchalibre.dto.UserResetPasswordDTO;
 import com.grupo1.canchalibre.dto.UserVerifyCodeDTO;
-import com.grupo1.canchalibre.entity.User;
+import com.grupo1.canchalibre.exception.BadRequestException;
 import com.grupo1.canchalibre.security.AuthenticationService;
 import jakarta.mail.MessagingException;
-import jakarta.ws.rs.BadRequestException;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -30,8 +29,7 @@ public class AuthController {
     private final AuthenticationService authService;
 
     @PostMapping(value = "login")
-    public ResponseEntity<AuthResponseDTO> login(@RequestBody UserLoginDTO request)
-    {
+    public ResponseEntity<AuthResponseDTO> login(@RequestBody UserLoginDTO request) {
         return ResponseEntity.ok(authService.login(request));
     }
 
@@ -40,12 +38,13 @@ public class AuthController {
         return ResponseEntity.ok(authService.register(request));
     }
 
-    @PostMapping("/verify/code")
+    @PostMapping("/verify")
     public ResponseEntity<String> verifyUser(@RequestBody UserVerifyCodeDTO userVerifyCodeDTO) throws BadRequestException {
         if (authService.verify(userVerifyCodeDTO.getCode())) {
             return ResponseEntity.ok().build();
         } else {
-            throw new BadRequestException("Error verificating user");
+            //throw new BadRequestException("Error verificating user");
+            return ResponseEntity.badRequest().build();
         }
     }
 
@@ -55,8 +54,11 @@ public class AuthController {
     }
 
     @PutMapping("/password")
-    public ResponseEntity<String>  renovarPassword( @RequestBody UserResetPasswordDTO userResetPasswordDTO){
-        return ResponseEntity.ok( authService.renovarPassword(userResetPasswordDTO.getEmail(), userResetPasswordDTO));
+    public ResponseEntity<String>  renovarPassword( @RequestBody UserResetPasswordDTO userResetPasswordDTO) throws BadRequestException{
+        if (authService.renovarPassword(userResetPasswordDTO.getEmail(), userResetPasswordDTO)) {
+            return ResponseEntity.ok().build();
+        }
+        throw new BadRequestException("Error verificating user");
     }
 
 }

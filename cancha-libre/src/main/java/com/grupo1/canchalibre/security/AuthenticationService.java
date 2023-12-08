@@ -62,6 +62,7 @@ public class AuthenticationService {
         double num = 10000 + Math.random() * 90000;
         String randomCode = Integer.toString((int) num);
         user.setVerificationCode(randomCode);
+        user.setEnabled(false);
 
         sendVerificationEmail(user);
 
@@ -99,7 +100,7 @@ public class AuthenticationService {
 
             content = content.replace("[[name]]", user.getUsername());
 
-            String verifyURL = "https://nomadapp.com.ar" + "/verify-confirmation?code=" + user.getVerificationCode();
+            String verifyURL = "https://localhost:3000" + "/verify-confirmation?code=" + user.getVerificationCode();
 
             content = content.replace("[[URL]]", verifyURL);
 
@@ -118,7 +119,6 @@ public class AuthenticationService {
         if (user == null || user.isEnabled()) {
             return false;
         } else {
-            user.setVerificationCode(null);
             user.setEnabled(true);
             userRepository.save(user);
             return true;
@@ -161,13 +161,13 @@ public class AuthenticationService {
         }
     }
 
-    public String renovarPassword(String email, UserResetPasswordDTO userRegisterDTO) {
+    public boolean renovarPassword(String email, UserResetPasswordDTO userRegisterDTO) {
         User user = userRepository.findByEmail(email).orElseThrow();
         if(!user.getVerificationCode().equals( userRegisterDTO.getCode())){
-            return "No se pudo cambiar la contraseña";
+            return false;
         }
         user.setPassword(codificador.encode(userRegisterDTO.getPassword()));
         userRepository.save(user);
-        return "Contraseña guardada correctamente";
+        return true;
     }
 }

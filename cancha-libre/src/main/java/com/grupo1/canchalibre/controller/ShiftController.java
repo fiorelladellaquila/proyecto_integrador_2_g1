@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-//@Cross origin completar
+//@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RequestMapping("/shift")
 public class ShiftController {
     @Autowired

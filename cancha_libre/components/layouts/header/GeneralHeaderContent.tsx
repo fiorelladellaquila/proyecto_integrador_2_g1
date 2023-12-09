@@ -14,7 +14,7 @@ import { useRouter } from "next/router";
 import { createAvatar } from "@dicebear/core";
 import { funEmoji } from "@dicebear/collection";
 import { useDispatch } from "react-redux";
-import { logout } from "@/redux/actions/auth";
+import { logout } from "@/redux/slices/auth";
 
 const GeneralHeaderContent: FC = () => {
   const router = useRouter();

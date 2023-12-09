@@ -51,7 +51,7 @@ const NotificationModal = ({
     }
     if (level === LEVEL_MODAL.warning) {
       return {
-        iconModal: success,
+        iconModal: warning,
         colorTitle: COLOR_TITLE_MODAL.warning,
         colorButton: COLOR_BUTTON_MODAL.warning,
       };

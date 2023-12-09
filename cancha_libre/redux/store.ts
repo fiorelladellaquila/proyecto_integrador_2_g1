@@ -1,14 +1,15 @@
-// store.ts
-import { createStore, combineReducers } from 'redux';
-import authReducer from './reducers/auth';
-import bookingReducer from '../redux/reducers/booking';
+import { configureStore } from '@reduxjs/toolkit';
+import authReducer from './slices/auth';
+import bookingReducer from '../redux/slices/booking';
+import soccerFieldsReducer from '../redux/slices/soccerFields';
 
-const rootReducer = combineReducers({
-  auth: authReducer,
-  booking: bookingReducer,
+const store = configureStore({
+  reducer: {
+    auth: authReducer,
+    soccerFields: soccerFieldsReducer,
+    booking: bookingReducer,
+  },
 });
 
-const store = createStore(rootReducer);
-
-export type RootState = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<typeof store.getState>;
 export default store;

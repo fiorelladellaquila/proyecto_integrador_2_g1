@@ -17,7 +17,7 @@ import {
   StyledValidationMessages,
 } from './recoverPasswordFormContainer.style';
 import { useDispatch } from 'react-redux';
-import { login } from '../../redux/actions/auth';
+// import { login } from '../../redux/actions/auth';
 import {jwtDecode} from 'jwt-decode';
 import { useRouter } from 'next/router';
 
@@ -37,35 +37,35 @@ const RecoverPasswordFormContainer: React.FC = () => {
           email: Yup.string().email('Debe ser un email valido').max(255).required('El email es requerido'),
         })}
         onSubmit={async (values) => {
-          try {
-            const response = await axios.post('https://run.mocky.io/v3/bbad14ad-42a4-4c85-854b-cd185451c37f', {
-              email: `${values.email}`,
-            });
-            const token = response.data.result.accessToken
-            if (token) {
-              dispatch(login(token));
-              const decodedToken: { [key: string]: any } = jwtDecode(token);
+          // try {
+          //   const response = await axios.post('https://run.mocky.io/v3/bbad14ad-42a4-4c85-854b-cd185451c37f', {
+          //     email: `${values.email}`,
+          //   });
+          //   const token = response.data.result.accessToken
+          //   if (token) {
+          //     dispatch(login(token));
+          //     const decodedToken: { [key: string]: any } = jwtDecode(token);
 
-              console.log('decoded', decodedToken);
+          //     console.log('decoded', decodedToken);
       
-              if (typeof decodedToken === 'object' && 'email' in decodedToken) {
-                console.log('entraaaa')
-                if (decodedToken.email === values.email) {
-                  return '200'
-                  // router.push('/home');
+          //     if (typeof decodedToken === 'object' && 'email' in decodedToken) {
+          //       console.log('entraaaa')
+          //       if (decodedToken.email === values.email) {
+          //         return '200'
+          //         // router.push('/home');
               
-                } else {
-                  console.error('Los datos del usuario no coinciden con el token JWT');
-                }
-              } else {
-                console.error('El token JWT no contiene una propiedad "email" válida');
-              }
-            } else {
-              console.error('No se recibió un token JWT en la respuesta');
-            }
-          } catch (error) {
-            console.error('Error de inicio de sesión:', error);
-          }
+          //       } else {
+          //         console.error('Los datos del usuario no coinciden con el token JWT');
+          //       }
+          //     } else {
+          //       console.error('El token JWT no contiene una propiedad "email" válida');
+          //     }
+          //   } else {
+          //     console.error('No se recibió un token JWT en la respuesta');
+          //   }
+          // } catch (error) {
+          //   console.error('Error de inicio de sesión:', error);
+          // }
         }}
       >
         {({ errors, handleBlur, handleChange, handleSubmit, touched, values }) => (

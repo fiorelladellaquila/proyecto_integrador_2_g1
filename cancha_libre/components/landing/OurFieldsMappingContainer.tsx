@@ -17,6 +17,7 @@ const OurFieldsMappingContainer: FC<OurFieldsMappingContainerProps> = ({
         justifyContent="center"
         spacing={1}
         style={{ padding: "0 5rem" }}
+        id='fields'
       >
         {[
           { id: 1, teamNumber: "5", price: "15.000", img: "/sliderF5.png" },
@@ -111,23 +112,26 @@ const OurFieldsMappingContainer: FC<OurFieldsMappingContainerProps> = ({
                 }}
               >
                 Reservá
-              </Button>):( 
-              <Link href="/shifts/1">
-                 <Button
-                variant="contained"
-                sx={{
-                  backgroundColor: "#EA4335",
-                  "&:hover": {
-                    backgroundColor: "rgba(234, 67, 53, 0.8)",
-                  },
-                  textTransform: "capitalize",
-                  width: "100%",
-                }}    
-              >
-                Reservá
-              </Button>
-              </Link>
-             )}
+              </Button>): null
+            //   ( 
+            //   <Link href="/shifts/1">
+            //      <Button
+            //     variant="contained"
+            //     sx={{
+            //       backgroundColor: "#EA4335",
+            //       "&:hover": {
+            //         backgroundColor: "rgba(234, 67, 53, 0.8)",
+            //       },
+            //       textTransform: "capitalize",
+            //       width: "100%",
+            //     }}    
+            //   >
+            //     Reservá
+            //   </Button>
+            //   </Link>
+            //  )
+             }
+             
              
             </Box>
           </Grid>

@@ -49,6 +49,7 @@ const CheckShiftStepperContainer: FC<Props> = ({ handleBack, handleNext }) => {
   };
 
   const handleNextButton = () => {
+    console.log('selectedAppointment', selectedAppointments)
     handleNext();
   };
 
@@ -108,7 +109,7 @@ const CheckShiftStepperContainer: FC<Props> = ({ handleBack, handleNext }) => {
                 sx={{ color: "555659", padding: "0.5rem 2rem " }}
               >
                 <strong>Cancha Seleccionada:</strong>{" "}
-                {selectedAppointments[0]?.court}
+                {selectedAppointments[0]?.court.description}
               </Typography>
               <Typography
                 variant="body1"
@@ -184,15 +185,16 @@ const CheckShiftStepperContainer: FC<Props> = ({ handleBack, handleNext }) => {
         <Button
           variant="contained"
           onClick={handleBackButton}
-          style={{ backgroundColor: "#2E2F33" }}
+          style={{ backgroundColor: "#2E2F33", margin: "1rem 0 0 0" }}
         >
           Atrás
         </Button>
         <Button
           variant="contained"
           onClick={handleNextButton}
-          style={{ backgroundColor: "#2E2F33" }}
+          style={{ backgroundColor: "#2E2F33", margin: "1rem 0 0 0" }}
         >
+          {" "}
           Siguiente
         </Button>
       </div>

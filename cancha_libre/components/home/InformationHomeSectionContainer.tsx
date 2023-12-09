@@ -76,19 +76,6 @@ const InformationHomeSectionContainer: FC = () => {
             marginTop: "auto",
           }}
         >
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: "#EA4335",
-              margin: "1rem",
-              "&:hover": {
-                backgroundColor: "rgba(234, 67, 53, 0.8)",
-              },
-              textTransform: "capitalize",
-            }}
-          >
-            Quiero reservar un turno
-          </Button>
           <Box
             sx={{
               width: "90%",

@@ -7,6 +7,7 @@ import {
   Grid,
   Box,
   FormControlLabel,
+  Link,
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -37,36 +38,48 @@ const LoginFormContainer: React.FC = () => {
   const router = useRouter();
 
   useEffect(() => {
-    // Recuperar el correo electrónico recordado al cargar el componente
     const storedRememberMe = localStorage.getItem("rememberMe");
     if (storedRememberMe) {
-      dispatch({ type: "SET_REMEMBER_ME", payload: JSON.parse(storedRememberMe) });
-  
-      // Si el usuario marca "Recuérdame", recuperar y establecer el correo electrónico
+      dispatch({
+        type: "SET_REMEMBER_ME",
+        payload: JSON.parse(storedRememberMe),
+      });
+
       if (JSON.parse(storedRememberMe)) {
         const rememberedEmail = localStorage.getItem("rememberedEmail") || "";
         dispatch({ type: LOGIN, payload: rememberedEmail });
       }
     }
   }, [dispatch]);
-  
+
   useEffect(() => {
-    // Modificar el efecto para que solo actualice localStorage si el valor cambia
-    if (rememberMe !== JSON.parse(localStorage.getItem("rememberMe") || "false")) {
+    if (
+      rememberMe !== JSON.parse(localStorage.getItem("rememberMe") || "false")
+    ) {
       localStorage.setItem("rememberMe", JSON.stringify(rememberMe));
-        // Si rememberMe es false, eliminar rememberedEmail del localStorage
-    if (!rememberMe) {
-      localStorage.removeItem("rememberedEmail");
-    }
+      if (!rememberMe) {
+        localStorage.removeItem("rememberedEmail");
+      }
     }
   }, [rememberMe]);
-  
-   return (
+
+  return (
     <FormContainer>
-      <Box sx={{ width: "100%" }}>
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Formik
           initialValues={{
-            email: (localStorage.getItem("rememberedEmail") || "").replace(/['"]/g, ""),
+            email: (localStorage.getItem("rememberedEmail") || "").replace(
+              /['"]/g,
+              ""
+            ),
             password: "",
             rememberMe: Boolean(localStorage.getItem("rememberedEmail")),
             submit: null,
@@ -83,27 +96,26 @@ const LoginFormContainer: React.FC = () => {
           onSubmit={async (values) => {
             try {
               const response = await login(values.email, values.password);
+              const { token, name, username } = response;
 
               console.log("response", response);
 
-              const { token, name, username } = response;
-
-             
-              console.log('remember', rememberMe);
-            
-                if (rememberMe) {
-                  localStorage.setItem("user", JSON.stringify({ token, name }));
-                  localStorage.setItem("rememberedEmail", JSON.stringify( username ));
-                }
-
+              if (rememberMe) {
                 localStorage.setItem("user", JSON.stringify({ token, name }));
+                localStorage.setItem(
+                  "rememberedEmail",
+                  JSON.stringify(username)
+                );
+              }
+
+              localStorage.setItem("user", JSON.stringify({ token, name }));
 
               dispatch({ type: LOGIN, payload: token });
 
               router.push("/home");
             } catch (error) {
               console.error("Error de inicio de sesión:", error);
-              setisOpen(true)
+              setisOpen(true);
             }
           }}
         >
@@ -121,6 +133,7 @@ const LoginFormContainer: React.FC = () => {
                 e.preventDefault();
                 handleSubmit();
               }}
+              style={{ width: "70%" }}
             >
               <StyledInputLabel
                 htmlFor="outlined-adornment-email-login"
@@ -229,7 +242,10 @@ const LoginFormContainer: React.FC = () => {
                       <Checkbox
                         checked={rememberMe}
                         onChange={(e) => {
-                          dispatch({ type: "SET_REMEMBER_ME", payload: e.target.checked });
+                          dispatch({
+                            type: "SET_REMEMBER_ME",
+                            payload: e.target.checked,
+                          });
                         }}
                         name="rememberMe"
                         color="primary"
@@ -277,19 +293,51 @@ const LoginFormContainer: React.FC = () => {
                   </a>
                 </Text>
               </Box>
-            </form>
-          )}
-        </Formik>
-        <NotificationModal
+              <Box
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "100%",
+                }}
+              ></Box>
+              <NotificationModal
                 isOpen={isOpen}
                 level="error"
                 title="No hemos podido identificarte"
                 body="Ingresaste mal tu usuario o contraseña. Por favor revisa los mismos y vuelve a intentar."
                 labelOnClick="VOLVER A INTENTAR"
                 setClose={setisOpen}
-            />
+              />
+            </form>
+          )}
+        </Formik>
+        <Box
+          style={{
+            backgroundColor: "#0A711B",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "20rem",
+            padding: "0.5rem 0",
+            borderRadius: "8px",
+          }}
+        >
+          <Text style={{ color: "white", marginBottom: "0.5rem" }}>
+            <span style={{ fontSize: "14px" }}>¿No tienes cuenta?</span>
+          </Text>
+          <ButtonContainer>
+            <Link href="/auth/SignUp">
+              <a>
+                <StyledButton size="large" type="submit" variant="contained">
+                  Registrate acá
+                </StyledButton>
+              </a>
+            </Link>
+          </ButtonContainer>
+        </Box>
       </Box>
-     
     </FormContainer>
   );
 };

@@ -116,7 +116,7 @@ public class AuthenticationService {
     public boolean verify(String verificationCode) {
         User user = userRepository.findByVerificationCode(verificationCode);
 
-        if (user == null || user.isEnabled()) {
+        if (user == null ) {
             return false;
         } else {
             user.setEnabled(true);

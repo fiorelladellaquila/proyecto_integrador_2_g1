@@ -12,6 +12,7 @@ const ContactUsSectionContainer: FC = () => {
           padding: "1rem 0 5rem 0",
           textAlign: "center",
         }}
+        id='contact'
       >
         <Typography
           fontFamily={'Aleo'}

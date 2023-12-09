@@ -14,7 +14,7 @@ import { Button, Input, Typography } from "@mui/material";
 import { getSoccerFields } from "../../services/soccerFields";
 import { fetchSoccerFieldsFailure, fetchSoccerFieldsRequest, fetchSoccerFieldsSuccess } from "@/redux/slices/soccerFields";
 import NotificationModal from "../modal/NotificationModal";
-
+import { isCourtBooked } from "@/utils/functions/booking";
 
 interface Appointment {
   date: string | null;
@@ -31,10 +31,8 @@ const generateTimeSlots = () => {
     timeSlots.push(startTime.format("HH"));
     startTime.add(1, "hour");
   }
-
   return timeSlots;
 };
-
 
 interface Props {
   handleNext: () => void;
@@ -44,61 +42,39 @@ interface Props {
 const Calendar: React.FC<Props> = ({ handleNext, handleBack }) => {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [isOpen, setisOpen] = useState<boolean>(false);
-  const timeSlots = generateTimeSlots();
-  const selectedAppointments = useSelector(selectSelectedAppointments);
-  console.log('selectedAppointments', selectedAppointments)
-  const dispatch = useDispatch();
-
-  // Use state para almacenar los datos de soccerFields
   const [soccerFieldsData, setSoccerFieldsData] = useState<any[]>([]);
 
-  // No necesitas inicializar soccerFieldsData aquí
+  const timeSlots = generateTimeSlots();
+  const selectedAppointments = useSelector(selectSelectedAppointments);
+  const dispatch = useDispatch();
 
   const fetchDataSoccerFields = async () => {
     try {
-      dispatch(fetchSoccerFieldsRequest()); // Opcional: Puedes dispatch un evento para indicar que se está realizando la solicitud
+      dispatch(fetchSoccerFieldsRequest());
       const response = await getSoccerFields();
-      setSoccerFieldsData(response); // Actualiza el estado con los datos obtenidos
-      dispatch(fetchSoccerFieldsSuccess(response)); // Puedes dispatch un evento para indicar que la solicitud fue exitosa
+      setSoccerFieldsData(response);
+      dispatch(fetchSoccerFieldsSuccess(response));
     } catch (error) {
       console.error('Error al obtener datos de campos de fútbol:', error);
-      dispatch(fetchSoccerFieldsFailure(error)); // Puedes dispatch un evento para indicar que la solicitud falló
+      dispatch(fetchSoccerFieldsFailure(error));
     }
   };
 
-  // const fetchDataAppointmentUnavaliable = async () => {
-  //   try {
-  //     dispatch(fetchAppointmentUnavailableRequest()); // Opcional: Puedes dispatch un evento para indicar que se está realizando la solicitud
-  //     const response = await getSoccerFields();
-  //     setSoccerFieldsData(response); // Actualiza el estado con los datos obtenidos
-  //     dispatch(fetchAppointmentUnavailableSuccess(response)); // Puedes dispatch un evento para indicar que la solicitud fue exitosa
-  //   } catch (error) {
-  //     console.error('Error al obtener datos de reservas ocupadas:', error);
-  //     dispatch(fetchAppointmentUnavailableFailure(error)); // Puedes dispatch un evento para indicar que la solicitud falló
-  //   }
-  // };
-
   useEffect(() => {
-    // Llamada a getSoccerFields cuando el componente se monta
     fetchDataSoccerFields();
-  }, []); // El segundo parámetro debe ser un array vacío para que useEffect se ejecute solo una vez
+  }, []); 
 
   console.log('soccerFieldsData', soccerFieldsData)
 
   const handleCellClick = (time: string, court: any) => {
-    console.log('time', time, 'court', court)
     if (selectedDate) {
-      // if(selectedAppointments.some((shift) => (shift.date === selectedDate && shift.time === time && shift.court?.description === court.description ))){
-      //   dispatch(clearAppointments())
-      // }
-      dispatch(toggleAppointment({ time, court }));
+      dispatch(toggleAppointment({ time, court, soccerFieldsData }));
     } else {
       setisOpen(true);
     }
   };
 
   const handleNextButton = () => {
-    // Puedes enviar la información al endpoint aquí si lo deseas
     console.log(
       "Enviando la siguiente información al endpoint:",
       selectedAppointments
@@ -108,25 +84,6 @@ const Calendar: React.FC<Props> = ({ handleNext, handleBack }) => {
 
   const handleBackButton = () => {
     handleBack();
-  };
-
-  const getAppointmentColor = (date: string | null, time: string, court: any) => {
-    if (!date) {
-      return "#4B4B4B"; // Color predeterminado si no hay fecha seleccionada
-    }
-  
-    const formattedDate = moment(date).format("YYYY-MM-DD");
-  
-    // Buscar si hay una reserva para la fecha, cancha y hora específicos
-    const hasAppointment = soccerFieldsData.some((field) =>
-      field.shifts.some((shift: any) =>
-        moment(shift.date_time).format("YYYY-MM-DD") === formattedDate &&
-        shift.soccer_field_id === court.id &&
-        moment(shift.date_time).format("HH") === time
-      )
-    );
-  
-    return hasAppointment ? "#FF0000" : "#4B4B4B";
   };
 
   return (
@@ -146,7 +103,6 @@ const Calendar: React.FC<Props> = ({ handleNext, handleBack }) => {
           color="#FFFFFF"
           sx={{
             borderBottom: "3px solid #FFFFFF",
-            // margin: "0 auto 1rem auto",
             display: "inline-block",
           }}
         >
@@ -157,7 +113,6 @@ const Calendar: React.FC<Props> = ({ handleNext, handleBack }) => {
         <div
           style={{ display: "flex", justifyContent: "center", margin: "2rem" }}
         >
-          {/* <Label>Fecha:</label> */}
           <Typography
             style={{ color: "#2E2F33", fontWeight: "bold", padding: "0 1rem" }}
           >
@@ -239,8 +194,10 @@ const Calendar: React.FC<Props> = ({ handleNext, handleBack }) => {
           </div>
 
           {/* Celdas del calendario */}
-          {soccerFieldsData.map((court: any) => (
-            <div key={court} style={{ display: "flex" }}>
+          {soccerFieldsData.map((court: any) => {
+           const {size, description} = court
+            return(
+              <div key={court} style={{ display: "flex" }}>
               {/* Nombre de la cancha */}
               <div  style={{
                   width: "auto",
@@ -262,7 +219,7 @@ const Calendar: React.FC<Props> = ({ handleNext, handleBack }) => {
                   fontSize: '8px'
                 }}
               >
-                {court.size}
+                {size}
               </Typography>
               <Typography
                 style={{
@@ -274,7 +231,7 @@ const Calendar: React.FC<Props> = ({ handleNext, handleBack }) => {
                   fontSize: '8px'
                 }}
               >
-                {court.description}
+                {description}
               </Typography>
 
               </div>
@@ -287,8 +244,22 @@ const Calendar: React.FC<Props> = ({ handleNext, handleBack }) => {
                     width: "50px",
                     height: "auto",
                     border: "0.1px solid #2E2F33",
-                    backgroundColor: getAppointmentColor(selectedDate, time, court),
-                    cursor: "pointer",
+                    backgroundColor: selectedAppointments.some(
+                      (appointment) =>
+                        appointment.date === selectedDate &&
+                        appointment.time === time &&
+                        appointment.court === court
+                    )
+                      ? "#00CC00"
+                      : isCourtBooked(selectedDate, time, court.id, soccerFieldsData )
+                      ? "#FF0000"
+                      : "#4B4B4B",
+                      cursor: isCourtBooked(selectedDate, time, court.id, soccerFieldsData)
+                      ? "not-allowed"
+                      : "pointer",
+                    pointerEvents: isCourtBooked(selectedDate, time, court.id, soccerFieldsData)
+                      ? "none"
+                      : "auto",
                   }}
                   onClick={() => handleCellClick(time, court)}
                 />
@@ -302,7 +273,9 @@ const Calendar: React.FC<Props> = ({ handleNext, handleBack }) => {
                 setClose={setisOpen}
               />
             </div>
-          ))}
+            )
+           
+})}
         </div>
       </div>
 

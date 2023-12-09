@@ -7,7 +7,7 @@ export const ModalBackground = styled.div`
   top: 0;
   left: 0;
   z-index: 2000;
-  position: absolute;
+  position: fixed;
 `;
 
 export const ModalContainer = styled.div`

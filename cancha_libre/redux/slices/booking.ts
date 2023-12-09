@@ -1,4 +1,3 @@
-// bookingSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface Appointment {
@@ -8,9 +7,8 @@ interface Appointment {
 }
 
 interface BookingState {
-  selectedDate: string | null;
+  selectedDate: any;
   selectedAppointments: Appointment[];
-  appointmentUnavaliable: any;
   loading: boolean;
   error: any;
 }
@@ -18,7 +16,6 @@ interface BookingState {
 const initialState: BookingState = {
   selectedDate: null,
   selectedAppointments: [],
-  appointmentUnavaliable: [],
   loading: false,
   error: null
 };
@@ -30,8 +27,8 @@ const bookingSlice = createSlice({
     selectDate: (state, action: PayloadAction<string>) => {
       state.selectedDate = action.payload;
     },
-    toggleAppointment: (state, action: PayloadAction<{ time: string; court: any }>) => {
-      const { time, court } = action.payload;
+    toggleAppointment: (state, action: PayloadAction<{ time: string; court: any, soccerFieldsData: any }>) => {
+      const { time, court, soccerFieldsData } = action.payload;
 
       const existingAppointmentIndex = state.selectedAppointments.findIndex(
         (appointment) =>
@@ -41,7 +38,7 @@ const bookingSlice = createSlice({
       );
 
       if (existingAppointmentIndex !== -1) {
-        console.log(existingAppointmentIndex)
+        // Si ya existe y no está reservado, quitar el elemento del array
         state.selectedAppointments = state.selectedAppointments.filter(
           (appointment, index) => index !== existingAppointmentIndex
         );
@@ -52,27 +49,10 @@ const bookingSlice = createSlice({
           court,
         });
       }
-      console.log('After Toggle - selectedAppointments:', state.selectedAppointments.map(appointment => JSON.stringify(appointment)))
-      console.log('Afetr Toggle - selectedDate:', state.selectedDate);
-    
     },
     clearAppointments: (state) => {
       state.selectedDate = null;
       state.selectedAppointments = [];
-    },
-    fetchAppointmentUnavailableRequest: (state) => {
-      state.loading = true;
-      state.error = null;
-    },
-    fetchAppointmentUnavailableSuccess: (state, action: PayloadAction<any[]>) => {
-      state.appointmentUnavaliable = action.payload;
-      state.loading = false;
-      state.error = null;
-    },
-    fetchAppointmentUnavailableFailure: (state, action: PayloadAction<any[]>) => {
-      state.appointmentUnavaliable = [];
-      state.loading = false;
-      state.error = action.payload;
     },
   }
 });

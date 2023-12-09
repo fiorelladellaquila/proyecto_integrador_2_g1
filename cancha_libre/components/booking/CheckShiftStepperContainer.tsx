@@ -184,15 +184,16 @@ const CheckShiftStepperContainer: FC<Props> = ({ handleBack, handleNext }) => {
         <Button
           variant="contained"
           onClick={handleBackButton}
-          style={{ backgroundColor: "#2E2F33" }}
+          style={{ backgroundColor: "#2E2F33", margin: "1rem 0 0 0" }}
         >
           Atrás
         </Button>
         <Button
           variant="contained"
           onClick={handleNextButton}
-          style={{ backgroundColor: "#2E2F33" }}
+          style={{ backgroundColor: "#2E2F33", margin: "1rem 0 0 0" }}
         >
+          {" "}
           Siguiente
         </Button>
       </div>

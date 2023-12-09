@@ -17,7 +17,7 @@ export const ModalContainer = styled.div`
   box-sizing: border-box;
   display: flex;
   font-family: sans-serif;
-  height: 100%;
+  height: 100vh;
   justify-content: center;
   padding: 0 10px;
   position: fixed;

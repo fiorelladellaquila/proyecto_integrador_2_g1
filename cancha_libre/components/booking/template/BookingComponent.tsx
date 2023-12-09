@@ -12,7 +12,7 @@ interface Props {
 
 const BookingComponent: FC<Props> = ({ result }: Props) => {
   return (
-    <ThemeProvider theme={theme}>
+    // <ThemeProvider theme={theme}>
       <LayoutGeneral title={"Home"}>
         <Box
           style={{
@@ -26,7 +26,7 @@ const BookingComponent: FC<Props> = ({ result }: Props) => {
           <GeneralFooter />
         </Box>
       </LayoutGeneral>
-    </ThemeProvider>
+    // </ThemeProvider>
   );
 };
 

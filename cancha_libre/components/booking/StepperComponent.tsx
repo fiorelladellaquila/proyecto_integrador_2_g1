@@ -48,14 +48,14 @@ export default function HorizontalLinearStepper({ result }: Props) {
         })}
       </Stepper>
       <SteppersProvider>
-      <Provider store={store}>
+      {/* <Provider store={store}> */}
       <SteppersSectionContainer
           activeStep={activeStep}
           result={result}
           handleBack={handleBack}
           handleNext={handleNext}
         />
-      </Provider>,
+      {/* </Provider>, */}
        
       </SteppersProvider>
     </Box>

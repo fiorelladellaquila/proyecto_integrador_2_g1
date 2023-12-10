@@ -17,7 +17,7 @@ const SteppersSectionContainer: FC<Props> = ({ result, activeStep, handleBack, h
     const renderStepContent = (step: number) => {
         switch (step) {
             case 0:
-                return <Calendar handleNext={handleNext}/>;
+                return <Calendar handleBack={handleBack} handleNext={handleNext}/>;
             case 1:
                 return <CheckShiftStepperContainer handleBack={handleBack} handleNext={handleNext} />;
             case 2:

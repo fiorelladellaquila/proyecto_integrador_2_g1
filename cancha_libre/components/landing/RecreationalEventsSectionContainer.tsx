@@ -12,6 +12,7 @@ const RecreationalEventsSectionContainer: FC = () => {
           padding: "3rem 0 3rem 0",
           textAlign: "center",
         }}
+        id='events'
       >
         <Typography
           fontFamily={'Aleo'}

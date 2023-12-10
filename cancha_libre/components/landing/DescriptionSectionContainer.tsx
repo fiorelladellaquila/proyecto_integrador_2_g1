@@ -10,7 +10,7 @@ const DescriptionSectionContainer: FC = () => {
   
   return (
     <>
-      <Box>
+      <Box id='services'>
         <Typography variant="h4" color="#3A3A3A" textAlign="center" mt={4} className="">
           COMPLEJO DEPORTIVO CANCHA LIBRE
         </Typography>

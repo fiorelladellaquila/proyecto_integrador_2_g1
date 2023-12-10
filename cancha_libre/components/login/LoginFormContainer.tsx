@@ -25,10 +25,10 @@ import {
 import Checkbox from "@mui/material/Checkbox";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { LOGIN } from "@/redux/types/authActionTypes";
-import { login } from "@/services/auth";
+import { login, setRememberMe } from "@/redux/slices/auth";
 import { RootState } from "@/redux/store";
 import NotificationModal from "../modal/NotificationModal";
+import { loginUser } from "@/services/auth";
 
 const LoginFormContainer: React.FC = () => {
   const rememberMe = useSelector((state: RootState) => state.auth.rememberMe);
@@ -40,14 +40,11 @@ const LoginFormContainer: React.FC = () => {
   useEffect(() => {
     const storedRememberMe = localStorage.getItem("rememberMe");
     if (storedRememberMe) {
-      dispatch({
-        type: "SET_REMEMBER_ME",
-        payload: JSON.parse(storedRememberMe),
-      });
+      dispatch(setRememberMe(JSON.parse(storedRememberMe)));
 
       if (JSON.parse(storedRememberMe)) {
         const rememberedEmail = localStorage.getItem("rememberedEmail") || "";
-        dispatch({ type: LOGIN, payload: rememberedEmail });
+        dispatch(login(rememberedEmail));
       }
     }
   }, [dispatch]);
@@ -63,6 +60,7 @@ const LoginFormContainer: React.FC = () => {
     }
   }, [rememberMe]);
 
+
   return (
     <FormContainer>
       <Box
@@ -74,51 +72,49 @@ const LoginFormContainer: React.FC = () => {
           alignItems: "center",
         }}
       >
-        <Formik
-          initialValues={{
-            email: (localStorage.getItem("rememberedEmail") || "").replace(
-              /['"]/g,
-              ""
-            ),
-            password: "",
-            rememberMe: Boolean(localStorage.getItem("rememberedEmail")),
-            submit: null,
-          }}
-          validationSchema={Yup.object().shape({
-            email: Yup.string()
-              .email("Debe ser un email valido")
-              .max(255)
-              .required("El email es requerido"),
-            password: Yup.string()
-              .max(255)
-              .required("La contraseña es requerida"),
-          })}
-          onSubmit={async (values) => {
-            try {
-              const response = await login(values.email, values.password);
-              const { token, name, username } = response;
-
-              console.log("response", response);
-
-              if (rememberMe) {
-                localStorage.setItem("user", JSON.stringify({ token, name }));
-                localStorage.setItem(
-                  "rememberedEmail",
-                  JSON.stringify(username)
-                );
-              }
-
-              localStorage.setItem("user", JSON.stringify({ token, name }));
-
-              dispatch({ type: LOGIN, payload: token });
-
-              router.push("/home");
-            } catch (error) {
-              console.error("Error de inicio de sesión:", error);
-              setisOpen(true);
+         <Formik
+        initialValues={{
+          username: (localStorage.getItem("rememberedEmail") || "").replace(
+            /['"]/g,
+            ""
+          ),
+          password: "",
+          rememberMe: Boolean(localStorage.getItem("rememberedEmail")),
+          submit: null,
+        }}
+        validationSchema={Yup.object().shape({
+          username: Yup.string()
+            .max(255)
+            .required("El nombre de usuario es requerido"),
+          password: Yup.string()
+            .max(255)
+            .required("La contraseña es requerida"),
+        })}
+        onSubmit={async (values, { setSubmitting }) => {
+          try {
+            const response = await loginUser(values.username, values.password);
+            const { token, name, username } = response;
+        
+            if (rememberMe) {
+              console.log('entraaaa')
+              localStorage.setItem("user", JSON.stringify({token, name}));
+              localStorage.setItem("rememberedEmail", username);
             }
-          }}
-        >
+        
+            localStorage.setItem("user", JSON.stringify({token, name}));
+        
+            dispatch(login({ token: token }));
+        
+            router.push("/home");
+          } catch (error) {
+            console.error("Error de inicio de sesión:", error);
+            setisOpen(true);
+          } finally {
+            setSubmitting(false);
+          }
+        }}
+        
+      >
           {({
             errors,
             handleBlur,
@@ -139,22 +135,22 @@ const LoginFormContainer: React.FC = () => {
                 htmlFor="outlined-adornment-email-login"
                 style={{ color: "black" }}
               >
-                Correo Electrónico
+                Nombre de usuario
               </StyledInputLabel>
-              <StyledFormControl error={Boolean(touched.email && errors.email)}>
+              <StyledFormControl error={Boolean(touched.username && errors.username)}>
                 <StyledInput
                   id="outlined-adornment-email-login"
-                  type="email"
-                  placeholder="Ingresá tu email"
-                  value={values.email}
-                  name="email"
+                  type="text"
+                  placeholder="Ingresá tu nombre usuario"
+                  value={values.username}
+                  name="username"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   inputProps={{}}
-                  label="Email"
+                  label="Username"
                 />
               </StyledFormControl>
-              {touched.email && errors.email && (
+              {touched.username && errors.username && (
                 <Box
                   sx={{
                     width: "80%",
@@ -168,7 +164,7 @@ const LoginFormContainer: React.FC = () => {
                 >
                   <StyledValidationMessages>
                     <ul>
-                      {touched.email && errors.email && <li>{errors.email}</li>}
+                      {touched.username && errors.username && <li>{errors.username}</li>}
                     </ul>
                   </StyledValidationMessages>
                 </Box>
@@ -242,10 +238,7 @@ const LoginFormContainer: React.FC = () => {
                       <Checkbox
                         checked={rememberMe}
                         onChange={(e) => {
-                          dispatch({
-                            type: "SET_REMEMBER_ME",
-                            payload: e.target.checked,
-                          });
+                          dispatch(setRememberMe(e.target.checked));
                         }}
                         name="rememberMe"
                         color="primary"

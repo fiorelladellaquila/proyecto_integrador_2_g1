@@ -5,7 +5,7 @@ import { URL_IMAGE_AWS } from "../../utils/constant/imagesAws";
 const HeroSectionContainer: FC = () => {
   return (
     <>
-      <Box sx={{ position: "relative", width: "100%", margin: "auto" }}>
+      <Box sx={{ position: "relative", width: "100%", margin: "auto" }} id='hero-section'>
         <Box
           sx={{
             position: "absolute",

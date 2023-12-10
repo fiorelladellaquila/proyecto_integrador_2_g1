@@ -1,6 +1,6 @@
 import * as React from "react";
 import { FC } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Link, Typography } from "@mui/material";
 import OurFieldsMappingContainer from "@/components/landing/OurFieldsMappingContainer";
 
 const CategoriesFieldsSectionContainer: FC = () => {
@@ -33,6 +33,25 @@ const CategoriesFieldsSectionContainer: FC = () => {
           CONOCÉ NUESTRAS CANCHAS
         </Typography>
         <OurFieldsMappingContainer inLandingTemplate={false} />
+        <Link href="/shifts/1" sx={{  display: 'flex',
+                  justifyContent: "center",
+                  alignItems: "center"}}>
+                 <Button
+                variant="contained"
+                sx={{
+                  backgroundColor: "#EA4335",
+                  "&:hover": {
+                    backgroundColor: "rgba(234, 67, 53, 0.8)",
+                  },
+                  textTransform: "capitalize",
+                  width: "85%",
+                
+                  margin: '1rem'
+                }}    
+              >
+                Quiero reservar un turno
+              </Button>
+              </Link>
       </Box>
     </>
   );

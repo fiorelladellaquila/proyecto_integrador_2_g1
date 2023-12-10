@@ -7,6 +7,7 @@ import {
   Grid,
   Box,
   FormControlLabel,
+  Link,
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -24,10 +25,10 @@ import {
 import Checkbox from "@mui/material/Checkbox";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { LOGIN } from "@/redux/types/authActionTypes";
-import { login } from "@/services/auth";
+import { login, setRememberMe } from "@/redux/slices/auth";
 import { RootState } from "@/redux/store";
 import NotificationModal from "../modal/NotificationModal";
+import { loginUser } from "@/services/auth";
 
 const LoginFormContainer: React.FC = () => {
   const rememberMe = useSelector((state: RootState) => state.auth.rememberMe);
@@ -37,76 +38,83 @@ const LoginFormContainer: React.FC = () => {
   const router = useRouter();
 
   useEffect(() => {
-    // Recuperar el correo electrónico recordado al cargar el componente
     const storedRememberMe = localStorage.getItem("rememberMe");
     if (storedRememberMe) {
-      dispatch({ type: "SET_REMEMBER_ME", payload: JSON.parse(storedRememberMe) });
-  
-      // Si el usuario marca "Recuérdame", recuperar y establecer el correo electrónico
+      dispatch(setRememberMe(JSON.parse(storedRememberMe)));
+
       if (JSON.parse(storedRememberMe)) {
         const rememberedEmail = localStorage.getItem("rememberedEmail") || "";
-        dispatch({ type: LOGIN, payload: rememberedEmail });
+        dispatch(login(rememberedEmail));
       }
     }
   }, [dispatch]);
-  
+
   useEffect(() => {
-    // Modificar el efecto para que solo actualice localStorage si el valor cambia
-    if (rememberMe !== JSON.parse(localStorage.getItem("rememberMe") || "false")) {
+    if (
+      rememberMe !== JSON.parse(localStorage.getItem("rememberMe") || "false")
+    ) {
       localStorage.setItem("rememberMe", JSON.stringify(rememberMe));
-        // Si rememberMe es false, eliminar rememberedEmail del localStorage
-    if (!rememberMe) {
-      localStorage.removeItem("rememberedEmail");
-    }
+      if (!rememberMe) {
+        localStorage.removeItem("rememberedEmail");
+      }
     }
   }, [rememberMe]);
-  
-   return (
+
+
+  return (
     <FormContainer>
-      <Box sx={{ width: "100%" }}>
-        <Formik
-          initialValues={{
-            email: (localStorage.getItem("rememberedEmail") || "").replace(/['"]/g, ""),
-            password: "",
-            rememberMe: Boolean(localStorage.getItem("rememberedEmail")),
-            submit: null,
-          }}
-          validationSchema={Yup.object().shape({
-            email: Yup.string()
-              .email("Debe ser un email valido")
-              .max(255)
-              .required("El email es requerido"),
-            password: Yup.string()
-              .max(255)
-              .required("La contraseña es requerida"),
-          })}
-          onSubmit={async (values) => {
-            try {
-              const response = await login(values.email, values.password);
-
-              console.log("response", response);
-
-              const { token, name, username } = response;
-
-             
-              console.log('remember', rememberMe);
-            
-                if (rememberMe) {
-                  localStorage.setItem("user", JSON.stringify({ token, name }));
-                  localStorage.setItem("rememberedEmail", JSON.stringify( username ));
-                }
-
-                localStorage.setItem("user", JSON.stringify({ token, name }));
-
-              dispatch({ type: LOGIN, payload: token });
-
-              router.push("/home");
-            } catch (error) {
-              console.error("Error de inicio de sesión:", error);
-              setisOpen(true)
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+         <Formik
+        initialValues={{
+          username: (localStorage.getItem("rememberedEmail") || "").replace(
+            /['"]/g,
+            ""
+          ),
+          password: "",
+          rememberMe: Boolean(localStorage.getItem("rememberedEmail")),
+          submit: null,
+        }}
+        validationSchema={Yup.object().shape({
+          username: Yup.string()
+            .max(255)
+            .required("El nombre de usuario es requerido"),
+          password: Yup.string()
+            .max(255)
+            .required("La contraseña es requerida"),
+        })}
+        onSubmit={async (values, { setSubmitting }) => {
+          try {
+            const response = await loginUser(values.username, values.password);
+            const { token, name, username } = response;
+        
+            if (rememberMe) {
+              console.log('entraaaa')
+              localStorage.setItem("user", JSON.stringify({token, name}));
+              localStorage.setItem("rememberedEmail", username);
             }
-          }}
-        >
+        
+            localStorage.setItem("user", JSON.stringify({token, name}));
+        
+            dispatch(login({ token: token }));
+        
+            router.push("/home");
+          } catch (error) {
+            console.error("Error de inicio de sesión:", error);
+            setisOpen(true);
+          } finally {
+            setSubmitting(false);
+          }
+        }}
+        
+      >
           {({
             errors,
             handleBlur,
@@ -121,27 +129,28 @@ const LoginFormContainer: React.FC = () => {
                 e.preventDefault();
                 handleSubmit();
               }}
+              style={{ width: "70%" }}
             >
               <StyledInputLabel
                 htmlFor="outlined-adornment-email-login"
                 style={{ color: "black" }}
               >
-                Correo Electrónico
+                Nombre de usuario
               </StyledInputLabel>
-              <StyledFormControl error={Boolean(touched.email && errors.email)}>
+              <StyledFormControl error={Boolean(touched.username && errors.username)}>
                 <StyledInput
                   id="outlined-adornment-email-login"
-                  type="email"
-                  placeholder="Ingresá tu email"
-                  value={values.email}
-                  name="email"
+                  type="text"
+                  placeholder="Ingresá tu nombre usuario"
+                  value={values.username}
+                  name="username"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   inputProps={{}}
-                  label="Email"
+                  label="Username"
                 />
               </StyledFormControl>
-              {touched.email && errors.email && (
+              {touched.username && errors.username && (
                 <Box
                   sx={{
                     width: "80%",
@@ -155,7 +164,7 @@ const LoginFormContainer: React.FC = () => {
                 >
                   <StyledValidationMessages>
                     <ul>
-                      {touched.email && errors.email && <li>{errors.email}</li>}
+                      {touched.username && errors.username && <li>{errors.username}</li>}
                     </ul>
                   </StyledValidationMessages>
                 </Box>
@@ -229,7 +238,7 @@ const LoginFormContainer: React.FC = () => {
                       <Checkbox
                         checked={rememberMe}
                         onChange={(e) => {
-                          dispatch({ type: "SET_REMEMBER_ME", payload: e.target.checked });
+                          dispatch(setRememberMe(e.target.checked));
                         }}
                         name="rememberMe"
                         color="primary"
@@ -277,19 +286,51 @@ const LoginFormContainer: React.FC = () => {
                   </a>
                 </Text>
               </Box>
-            </form>
-          )}
-        </Formik>
-        <NotificationModal
+              <Box
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "100%",
+                }}
+              ></Box>
+              <NotificationModal
                 isOpen={isOpen}
                 level="error"
                 title="No hemos podido identificarte"
                 body="Ingresaste mal tu usuario o contraseña. Por favor revisa los mismos y vuelve a intentar."
                 labelOnClick="VOLVER A INTENTAR"
                 setClose={setisOpen}
-            />
+              />
+            </form>
+          )}
+        </Formik>
+        <Box
+          style={{
+            backgroundColor: "#0A711B",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "20rem",
+            padding: "0.5rem 0",
+            borderRadius: "8px",
+          }}
+        >
+          <Text style={{ color: "white", marginBottom: "0.5rem" }}>
+            <span style={{ fontSize: "14px" }}>¿No tienes cuenta?</span>
+          </Text>
+          <ButtonContainer>
+            <Link href="/auth/SignUp">
+              <a>
+                <StyledButton size="large" type="submit" variant="contained">
+                  Registrate acá
+                </StyledButton>
+              </a>
+            </Link>
+          </ButtonContainer>
+        </Box>
       </Box>
-     
     </FormContainer>
   );
 };

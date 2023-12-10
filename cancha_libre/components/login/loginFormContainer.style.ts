@@ -7,8 +7,13 @@ export const FormContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin: 2rem;
+<<<<<<< HEAD
   width: 35rem;
   height: 70vh;
+=======
+  width: 50rem;
+  height: 100vh;
+>>>>>>> origin/main
 `;
 
 export const Logo = styled.img``;
@@ -22,11 +27,13 @@ export const StyledFormControl = styled(FormControl)`
 export const StyledInputLabel = styled(InputLabel)`
   margin: 0rem 3rem;
   color: black;
+  width: 100%
 `;
 
 export const StyledInput = styled(OutlinedInput)`
   margin: 0.6rem 3rem;
   background-color: #fbfcfc;
+  
 `;
 
 export const ButtonContainer = styled.div`

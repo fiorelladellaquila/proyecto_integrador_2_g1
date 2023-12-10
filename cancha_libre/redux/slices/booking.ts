@@ -1,20 +1,23 @@
-// bookingSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface Appointment {
   date: string | null;
   time: string | null;
-  court: string | null;
+  court: any | null;
 }
 
 interface BookingState {
-  selectedDate: string | null;
+  selectedDate: any;
   selectedAppointments: Appointment[];
+  loading: boolean;
+  error: any;
 }
 
 const initialState: BookingState = {
   selectedDate: null,
   selectedAppointments: [],
+  loading: false,
+  error: null
 };
 
 const bookingSlice = createSlice({
@@ -24,17 +27,21 @@ const bookingSlice = createSlice({
     selectDate: (state, action: PayloadAction<string>) => {
       state.selectedDate = action.payload;
     },
-    toggleAppointment: (state, action: PayloadAction<{ time: string; court: string }>) => {
-      const { time, court } = action.payload;
+    toggleAppointment: (state, action: PayloadAction<{ time: string; court: any, soccerFieldsData: any }>) => {
+      const { time, court, soccerFieldsData } = action.payload;
+
       const existingAppointmentIndex = state.selectedAppointments.findIndex(
         (appointment) =>
           appointment.date === state.selectedDate &&
           appointment.time === time &&
-          appointment.court === court
+          appointment.court.description === court.description
       );
 
       if (existingAppointmentIndex !== -1) {
-        state.selectedAppointments.splice(existingAppointmentIndex, 1);
+        // Si ya existe y no está reservado, quitar el elemento del array
+        state.selectedAppointments = state.selectedAppointments.filter(
+          (appointment, index) => index !== existingAppointmentIndex
+        );
       } else {
         state.selectedAppointments.push({
           date: state.selectedDate,
@@ -47,7 +54,7 @@ const bookingSlice = createSlice({
       state.selectedDate = null;
       state.selectedAppointments = [];
     },
-  },
+  }
 });
 
 export const { selectDate, toggleAppointment, clearAppointments } = bookingSlice.actions;

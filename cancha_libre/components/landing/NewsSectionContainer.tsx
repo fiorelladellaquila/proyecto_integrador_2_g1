@@ -13,6 +13,7 @@ const NewsSectionContainer: FC = () => {
           padding: "1rem",
           textAlign: "center",
         }}
+        id='news'
       >
         <Typography
           fontFamily={'__Aleo_b421b5'}

@@ -1,11 +1,7 @@
 import { Box, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import { FC } from "react";
-import{Aleo} from 'next/font/google'
-import { Amiko} from 'next/font/google'
 import { URL_IMAGE_AWS } from "../../utils/constant/imagesAws";
-const amiko = Amiko({ subsets: ['latin'], weight: "400" })
-const aleo = Aleo({ subsets: ['latin'], weight: "400" })
 const DescriptionSectionContainer: FC = () => {
   
   return (
@@ -14,7 +10,7 @@ const DescriptionSectionContainer: FC = () => {
         <Typography variant="h4" color="#3A3A3A" textAlign="center" mt={4} className="">
           COMPLEJO DEPORTIVO CANCHA LIBRE
         </Typography>
-        <Typography variant="h5" color="#787B81" textAlign="center" mt={2}>
+        <Typography variant="h5" color="#787B81" textAlign="center" mt={2} >
           Deportes + Recreación
         </Typography>
 

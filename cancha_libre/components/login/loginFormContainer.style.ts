@@ -7,8 +7,13 @@ export const FormContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin: 2rem;
+<<<<<<< HEAD
+  width: 35rem;
+  height: 70vh;
+=======
   width: 50rem;
   height: 100vh;
+>>>>>>> origin/main
 `;
 
 export const Logo = styled.img``;

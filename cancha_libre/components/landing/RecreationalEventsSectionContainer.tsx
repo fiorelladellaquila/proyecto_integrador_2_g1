@@ -15,7 +15,7 @@ const RecreationalEventsSectionContainer: FC = () => {
         id='events'
       >
         <Typography
-          fontFamily={'Aleo'}
+          fontFamily={'__Aleo_b421b5'}
           fontWeight={'600'}
           variant="h4"
           color="#3A3A3A"
@@ -23,6 +23,7 @@ const RecreationalEventsSectionContainer: FC = () => {
             borderBottom: "4px solid #3A3A3A",
             margin: "0 auto 16px auto",
             display: "inline-block",
+           
           }}
         >
           EVENTOS RECREATIVOS

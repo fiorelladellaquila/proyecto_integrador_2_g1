@@ -7,18 +7,19 @@ import store from "../../../redux/store";
 import { ThemeProvider } from "@mui/system";
 import { theme } from "@/styles/material-theme";
 import { Box } from "@mui/material";
+import { amiko } from "@/components/fonts";
 
 const Register = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <LayoutGeneral title={"RecoverPassword"}>
+    // <ThemeProvider theme={theme}>
+      <Provider store={store} >
+        <LayoutGeneral title={"RecoverPassword"} className={`${amiko.className}`} >
           <Container style={{ height: "100vh" }}>
             <RecoverPasswordFormContainer />
           </Container>
         </LayoutGeneral>
-      </Provider>
-    </ThemeProvider>
+      // </Provider>
+    // </ThemeProvider>
   );
 };
 

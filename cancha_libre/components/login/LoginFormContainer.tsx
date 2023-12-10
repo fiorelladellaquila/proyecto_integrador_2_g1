@@ -74,7 +74,7 @@ const LoginFormContainer: React.FC = () => {
       >
          <Formik
         initialValues={{
-          email: (localStorage.getItem("rememberedEmail") || "").replace(
+          username: (localStorage.getItem("rememberedEmail") || "").replace(
             /['"]/g,
             ""
           ),
@@ -83,18 +83,17 @@ const LoginFormContainer: React.FC = () => {
           submit: null,
         }}
         validationSchema={Yup.object().shape({
-          email: Yup.string()
-            .email("Debe ser un email valido")
+          username: Yup.string()
             .max(255)
-            .required("El email es requerido"),
+            .required("El nombre de usuario es requerido"),
           password: Yup.string()
             .max(255)
             .required("La contraseña es requerida"),
         })}
         onSubmit={async (values, { setSubmitting }) => {
           try {
-            const response = await loginUser(values.email, values.password);
-            const { token, name, username } = response; // Destructurar payload
+            const response = await loginUser(values.username, values.password);
+            const { token, name, username } = response;
         
             if (rememberMe) {
               console.log('entraaaa')
@@ -136,22 +135,22 @@ const LoginFormContainer: React.FC = () => {
                 htmlFor="outlined-adornment-email-login"
                 style={{ color: "black" }}
               >
-                Correo Electrónico
+                Nombre de usuario
               </StyledInputLabel>
-              <StyledFormControl error={Boolean(touched.email && errors.email)}>
+              <StyledFormControl error={Boolean(touched.username && errors.username)}>
                 <StyledInput
                   id="outlined-adornment-email-login"
-                  type="email"
-                  placeholder="Ingresá tu email"
-                  value={values.email}
-                  name="email"
+                  type="text"
+                  placeholder="Ingresá tu nombre usuario"
+                  value={values.username}
+                  name="username"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   inputProps={{}}
-                  label="Email"
+                  label="Username"
                 />
               </StyledFormControl>
-              {touched.email && errors.email && (
+              {touched.username && errors.username && (
                 <Box
                   sx={{
                     width: "80%",
@@ -165,7 +164,7 @@ const LoginFormContainer: React.FC = () => {
                 >
                   <StyledValidationMessages>
                     <ul>
-                      {touched.email && errors.email && <li>{errors.email}</li>}
+                      {touched.username && errors.username && <li>{errors.username}</li>}
                     </ul>
                   </StyledValidationMessages>
                 </Box>

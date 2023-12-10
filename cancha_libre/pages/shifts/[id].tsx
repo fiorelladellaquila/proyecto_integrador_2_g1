@@ -1,10 +1,10 @@
 import BookingComponent from "@/components/booking/template/BookingComponent";
 import { NextPage } from "next";
-import * as React from "react";
+import React from "react";
 
 interface Props {
-    result: any;
-  }
+  result: any;
+}
 
 const Shifts: NextPage<Props> = ({ result }: any) => {
   return <BookingComponent result={result} />;

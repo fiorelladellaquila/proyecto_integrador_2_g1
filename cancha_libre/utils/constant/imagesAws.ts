@@ -1,0 +1,1 @@
+export const URL_IMAGE_AWS = 'https://grupo1-c2-canchalibre-img.s3.us-east-1.amazonaws.com';

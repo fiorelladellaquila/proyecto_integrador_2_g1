@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import store from "../../../redux/store";
 import { ThemeProvider } from "@mui/system";
 import { theme } from "@/styles/material-theme";
-
+import GeneralFooter from '../../layouts/footer/general-footer.component'
 const Register = () => {
   return (
     <ThemeProvider theme={theme}>
@@ -16,6 +16,7 @@ const Register = () => {
             <SingUpFormContainer />
           </Container>
         </LayoutGeneral>
+        <GeneralFooter/>
       </Provider>
     </ThemeProvider>
   );

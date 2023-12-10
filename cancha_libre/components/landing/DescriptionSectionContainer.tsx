@@ -1,6 +1,7 @@
 import { Box, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import { FC } from "react";
+import { URL_IMAGE_AWS } from "../../utils/constant/imagesAws";
 const DescriptionSectionContainer: FC = () => {
   
   return (
@@ -83,7 +84,7 @@ const DescriptionSectionContainer: FC = () => {
                   }}
                 >
                   <Image
-                    src={`/${index}.jpg`}
+                    src={`${URL_IMAGE_AWS}/${index}.jpg`}
                     alt={`Imagen ${index}`}
                     layout="fill"
                     objectFit="cover"

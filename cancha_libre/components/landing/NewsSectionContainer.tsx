@@ -1,6 +1,7 @@
 import { Box, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import { FC } from "react";
+import { URL_IMAGE_AWS } from "../../utils/constant/imagesAws";
 
 
 const NewsSectionContainer: FC = () => {
@@ -31,7 +32,7 @@ const NewsSectionContainer: FC = () => {
           {Array.from({ length: 12 }).map((_, index) => (
             <Grid item xs={6} sm={3} key={index}>
               <Image
-                src={`/novedad_${index + 1}.png`}
+                src={`${URL_IMAGE_AWS}/novedad_${index + 1}.png`}
                 alt={`Novedad ${index + 1}`}
                 layout="responsive"
                 width={500}

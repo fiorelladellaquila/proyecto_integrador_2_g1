@@ -18,9 +18,21 @@ import {
   StyledButton,
   Text,
   StyledValidationMessages,
+<<<<<<< HEAD
+  StyledButtonGoogle,
+} from './singUpFormContainer.style';
+import Checkbox from '@mui/material/Checkbox';
+import { useDispatch } from 'react-redux';
+import { login } from '../../redux/actions/auth';
+import {jwtDecode} from 'jwt-decode';
+import { useRouter } from 'next/router';
+import NextLink from "next/link";
+import { amiko } from '../fonts';
+=======
 } from "./singUpFormContainer.style";
 import { createUser } from "@/services/createUser";
 import NotificationModal from "../modal/NotificationModal";
+>>>>>>> origin/main
 
 const SignUpFormContainer: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -106,6 +118,28 @@ const SignUpFormContainer: React.FC = () => {
                   inputProps={{}}
                   label="Nombre Completo"
                 />
+<<<<<<< HEAD
+            </StyledFormControl >
+            {(touched.fullName && errors.fullName) && (
+            <Box sx={{ 
+              width: '80%', 
+              display: "flex", 
+              flexDirection: "column", 
+              justifyContent: "center",
+              alignItems: "left",
+              borderRadius: '8px', 
+              margin: '0 auto',
+            }}>
+              <StyledValidationMessages style={{ fontFamily:`${amiko}` }}>
+                  <ul>
+                    {touched.fullName && errors.fullName && (
+                      <li>{errors.fullName}</li>
+                    )}
+                  </ul>
+              </StyledValidationMessages>
+              </Box>
+            )}
+=======
               </StyledFormControl>
               {touched.fullName && errors.fullName && (
                 <Box
@@ -128,6 +162,7 @@ const SignUpFormContainer: React.FC = () => {
                   </StyledValidationMessages>
                 </Box>
               )}
+>>>>>>> origin/main
 
               <StyledInputLabel
                 htmlFor="outlined-adornment-email-login"
@@ -304,6 +339,29 @@ const SignUpFormContainer: React.FC = () => {
                   </StyledButton>
                 </ButtonContainer>
               </Box>
+<<<<<<< HEAD
+            )}
+            <Box sx={{ width: '100%', display: "flex", alignItems: "center", justifyContent:"center", padding:'1.5rem 0 0 0' }}>
+            <ButtonContainer>
+              <StyledButton  size="large" type="submit" variant="contained">
+                Crear Cuenta
+              </StyledButton>
+            </ButtonContainer>
+            </Box>
+            <Box sx={{ width: '100%', display: "flex", alignItems: "center", justifyContent: "center", marginTop: 2 }}>
+                <NextLink href="/auth/login" passHref>
+                  <Text style={{ color: 'white',  marginBottom: '1rem' }}>
+                    <a href="login" style={{ color: 'black',}}>¿Ya tenés tu cuenta? Iniciá sesión acá</a>
+                  </Text>
+                </NextLink>
+            </Box>
+
+  
+            {/* </Box> */}           
+          </form>
+        )}
+      </Formik>
+=======
               <Box
                 sx={{
                   width: "100%",
@@ -330,6 +388,7 @@ const SignUpFormContainer: React.FC = () => {
           labelOnClick="CERRAR"
           setClose={setisOpen}
         />
+>>>>>>> origin/main
       </Box>
     </FormContainer>
   );

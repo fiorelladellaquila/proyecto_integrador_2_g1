@@ -15,7 +15,7 @@ const ContactUsSectionContainer: FC = () => {
         id='contact'
       >
         <Typography
-          fontFamily={'Aleo'}
+          fontFamily={`${aleo}`}
           fontWeight={'600'}
           variant="h4"
           color="#3A3A3A"

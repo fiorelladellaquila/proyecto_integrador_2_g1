@@ -3,6 +3,7 @@ import Image from "next/image";
 import { FC } from "react";
 import { URL_IMAGE_AWS } from "../../utils/constant/imagesAws";
 
+
 const NewsSectionContainer: FC = () => {
   return (
     <>
@@ -15,15 +16,16 @@ const NewsSectionContainer: FC = () => {
         id='news'
       >
         <Typography
-          fontFamily={'Aleo'}
+          fontFamily={'__Aleo_b421b5'}
           fontWeight={'600'}
           variant="h4"
           color="#FFFFFF"
           sx={{
             borderBottom: "4px solid #FFFFFF",
             margin: "0 auto 3rem auto",
-            display: "inline-block",
+            display: "inline-block"
           }}
+          
         >
           NOVEDADES
         </Typography>

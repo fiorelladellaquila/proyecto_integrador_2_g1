@@ -20,14 +20,15 @@ import { useDispatch } from 'react-redux';
 // import { login } from '../../redux/actions/auth';
 import {jwtDecode} from 'jwt-decode';
 import { useRouter } from 'next/router';
+import { amiko } from '../fonts';
 
 const RecoverPasswordFormContainer: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
   return (
-    <FormContainer >
-      <Box sx={{ width: '100%' }}>
+    <FormContainer className={`${amiko}`}>
+      <Box>
       <Formik
         initialValues={{
           email: '',
@@ -48,11 +49,19 @@ const RecoverPasswordFormContainer: React.FC = () => {
 
           //     console.log('decoded', decodedToken);
       
+<<<<<<< HEAD
+              if (typeof decodedToken === 'object' && 'email' in decodedToken) {
+                
+                if (decodedToken.email === values.email) {
+                  return '200'
+                  // router.push('/home');
+=======
           //     if (typeof decodedToken === 'object' && 'email' in decodedToken) {
           //       console.log('entraaaa')
           //       if (decodedToken.email === values.email) {
           //         return '200'
           //         // router.push('/home');
+>>>>>>> origin/main
               
           //       } else {
           //         console.error('Los datos del usuario no coinciden con el token JWT');
@@ -93,7 +102,6 @@ const RecoverPasswordFormContainer: React.FC = () => {
             </StyledFormControl>
             {(touched.email && errors.email) && (
             <Box sx={{ 
-              width: '80%', 
               display: "flex", 
               flexDirection: "column", 
               justifyContent: "center",
@@ -124,7 +132,7 @@ const RecoverPasswordFormContainer: React.FC = () => {
             </ButtonContainer>
             </Box>
             <Box sx={{ width: '100%', display: "flex", alignItems: "center", justifyContent: "center", marginTop: 2 }}>
-              <Text style={{ color: 'white',  marginBottom: '1rem' }}>
+              <Text style={{ color: 'white',  marginBottom: '1rem', textAlign: 'center'}}>
                 <a style={{  alignItems: "center",  color: 'black',}}>Si pasados 10 minutos aún no te llegó el mail, por las dudas revisá la papelera o la carpeta spam.</a>
               </Text>
             </Box>

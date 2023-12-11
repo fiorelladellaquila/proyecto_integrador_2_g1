@@ -6,12 +6,12 @@ import { Box, ThemeProvider, Typography } from "@mui/material";
 import Image from "next/image";
 import GeneralFooter from "@/components/layouts/footer/general-footer.component";
 import OurFieldsMappingContainer from "@/components/landing/OurFieldsMappingContainer";
-import InformationHomeSectionContainer from "../InformationHomeSectionContainer";
+// import InformationHomeSectionContainer from "../InformationHomeSectionContainer";
 import CategoriesFieldsSectionContainer from "../CategoriesFieldsSectionContainer";
 import { amiko } from "../../fonts"
 import { URL_IMAGE_AWS } from "@/utils/constant/imagesAws";
 import { theme } from "@/styles/material-theme";  
-const HomeComponent: FC = () => {
+const HomeAdminComponent: FC = () => {
   return (
     <ThemeProvider theme={theme}>
 <LayoutGeneral title={"Home"} >
@@ -38,7 +38,7 @@ const HomeComponent: FC = () => {
         backgroundColor: "#2E2F33",
       }}
     >
-      <InformationHomeSectionContainer />
+     
       <CategoriesFieldsSectionContainer />
     </Box>
     <GeneralFooter />
@@ -48,4 +48,4 @@ const HomeComponent: FC = () => {
   );
 };
 
-export default HomeComponent;
+export default HomeAdminComponent;

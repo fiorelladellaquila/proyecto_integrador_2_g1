@@ -19,7 +19,7 @@ const HeroSectionContainer: FC = () => {
             width: "100%",
           }}
         >
-          <Typography variant="h3" color="#fff" mt={4}>
+          <Typography variant="h3" color="#fff" mt={4} font-weight="700">
             Vení a darlo todo por tu equipo.
           </Typography>
           <Box textAlign="center" mt={2}>

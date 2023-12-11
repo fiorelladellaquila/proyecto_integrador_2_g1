@@ -19,14 +19,15 @@ import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { recoverPassword } from '@/services/recoverPassword';
 import NotificationModal from '../modal/NotificationModal';
+import { amiko } from '../fonts';
 
 const RecoverPasswordFormContainer: React.FC = () => {
   const [isOpen, setisOpen] = useState<boolean>(false);
 
 
   return (
-    <FormContainer >
-      <Box sx={{ width: '100%' }}>
+    <FormContainer className={`${amiko}`}>
+      <Box>
       <Formik
         initialValues={{
           email: '',
@@ -69,7 +70,6 @@ const RecoverPasswordFormContainer: React.FC = () => {
             </StyledFormControl>
             {(touched.email && errors.email) && (
             <Box sx={{ 
-              width: '80%', 
               display: "flex", 
               flexDirection: "column", 
               justifyContent: "center",
@@ -100,7 +100,7 @@ const RecoverPasswordFormContainer: React.FC = () => {
             </ButtonContainer>
             </Box>
             <Box sx={{ width: '100%', display: "flex", alignItems: "center", justifyContent: "center", marginTop: 2 }}>
-              <Text style={{ color: 'white',  marginBottom: '1rem' }}>
+              <Text style={{ color: 'white',  marginBottom: '1rem', textAlign: 'center'}}>
                 <a style={{  alignItems: "center",  color: 'black',}}>Si pasados 10 minutos aún no te llegó el mail, por las dudas revisá la papelera o la carpeta spam.</a>
               </Text>
             </Box>

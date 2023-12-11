@@ -1,6 +1,8 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { FC } from "react";
 import OurFieldsMappingContainer from "./OurFieldsMappingContainer";
+import {aleo} from "../fonts"
+
 
 const OurTeamsSectionContainer: FC = () => {
   return (
@@ -14,7 +16,7 @@ const OurTeamsSectionContainer: FC = () => {
         }}
       >
         <Typography
-          fontFamily={'Aleo'}
+          fontFamily={'__Aleo_b421b5'}
           fontWeight={'600'}
           variant="h4"
           color="#FFFFFF"

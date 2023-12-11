@@ -18,4 +18,7 @@ public interface IShiftRepository extends JpaRepository<Shift, Long>{
             @Param("startDate") Date startDate,
             @Param("endDate") Date endDate);
 
+    @Query("SELECT s FROM Shift s WHERE s.user_id = :user_id")
+    List<Shift> findAllByUser_id(@Param("user_id") Long user_id);
+
 }

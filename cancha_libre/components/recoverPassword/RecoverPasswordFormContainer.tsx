@@ -49,19 +49,11 @@ const RecoverPasswordFormContainer: React.FC = () => {
 
           //     console.log('decoded', decodedToken);
       
-<<<<<<< HEAD
-              if (typeof decodedToken === 'object' && 'email' in decodedToken) {
-                
-                if (decodedToken.email === values.email) {
-                  return '200'
-                  // router.push('/home');
-=======
           //     if (typeof decodedToken === 'object' && 'email' in decodedToken) {
           //       console.log('entraaaa')
           //       if (decodedToken.email === values.email) {
           //         return '200'
           //         // router.push('/home');
->>>>>>> origin/main
               
           //       } else {
           //         console.error('Los datos del usuario no coinciden con el token JWT');

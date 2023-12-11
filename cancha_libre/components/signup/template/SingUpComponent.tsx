@@ -6,12 +6,8 @@ import { Provider } from "react-redux";
 import store from "../../../redux/store";
 import { ThemeProvider } from "@mui/system";
 import { theme } from "@/styles/material-theme";
-<<<<<<< HEAD
-import GeneralFooter from '../../layouts/footer/general-footer.component'
-=======
 import GeneralFooter from "@/components/layouts/footer/general-footer.component";
 
->>>>>>> origin/main
 const Register = () => {
   return (
     <ThemeProvider theme={theme}>

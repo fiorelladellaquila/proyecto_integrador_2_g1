@@ -22,10 +22,12 @@ const dataA = [
   {
     date: '2022-01-01',
     field: 'F5A',
+    time:'15:00'
   },
   {
     date: '2022-02-15',
     field: 'F7',
+    time:'18:00'
   },
   // ... Agrega más datos según sea necesario
 ];
@@ -75,16 +77,19 @@ export default function CombinedTable() {
           <TableHead>
             <TableRow>
               <TableCell />
-              <TableCell>Name</TableCell>
-              <TableCell align="right">Email</TableCell>
-              <TableCell align="right">Password</TableCell>
-              <TableCell align="right">Delete</TableCell>
+              <TableCell>ID</TableCell>
+              <TableCell>Nombre</TableCell>
+              <TableCell>Apellido</TableCell>
+              <TableCell>Numero de contacto</TableCell>
+              <TableCell >Email</TableCell>
+              <TableCell >Contraseña</TableCell>
+             
             </TableRow>
           </TableHead>
           <TableBody>
             {paginatedRows.map((user) => (
               <React.Fragment key={user.id}>
-                <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+                <TableRow >
                   <TableCell>
                     <IconButton
                       aria-label="expand row"
@@ -94,14 +99,18 @@ export default function CombinedTable() {
                       <KeyboardArrowDownIcon />
                     </IconButton>
                   </TableCell>
+                  <TableCell> {user.id}</TableCell>
+
                   <TableCell component="th" scope="row">
-                    {user.firstName} {user.lastName}
+                    {user.firstName}
                   </TableCell>
-                  <TableCell align="right">{user.email}</TableCell>
-                  <TableCell align="right">{user.password}</TableCell>
-                  <TableCell align="right">
-                    <Checkbox onChange={() => console.log('Borrar: ', user.firstName)} />
-                  </TableCell>
+                  <TableCell> {user.lastName}</TableCell>
+                  <TableCell>{user.password}</TableCell>
+                  <TableCell>{user.email}</TableCell>
+                  <TableCell>{user.password}</TableCell>
+                  
+
+                 
                 </TableRow>
                 {/* Expandir la fila para mostrar historial */}
                 <TableRow>
@@ -109,14 +118,16 @@ export default function CombinedTable() {
                     <Collapse in={expandedRows.includes(user.id)} timeout="auto" unmountOnExit>
                       <Box sx={{ margin: 1 }}>
                         <Typography variant="h6" gutterBottom component="div" fontFamily={`${amiko}`}>
-                          History
+                          Historial reservas
                         </Typography>
                         {/* Mostrar historial desde la tabla A */}
-                        <Table size="small" aria-label="history">
+                        <Table>
                           <TableHead>
                             <TableRow>
                               <TableCell>Date</TableCell>
                               <TableCell>Field</TableCell>
+                              <TableCell>Time</TableCell>
+
                             </TableRow>
                           </TableHead>
                           <TableBody>
@@ -124,6 +135,8 @@ export default function CombinedTable() {
                               <TableRow key={rental.date}>
                                 <TableCell>{rental.date}</TableCell>
                                 <TableCell>{rental.field}</TableCell>
+                                <TableCell>{rental.time}</TableCell>
+
                               </TableRow>
                             ))}
                           </TableBody>

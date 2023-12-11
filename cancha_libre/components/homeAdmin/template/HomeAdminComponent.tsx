@@ -36,6 +36,7 @@ const HomeAdminComponent: FC = () => {
         flex: 1,
         display: "flex",
         backgroundColor: "#2E2F33",
+        justifyContent: "center",
       }}
     >
      

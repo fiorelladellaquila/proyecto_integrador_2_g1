@@ -2,12 +2,11 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
-  // flex-direction: column;
   align-content: center;
   justify-content: center;
   background-color: #BDFFBD;
   width: 100vw;
-  height: 90vh;
+  height: auto;
 
   @media (min-width: 768px) {
     flex-direction: row;
@@ -19,7 +18,6 @@ export const ContainerImage = styled.div`
   margin: 2.6rem 0;
   width: 40rem;
   height: 30rem;
-  // flex: 3;
 
   @media (max-width: 767px) {
     flex: 1;

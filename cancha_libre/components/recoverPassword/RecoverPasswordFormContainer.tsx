@@ -68,24 +68,25 @@ const RecoverPasswordFormContainer: React.FC = () => {
                     label="Email"
                 />
             </StyledFormControl>
-            {(touched.email && errors.email) && (
-            <Box sx={{ 
-              display: "flex", 
-              flexDirection: "column", 
-              justifyContent: "center",
-              alignItems: "left",
-              borderRadius: '8px', 
-              margin: '0 auto',
-            }}>
-          <StyledValidationMessages>
-                  <ul>
-                    {touched.email && errors.email && (
-                      <li>{errors.email}</li>
-                    )}
-                  </ul>
-          </StyledValidationMessages>
-              </Box>
-            )}
+            {touched.email && errors.email && (
+                <Box
+                  sx={{
+                    width: "80%",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "left",
+                    borderRadius: "8px",
+                    margin: "0 auto",
+                  }}
+                >
+                  <StyledValidationMessages>
+                    <ul>
+                      {touched.email && errors.email && <li>{errors.email}</li>}
+                    </ul>
+                  </StyledValidationMessages>
+                </Box>
+              )}
 
             {errors.submit && (
               <Box sx={{ mt: 3 }}>

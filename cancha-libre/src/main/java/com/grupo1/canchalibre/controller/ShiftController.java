@@ -1,5 +1,6 @@
 package com.grupo1.canchalibre.controller;
 
+import com.grupo1.canchalibre.dto.UserWhitShiftDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -71,5 +72,10 @@ public class ShiftController {
     @GetMapping("/SoccerField/{id}/libre")
     public ResponseEntity<List<Shift>> listAvailableBySoccerFields(@PathVariable Long id) {
         return ResponseEntity.ok(shiftService.listAvailableBySoccerFields(id));
+    }
+
+    @GetMapping("/shift/userId/{id}")
+    public ResponseEntity<UserWhitShiftDTO> findByUserId(@PathVariable Long id) {
+        return ResponseEntity.ok(shiftService.findByUserId(id));
     }
 }

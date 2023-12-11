@@ -44,9 +44,7 @@ const LayoutGeneral: FC<Props> = ({children, title, description, keywords, class
 			<GeneralHeader />
 			<HeaderHome />
 				<Stack direction={"column"}>
-					<Box display={'flex'} justifyContent={'center'}>
 						{children}
-					</Box>
 				</Stack>
         </>
     );

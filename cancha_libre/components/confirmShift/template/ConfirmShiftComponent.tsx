@@ -50,7 +50,7 @@ const ConfirmShiftComponent: FC = () => {
   const router = useRouter();
 
   const handleGoHome = () => {
-    router.push("/");
+    router.push("/home");
   };
 
   return (

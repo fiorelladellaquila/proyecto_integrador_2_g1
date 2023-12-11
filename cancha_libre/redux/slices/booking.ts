@@ -8,14 +8,14 @@ interface Appointment {
 
 interface BookingState {
   selectedDate: any;
-  selectedAppointments: Appointment[];
+  selectedAppointment: Appointment | null;
   loading: boolean;
   error: any;
 }
 
 const initialState: BookingState = {
   selectedDate: null,
-  selectedAppointments: [],
+  selectedAppointment: null,
   loading: false,
   error: null
 };
@@ -27,32 +27,29 @@ const bookingSlice = createSlice({
     selectDate: (state, action: PayloadAction<string>) => {
       state.selectedDate = action.payload;
     },
-    toggleAppointment: (state, action: PayloadAction<{ time: string; court: any, soccerFieldsData: any }>) => {
+    toggleAppointment: (state, action: PayloadAction<{ time: string; court: any; soccerFieldsData: any }>) => {
       const { time, court, soccerFieldsData } = action.payload;
 
-      const existingAppointmentIndex = state.selectedAppointments.findIndex(
-        (appointment) =>
-          appointment.date === state.selectedDate &&
-          appointment.time === time &&
-          appointment.court.description === court.description
-      );
-
-      if (existingAppointmentIndex !== -1) {
-        // Si ya existe y no está reservado, quitar el elemento del array
-        state.selectedAppointments = state.selectedAppointments.filter(
-          (appointment, index) => index !== existingAppointmentIndex
-        );
+      if (
+        state.selectedAppointment &&
+        state.selectedAppointment.date === state.selectedDate &&
+        state.selectedAppointment.time === time &&
+        state.selectedAppointment.court.description === court.description
+      ) {
+        // Si el mismo turno ya está seleccionado, deseleccionarlo
+        state.selectedAppointment = null;
       } else {
-        state.selectedAppointments.push({
+        // Si no está seleccionado, asignar el nuevo turno
+        state.selectedAppointment = {
           date: state.selectedDate,
           time,
           court,
-        });
+        };
       }
     },
     clearAppointments: (state) => {
       state.selectedDate = null;
-      state.selectedAppointments = [];
+      state.selectedAppointment = null;
     },
   }
 });
@@ -61,7 +58,7 @@ export const { selectDate, toggleAppointment, clearAppointments } = bookingSlice
 
 // Selectores
 export const selectSelectedDate = (state: { booking: BookingState }) => state.booking.selectedDate;
-export const selectSelectedAppointments = (state: { booking: BookingState }) =>
-  state.booking.selectedAppointments;
+export const selectSelectedAppointment = (state: { booking: BookingState }) =>
+  state.booking.selectedAppointment;
 
 export default bookingSlice.reducer;

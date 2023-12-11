@@ -18,21 +18,15 @@ import {
   StyledButton,
   Text,
   StyledValidationMessages,
-<<<<<<< HEAD
   StyledButtonGoogle,
 } from './singUpFormContainer.style';
 import Checkbox from '@mui/material/Checkbox';
 import { useDispatch } from 'react-redux';
-import { login } from '../../redux/actions/auth';
-import {jwtDecode} from 'jwt-decode';
 import { useRouter } from 'next/router';
 import NextLink from "next/link";
 import { amiko } from '../fonts';
-=======
-} from "./singUpFormContainer.style";
 import { createUser } from "@/services/createUser";
 import NotificationModal from "../modal/NotificationModal";
->>>>>>> origin/main
 
 const SignUpFormContainer: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -51,6 +45,7 @@ const SignUpFormContainer: React.FC = () => {
       <Box sx={{ width: "100%" }}>
         <Formik
           initialValues={{
+            username: "",
             fullName: "",
             email:"",
             phone: "",
@@ -59,6 +54,9 @@ const SignUpFormContainer: React.FC = () => {
             submit: null,
           }}
           validationSchema={Yup.object().shape({
+            username: Yup.string()
+              .max(255)
+              .required('El nombre de usuario es requerido'),
             fullName: Yup.string()
               .max(255)
               .required("El nombre completo es requerido"),
@@ -76,7 +74,7 @@ const SignUpFormContainer: React.FC = () => {
           })}
           onSubmit={async (values) => {
             try {
-              const response = await createUser(values.fullName, values.email, values.email, values.phone, values.password);
+              const response = await createUser(values.fullName, values.email, values.username, values.phone, values.password);
               setisOpen(true)
             } catch (error) {
               console.error("Error en Registracion de Usuario:", error);
@@ -98,6 +96,48 @@ const SignUpFormContainer: React.FC = () => {
                 handleSubmit();
               }}
             >
+               <StyledInputLabel
+                htmlFor="outlined-adornment-username-login"
+                style={{ color: "black" }}
+              >
+                Nombre de usuario
+              </StyledInputLabel>
+              <StyledFormControl
+                error={Boolean(touched.username && errors.username)}
+              >
+                <StyledInput
+                  id="outlined-adornment-username-login"
+                  type="text"
+                  placeholder="Ingresá tu nombre de usuario"
+                  value={values.fullName}
+                  name="username"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  inputProps={{}}
+                  label="Nombre de usuario"
+                />
+              </StyledFormControl>
+              {touched.username && errors.username && (
+                <Box
+                  sx={{
+                    width: "80%",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "left",
+                    borderRadius: "8px",
+                    margin: "0 auto",
+                  }}
+                >
+                  <StyledValidationMessages>
+                    <ul>
+                      {touched.username && errors.username && (
+                        <li>{errors.username}</li>
+                      )}
+                    </ul>
+                  </StyledValidationMessages>
+                </Box>
+              )}
               <StyledInputLabel
                 htmlFor="outlined-adornment-fullName-login"
                 style={{ color: "black" }}
@@ -118,7 +158,6 @@ const SignUpFormContainer: React.FC = () => {
                   inputProps={{}}
                   label="Nombre Completo"
                 />
-<<<<<<< HEAD
             </StyledFormControl >
             {(touched.fullName && errors.fullName) && (
             <Box sx={{ 
@@ -139,30 +178,6 @@ const SignUpFormContainer: React.FC = () => {
               </StyledValidationMessages>
               </Box>
             )}
-=======
-              </StyledFormControl>
-              {touched.fullName && errors.fullName && (
-                <Box
-                  sx={{
-                    width: "80%",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "left",
-                    borderRadius: "8px",
-                    margin: "0 auto",
-                  }}
-                >
-                  <StyledValidationMessages>
-                    <ul>
-                      {touched.fullName && errors.fullName && (
-                        <li>{errors.fullName}</li>
-                      )}
-                    </ul>
-                  </StyledValidationMessages>
-                </Box>
-              )}
->>>>>>> origin/main
 
               <StyledInputLabel
                 htmlFor="outlined-adornment-email-login"
@@ -339,8 +354,6 @@ const SignUpFormContainer: React.FC = () => {
                   </StyledButton>
                 </ButtonContainer>
               </Box>
-<<<<<<< HEAD
-            )}
             <Box sx={{ width: '100%', display: "flex", alignItems: "center", justifyContent:"center", padding:'1.5rem 0 0 0' }}>
             <ButtonContainer>
               <StyledButton  size="large" type="submit" variant="contained">
@@ -361,26 +374,7 @@ const SignUpFormContainer: React.FC = () => {
           </form>
         )}
       </Formik>
-=======
-              <Box
-                sx={{
-                  width: "100%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginTop: 2,
-                }}
-              >
-                <Text style={{ color: "white", marginBottom: "1rem" }}>
-                  <a href="login" style={{ color: "black" }}>
-                    ¿Ya tenés tu cuenta? Iniciá sesión acá
-                  </a>
-                </Text>
-              </Box>
-            </form>
-          )}
-        </Formik>
-        <NotificationModal
+      <NotificationModal
           isOpen={isOpen}
           level="success"
           title="Registracion exitosa"
@@ -388,7 +382,6 @@ const SignUpFormContainer: React.FC = () => {
           labelOnClick="CERRAR"
           setClose={setisOpen}
         />
->>>>>>> origin/main
       </Box>
     </FormContainer>
   );

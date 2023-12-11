@@ -33,7 +33,7 @@ const CategoriesFieldsSectionContainer: FC = () => {
           CONOCÉ NUESTRAS CANCHAS
         </Typography>
         <OurFieldsMappingContainer inLandingTemplate={false} />
-        <Link href="/shifts/1" sx={{  display: 'flex',
+        <Link href="/shifts" sx={{  display: 'flex',
                   justifyContent: "center",
                   alignItems: "center"}}>
                  <Button

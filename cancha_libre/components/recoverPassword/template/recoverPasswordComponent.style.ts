@@ -2,12 +2,11 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
-  // flex-direction: column;
   align-content: center;
   justify-content: center;
   background-color: #BDFFBD;
   width: 100vw;
-  max-height: 100vh;
+  height: 100vh;
 
   @media (min-width: 768px) {
     flex-direction: row;

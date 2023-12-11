@@ -11,9 +11,9 @@ export const FormContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 2rem;
+  margin: 5rem;
   width: 35rem;
-  height: 100vh
+  height: auto
 `
 
 export const Logo = styled.img``

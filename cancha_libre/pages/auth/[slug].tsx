@@ -3,11 +3,12 @@ import { useRouter } from 'next/router';
 import LoginComponent from '../../components/login/template/LoginComponent';
 import SignUpComponent from '../../components/signup/template/SingUpComponent';
 import RecoverPassword from '../../components/recoverPassword/template/recoverPasswordComponent'
+import RestorePassword from '@/components/restorePassword/template/RestorePasswordComponent';
+
 export default function Auth() {
   const router = useRouter();
-  const { slug } = router.query;
-//  console.log(slug)
-  // Utiliza el valor de slug para determinar qué componente de inicio de sesión renderizar
+  const { slug, code, email } = router.query;
+
   if (slug === 'login') {
     return <LoginComponent />;
   
@@ -18,7 +19,9 @@ export default function Auth() {
   if (slug === 'RecoverPassword') {
     return <RecoverPassword />;
   }
-  // Maneja otros casos o valores de slug según sea necesario
+  if(slug === 'reset_password' && code && email) {
+    return <RestorePassword code={code} email={email}/>
+  }
 
   return <div>Página de autenticación no encontrada</div>;
 }

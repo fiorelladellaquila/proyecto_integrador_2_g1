@@ -1,7 +1,7 @@
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import Image from "next/image";
 import { FC } from "react";
-import { aleo } from '../fonts';
+import { aleo } from "../fonts";
 
 const ContactUsSectionContainer: FC = () => {
   return (
@@ -12,21 +12,23 @@ const ContactUsSectionContainer: FC = () => {
           padding: "1rem 0 5rem 0",
           textAlign: "center",
         }}
-        id='contact'
+        id="contact"
       >
         <Typography
           fontFamily={`${aleo}`}
-          fontWeight={'600'}
+          fontWeight={"600"}
           variant="h4"
           color="#3A3A3A"
           sx={{
             borderBottom: "4px solid #3A3A3A",
-            margin: "0 auto 3rem auto",
+            margin: "0 auto 1rem auto",
             display: "inline-block",
           }}
         >
           CONTACTANOS
         </Typography>
+        <br />
+        <strong style={{ padding: "5rem" }}>(Proximamente)</strong>
         <Grid display="flex">
           <Box margin="1rem" width="100%">
             {/* Formulario de contacto */}
@@ -72,13 +74,16 @@ const ContactUsSectionContainer: FC = () => {
                   }}
                 />
               </Box>
-              <Button variant="contained" sx={{
+              <Button
+                variant="contained"
+                sx={{
                   backgroundColor: "#00CC00",
                   "&:hover": {
                     backgroundColor: "rgba(0,204,0, 0.8)",
                   },
                   textTransform: "capitalize",
-                }}>
+                }}
+              >
                 Enviar
               </Button>
             </form>

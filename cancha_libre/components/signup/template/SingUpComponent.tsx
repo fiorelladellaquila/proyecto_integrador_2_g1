@@ -4,22 +4,19 @@ import SingUpFormContainer from "../SingUpFormContainer";
 import { Container } from "./singUpComponent.style";
 import { Provider } from "react-redux";
 import store from "../../../redux/store";
-import { ThemeProvider } from "@mui/system";
-import { theme } from "@/styles/material-theme";
 import GeneralFooter from '../../layouts/footer/general-footer.component'
+import { amiko } from "@/components/fonts";
+
 const Register = () => {
   return (
-    <ThemeProvider theme={theme}>
       <Provider store={store}>
-        <LayoutGeneral title={"SingUp"}>
+        <LayoutGeneral title={"SingUp"}  className={`${amiko.className}`}>
           <Container>
             <SingUpFormContainer />
           </Container>
         </LayoutGeneral>
         <GeneralFooter/>
       </Provider>
-      <GeneralFooter/>
-    </ThemeProvider>
   );
 };
 

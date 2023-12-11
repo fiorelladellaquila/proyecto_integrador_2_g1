@@ -1,7 +1,5 @@
 import axios from 'axios';
-
-const BASE_URL = 'https://run.mocky.io/v3/';
-// const BASE_URL = 'http://localhost:8080/';
+import { BASE_URL } from '../utils/constant/urlBaseServices';
 
 const apiService = axios.create({
   baseURL: BASE_URL,
@@ -19,7 +17,7 @@ export const createUser = async (fullName: string, email: string, username: stri
   const [name, lastName] = fullName.split(' ');
   
   try {
-    const response = await apiService.post('6e4c0a55-0f60-4c7b-bea2-80b11e933322', {  //  200 => '6e4c0a55-0f60-4c7b-bea2-80b11e933322', 403 => '79eed8d6-9adb-42cc-83f8-00f6309bc57e',  endpoinyt => 'canchas/auth/register' 
+    const response = await apiService.post('canchas/auth/register', {
         name,
         lastName,
         email,

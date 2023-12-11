@@ -12,8 +12,8 @@ interface Props {
 
 const CheckShiftStepperContainer: FC<Props> = ({ handleBack, handleNext }) => {
   const { handlerCustomer } = useContext(SteppersContext) ?? {};
-  const selectedAppointments = useSelector(
-    (state: RootState) => state.booking.selectedAppointments
+  const selectedAppointment = useSelector(
+    (state: RootState) => state.booking.selectedAppointment
   );
 
   const mapContainerStyle = {
@@ -49,7 +49,7 @@ const CheckShiftStepperContainer: FC<Props> = ({ handleBack, handleNext }) => {
   };
 
   const handleNextButton = () => {
-    console.log('selectedAppointment', selectedAppointments)
+    console.log('selectedAppointment', selectedAppointment)
     handleNext();
   };
 
@@ -109,19 +109,19 @@ const CheckShiftStepperContainer: FC<Props> = ({ handleBack, handleNext }) => {
                 sx={{ color: "555659", padding: "0.5rem 2rem " }}
               >
                 <strong>Cancha Seleccionada:</strong>{" "}
-                {selectedAppointments[0]?.court.description}
+                {selectedAppointment ? selectedAppointment.court.description : ''}
               </Typography>
               <Typography
                 variant="body1"
                 sx={{ color: "555659", padding: "0.5rem 2rem " }}
               >
-                <strong>Fecha:</strong> {selectedAppointments[0]?.date}
+                <strong>Fecha:</strong> {selectedAppointment ? selectedAppointment.date : ''}
               </Typography>
               <Typography
                 variant="body1"
                 sx={{ color: "555659", padding: "0.5rem 2rem " }}
               >
-                <strong>Hora:</strong> {selectedAppointments[0]?.time}
+                <strong>Hora:</strong> {selectedAppointment ? selectedAppointment.time : ''}
               </Typography>
             </div>
             <div style={{ backgroundColor: "#B4FA8A", borderRadius: "20px" }}>

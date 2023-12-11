@@ -1,11 +1,16 @@
 import { Box, Button, Typography } from "@mui/material";
 import { FC } from "react";
 import { URL_IMAGE_AWS } from "../../utils/constant/imagesAws";
+import { useRouter } from 'next/router';
 
 const HeroSectionContainer: FC = () => {
+  const router = useRouter();
   return (
     <>
-      <Box sx={{ position: "relative", width: "100%", margin: "auto" }} id='hero-section'>
+      <Box
+        sx={{ position: "relative", width: "100%", margin: "auto" }}
+        id="hero-section"
+      >
         <Box
           sx={{
             position: "absolute",
@@ -18,13 +23,19 @@ const HeroSectionContainer: FC = () => {
             Vení a darlo todo por tu equipo.
           </Typography>
           <Box textAlign="center" mt={2}>
-            <Button variant="contained" sx={{
-                  backgroundColor: "#00CC00",
-                  "&:hover": {
-                    backgroundColor: "rgba(0,204,0, 0.8)",
-                  },
-                  textTransform: "capitalize",
-                }}>
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: "#00CC00",
+                "&:hover": {
+                  backgroundColor: "rgba(0,204,0, 0.8)",
+                },
+                textTransform: "capitalize",
+              }}
+              onClick={() => {
+                router.push('/home');
+              }}
+            >
               ¡Reserva ahora!
             </Button>
           </Box>
@@ -63,7 +74,7 @@ const HeroSectionContainer: FC = () => {
             </svg>
           </Box>
         </Box>
-         <video
+        <video
           autoPlay
           muted
           loop

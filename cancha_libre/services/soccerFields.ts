@@ -1,23 +1,40 @@
-// soccerFieldsService.ts
-import axios from 'axios';
-import {
-  fetchSoccerFieldsRequest,
-  fetchSoccerFieldsSuccess,
-  fetchSoccerFieldsFailure,
-} from '../redux/slices/soccerFields';
-import { useDispatch } from 'react-redux';
+// import axios from 'axios';
+// import { BASE_URL } from '../utils/constant/urlBaseServices';
 
-const BASE_URL = 'https://run.mocky.io/v3/';
-const apiService = axios.create({
-  baseURL: BASE_URL,
-});
+// const apiService = axios.create({
+//   baseURL: BASE_URL,
+// });
 
-export const getSoccerFields = async (): Promise<any> => {
+// export const getSoccerFields = async (): Promise<any> => {
 
+//   try {
+//     const response = await apiService.get('canchas/soccer-fields');
+//     console.log('response.data', response)
+//     return response.data;
+//   } catch (error) {
+//   }
+// };
+
+import { BASE_URL } from '../utils/constant/urlBaseServices';
+
+export const getSoccerFields = async (authToken:any): Promise<any> => {
   try {
-    const response = await apiService.get('e812c254-001a-4b4e-84ae-385f8acad926');
-    console.log('response.data', response)
-    return response.data;
+    const response = await fetch(`${BASE_URL}canchas/soccer-fields`, {
+      method: 'GET',
+      headers: {
+        'Authorization': authToken ? `Bearer ${authToken}` : '',
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Request failed with status ${response.status}`);
+    }
+
+    const responseData = await response.json();
+    console.log('responseData', responseData);
+    return responseData;
   } catch (error) {
+    throw error;
   }
 };

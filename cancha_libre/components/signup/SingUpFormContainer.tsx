@@ -39,6 +39,7 @@ const SignUpFormContainer: React.FC = () => {
       <Box sx={{ width: "100%" }}>
         <Formik
           initialValues={{
+            username: "",
             fullName: "",
             email:"",
             phone: "",
@@ -47,6 +48,9 @@ const SignUpFormContainer: React.FC = () => {
             submit: null,
           }}
           validationSchema={Yup.object().shape({
+            username: Yup.string()
+              .max(255)
+              .required('El nombre de usuario es requerido'),
             fullName: Yup.string()
               .max(255)
               .required("El nombre completo es requerido"),
@@ -64,7 +68,7 @@ const SignUpFormContainer: React.FC = () => {
           })}
           onSubmit={async (values) => {
             try {
-              const response = await createUser(values.fullName, values.email, values.email, values.phone, values.password);
+              const response = await createUser(values.fullName, values.email, values.username, values.phone, values.password);
               setisOpen(true)
             } catch (error) {
               console.error("Error en Registracion de Usuario:", error);
@@ -86,6 +90,48 @@ const SignUpFormContainer: React.FC = () => {
                 handleSubmit();
               }}
             >
+               <StyledInputLabel
+                htmlFor="outlined-adornment-username-login"
+                style={{ color: "black" }}
+              >
+                Nombre de usuario
+              </StyledInputLabel>
+              <StyledFormControl
+                error={Boolean(touched.username && errors.username)}
+              >
+                <StyledInput
+                  id="outlined-adornment-username-login"
+                  type="text"
+                  placeholder="Ingresá tu nombre de usuario"
+                  value={values.fullName}
+                  name="username"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  inputProps={{}}
+                  label="Nombre de usuario"
+                />
+              </StyledFormControl>
+              {touched.username && errors.username && (
+                <Box
+                  sx={{
+                    width: "80%",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "left",
+                    borderRadius: "8px",
+                    margin: "0 auto",
+                  }}
+                >
+                  <StyledValidationMessages>
+                    <ul>
+                      {touched.username && errors.username && (
+                        <li>{errors.username}</li>
+                      )}
+                    </ul>
+                  </StyledValidationMessages>
+                </Box>
+              )}
               <StyledInputLabel
                 htmlFor="outlined-adornment-fullName-login"
                 style={{ color: "black" }}

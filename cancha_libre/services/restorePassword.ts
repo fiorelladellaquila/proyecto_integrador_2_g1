@@ -1,21 +1,23 @@
 import { BASE_URL } from '../utils/constant/urlBaseServices';
 
-interface PostShift {
-  date_time: string;
-  reserved: number;
-  soccer_field_id: number;
-  user_id: number;
+interface RestorePassword {
+ code: number,
+ email: string, 
+ password: string,
 }
 
-export const postShift = async (authToken: string, body: PostShift): Promise<PostShift> => {
+export const restorePassword = async (code: string, email: string, password: string): Promise<RestorePassword> => {
   try {
-    const response = await fetch(`${BASE_URL}canchas/shift`, {
-      method: 'POST',
+    const response = await fetch(`${BASE_URL}canchas/auth/password`, {
+      method: 'PUT',
       headers: {
-        'Authorization': authToken ? `Bearer ${authToken}` : '',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify({
+        code,
+        email,
+        password,
+      }),
     });
 
     if (!response.ok) {

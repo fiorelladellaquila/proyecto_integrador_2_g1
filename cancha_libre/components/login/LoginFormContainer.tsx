@@ -93,15 +93,15 @@ const LoginFormContainer: React.FC = () => {
         onSubmit={async (values, { setSubmitting }) => {
           try {
             const response = await loginUser(values.username, values.password);
-            const { token, name, username } = response;
+            const { token, name, username, id } = response;
         
             if (rememberMe) {
               console.log('entraaaa')
-              localStorage.setItem("user", JSON.stringify({token, name}));
+              localStorage.setItem("user", JSON.stringify({token, name, id}));
               localStorage.setItem("rememberedEmail", username);
             }
         
-            localStorage.setItem("user", JSON.stringify({token, name}));
+            localStorage.setItem("user", JSON.stringify({token, name, id}));
         
             dispatch(login({ token: token }));
         

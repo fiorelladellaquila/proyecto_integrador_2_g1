@@ -5,7 +5,7 @@ import "moment/locale/es";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectSelectedDate,
-  selectSelectedAppointments,
+  selectSelectedAppointment,
   selectDate,
   toggleAppointment,
   clearAppointments,
@@ -43,15 +43,40 @@ const Calendar: React.FC<Props> = ({ handleNext, handleBack }) => {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [isOpen, setisOpen] = useState<boolean>(false);
   const [soccerFieldsData, setSoccerFieldsData] = useState<any[]>([]);
+  const [userData, setUserData] = useState(() => {
+    if (typeof window !== 'undefined') {
+      // Solo intentar acceder a localStorage en el navegador
+      return JSON.parse(localStorage.getItem("user") || "{}");
+    } else {
+      return {};
+    }
+  });
+
+  useEffect(() => {
+    // Solo suscribirse al evento 'storage' en el navegador
+    if (typeof window !== 'undefined') {
+      const handleStorageChange = () => {
+        setUserData(JSON.parse(localStorage.getItem("user") || "{}"));
+      };
+
+      window.addEventListener("storage", handleStorageChange);
+
+      return () => {
+        window.removeEventListener("storage", handleStorageChange);
+      };
+    }
+  }, []);
+
+  console.log('userData', userData)
 
   const timeSlots = generateTimeSlots();
-  const selectedAppointments = useSelector(selectSelectedAppointments);
+  const selectedAppointment = useSelector(selectSelectedAppointment);
   const dispatch = useDispatch();
 
   const fetchDataSoccerFields = async () => {
     try {
       dispatch(fetchSoccerFieldsRequest());
-      const response = await getSoccerFields();
+      const response = await getSoccerFields(userData.token);
       setSoccerFieldsData(response);
       dispatch(fetchSoccerFieldsSuccess(response));
     } catch (error) {
@@ -77,7 +102,7 @@ const Calendar: React.FC<Props> = ({ handleNext, handleBack }) => {
   const handleNextButton = () => {
     console.log(
       "Enviando la siguiente información al endpoint:",
-      selectedAppointments
+      selectedAppointment
     );
     handleNext();
   };
@@ -238,28 +263,23 @@ const Calendar: React.FC<Props> = ({ handleNext, handleBack }) => {
              
               {/* Celdas de horarios */}
               {timeSlots.map((time) => (
-                <div
+                  <div
                   key={time}
                   style={{
-                    width: "50px",
-                    height: "auto",
-                    border: "0.1px solid #2E2F33",
-                    backgroundColor: selectedAppointments.some(
-                      (appointment) =>
-                        appointment.date === selectedDate &&
-                        appointment.time === time &&
-                        appointment.court === court
-                    )
-                      ? "#00CC00"
-                      : isCourtBooked(selectedDate, time, court.id, soccerFieldsData )
-                      ? "#FF0000"
-                      : "#4B4B4B",
-                      cursor: isCourtBooked(selectedDate, time, court.id, soccerFieldsData)
-                      ? "not-allowed"
-                      : "pointer",
-                    pointerEvents: isCourtBooked(selectedDate, time, court.id, soccerFieldsData)
-                      ? "none"
-                      : "auto",
+                    width: '50px',
+                    height: 'auto',
+                    border: '0.1px solid #2E2F33',
+                    backgroundColor:
+                      selectedAppointment &&
+                      selectedAppointment.date === selectedDate &&
+                      selectedAppointment.time === time &&
+                      selectedAppointment.court === court
+                        ? '#00CC00'
+                        : isCourtBooked(selectedDate, time, court.id, soccerFieldsData)
+                        ? '#FF0000'
+                        : '#4B4B4B',
+                    cursor: isCourtBooked(selectedDate, time, court.id, soccerFieldsData) ? 'not-allowed' : 'pointer',
+                    pointerEvents: isCourtBooked(selectedDate, time, court.id, soccerFieldsData) ? 'none' : 'auto',
                   }}
                   onClick={() => handleCellClick(time, court)}
                 />
@@ -290,8 +310,8 @@ const Calendar: React.FC<Props> = ({ handleNext, handleBack }) => {
         <Button
           variant="contained"
           onClick={handleNextButton}
-          style={{  backgroundColor: selectedAppointments.length === 0 ? "#E0E0E0" : "#2E2F33", margin: "1rem 0 0 0" }}
-          disabled={selectedAppointments.length === 0}
+          style={{  backgroundColor: !selectedAppointment ? "#E0E0E0" : "#2E2F33", margin: "1rem 0 0 0" }}
+          disabled={!selectedAppointment}
         >
           {" "}
           Siguiente

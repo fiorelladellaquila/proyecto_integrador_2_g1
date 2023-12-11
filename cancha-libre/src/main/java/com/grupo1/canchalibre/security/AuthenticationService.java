@@ -40,6 +40,7 @@ public class AuthenticationService {
         String token=jwtService.getToken(user);
         return AuthResponseDTO.builder()
                 .token(token)
+                .id(user.getId())
                 .username(user.getUsername())
                 .name(user.getName())
                 .lastName(user.getLastName())

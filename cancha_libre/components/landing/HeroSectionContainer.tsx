@@ -1,10 +1,44 @@
 import { Box, Button, Typography } from "@mui/material";
-import { FC } from "react";
+import { FC, useState, useEffect } from "react";
 import { URL_IMAGE_AWS } from "../../utils/constant/imagesAws";
 import { useRouter } from 'next/router';
 
 const HeroSectionContainer: FC = () => {
   const router = useRouter();
+  const [userData, setUserData] = useState(
+    typeof window !== 'undefined'
+      ? JSON.parse(localStorage.getItem("user") || "{}")
+      : {}
+  );
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setUserData(
+        typeof window !== 'undefined'
+          ? JSON.parse(localStorage.getItem("user") || "{}")
+          : {}
+      );
+    };
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener("storage", handleStorageChange);
+    }
+
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener("storage", handleStorageChange);
+      }
+    };
+  }, []);
+
+  const handleReserveNow = () => {
+    if (userData.token) {
+      router.push('/home');
+    } else {
+      router.push('/auth/login');
+    }
+  };
+
   return (
     <>
       <Box
@@ -24,20 +58,18 @@ const HeroSectionContainer: FC = () => {
           </Typography>
           <Box textAlign="center" mt={2}>
             <Button
-              variant="contained"
-              sx={{
-                backgroundColor: "#00CC00",
-                "&:hover": {
-                  backgroundColor: "rgba(0,204,0, 0.8)",
-                },
-                textTransform: "capitalize",
-              }}
-              onClick={() => {
-                router.push('/home');
-              }}
-            >
-              ¡Reserva ahora!
-            </Button>
+        variant="contained"
+        sx={{
+          backgroundColor: "#00CC00",
+          "&:hover": {
+            backgroundColor: "rgba(0,204,0, 0.8)",
+          },
+          textTransform: "capitalize",
+        }}
+        onClick={handleReserveNow}
+      >
+        ¡Reserva ahora!
+      </Button>
           </Box>
           <Box
             sx={{

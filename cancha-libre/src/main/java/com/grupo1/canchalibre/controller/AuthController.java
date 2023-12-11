@@ -48,7 +48,7 @@ public class AuthController {
         }
     }
 
-    @GetMapping()
+    @PostMapping("/mail")
     public void resetPasswordSendCode(@RequestBody UserEmailDTO email) throws MessagingException, UnsupportedEncodingException {
         authService.renovarPasswordSendCode(email.getEmail());
     }

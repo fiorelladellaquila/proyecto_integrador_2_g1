@@ -1,10 +1,12 @@
-import React, { FC, useContext, useEffect, useRef } from "react";
+import React, { FC, useContext, useEffect, useRef, useState } from "react";
 import { Typography, Button, Link } from "@mui/material";
 import { SteppersContext } from "./context/SteppersContext";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import QRCode from "qrcode.react";
 import { useRouter } from 'next/router';
+import { postShift } from "@/services/shifts";
+import moment from "moment";
 
 interface Props {
   handleBack: () => void;
@@ -13,10 +15,41 @@ interface Props {
 
 const CheckoutStepperContainer: FC<Props> = ({ handleBack, handleNext }) => {
   const { handlerCustomer } = useContext(SteppersContext) ?? {};
-  const selectedAppointments = useSelector(
-    (state: RootState) => state.booking.selectedAppointments
+  const [userData, setUserData] = useState(
+    JSON.parse(localStorage.getItem("user") || "{}")
+  );
+  const selectedAppointment = useSelector(
+    (state: RootState) => state.booking.selectedAppointment
   );
   const router = useRouter();
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setUserData(JSON.parse(localStorage.getItem("user") || "{}"));
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
+
+  console.log('selectedAppointment', selectedAppointment)
+  console.log('userData', userData)
+  
+ // Combina la fecha y la hora en un formato reconocido por moment
+const dateTimeString = `${selectedAppointment ? selectedAppointment.date : ''}T${selectedAppointment ? selectedAppointment.time: ''}:00:00`;
+
+// formatea la fecha y hora
+const formattedDateTime = moment(dateTimeString, 'YYYY-MM-DDTHH:mm:ss').add(3, 'hours').format('YYYY-MM-DDTHH:mm:ss');
+
+  const postShiftObject = {
+    date_time: formattedDateTime,
+    reserved: 1,
+    soccer_field_id: selectedAppointment?.court.id,
+    user_id: userData.id
+  }
 
   const center = {
     lat: -31.436677932739258,
@@ -44,11 +77,10 @@ const CheckoutStepperContainer: FC<Props> = ({ handleBack, handleNext }) => {
     handleBack();
   };
 
-  const handleNextButton = () => {
-    handleNext();
-  };
 
-  const handleConfirmShift = () => {
+  console.log('postShiftObject', postShiftObject)
+  const handleConfirmShift = async () => {
+    await postShift(userData.token, postShiftObject);
     router.push('/confirmShift');
   }
 

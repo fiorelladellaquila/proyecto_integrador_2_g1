@@ -1,26 +1,24 @@
 import React from "react";
 import LayoutGeneral from "../../layouts/layout-general";
-import SingUpFormContainer from "../SingUpFormContainer";
-import { Container } from "./singUpComponent.style";
+import { Container } from "./restorePasswordComponent.style";
 import { Provider } from "react-redux";
 import store from "../../../redux/store";
 import { ThemeProvider } from "@mui/system";
 import { theme } from "@/styles/material-theme";
-import GeneralFooter from '../../layouts/footer/general-footer.component'
-const Register = () => {
+import RestorePasswordFormContainer from "../RestorePasswordFormContainer";
+
+const RestorePassword = ({code, email}: any) => {
   return (
     <ThemeProvider theme={theme}>
       <Provider store={store}>
-        <LayoutGeneral title={"SingUp"}>
-          <Container>
-            <SingUpFormContainer />
+        <LayoutGeneral title={"RestorePassword"}>
+          <Container style={{ height: "100vh" }}>
+            <RestorePasswordFormContainer code={code} email={email} />
           </Container>
         </LayoutGeneral>
-        <GeneralFooter/>
       </Provider>
-      <GeneralFooter/>
     </ThemeProvider>
   );
 };
 
-export default Register
+export default RestorePassword;

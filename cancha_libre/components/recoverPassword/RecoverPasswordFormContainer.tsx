@@ -1,5 +1,4 @@
-import React from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import { Formik } from 'formik';
 import {
   FormHelperText,
@@ -17,14 +16,14 @@ import {
   StyledValidationMessages,
 } from './recoverPasswordFormContainer.style';
 import { useDispatch } from 'react-redux';
-// import { login } from '../../redux/actions/auth';
-import {jwtDecode} from 'jwt-decode';
 import { useRouter } from 'next/router';
+import { recoverPassword } from '@/services/recoverPassword';
+import NotificationModal from '../modal/NotificationModal';
 import { amiko } from '../fonts';
 
 const RecoverPasswordFormContainer: React.FC = () => {
-  const dispatch = useDispatch();
-  const router = useRouter();
+  const [isOpen, setisOpen] = useState<boolean>(false);
+
 
   return (
     <FormContainer className={`${amiko}`}>
@@ -38,35 +37,12 @@ const RecoverPasswordFormContainer: React.FC = () => {
           email: Yup.string().email('Debe ser un email valido').max(255).required('El email es requerido'),
         })}
         onSubmit={async (values) => {
-          // try {
-          //   const response = await axios.post('https://run.mocky.io/v3/bbad14ad-42a4-4c85-854b-cd185451c37f', {
-          //     email: `${values.email}`,
-          //   });
-          //   const token = response.data.result.accessToken
-          //   if (token) {
-          //     dispatch(login(token));
-          //     const decodedToken: { [key: string]: any } = jwtDecode(token);
-
-          //     console.log('decoded', decodedToken);
-      
-          //     if (typeof decodedToken === 'object' && 'email' in decodedToken) {
-          //       console.log('entraaaa')
-          //       if (decodedToken.email === values.email) {
-          //         return '200'
-          //         // router.push('/home');
-              
-          //       } else {
-          //         console.error('Los datos del usuario no coinciden con el token JWT');
-          //       }
-          //     } else {
-          //       console.error('El token JWT no contiene una propiedad "email" válida');
-          //     }
-          //   } else {
-          //     console.error('No se recibió un token JWT en la respuesta');
-          //   }
-          // } catch (error) {
-          //   console.error('Error de inicio de sesión:', error);
-          // }
+          try {
+            const response = await recoverPassword(values.email);
+            setisOpen(true)
+          } catch (error) {
+            console.error("Error en el restablecimiento de contraseña:", error);
+          }
         }}
       >
         {({ errors, handleBlur, handleChange, handleSubmit, touched, values }) => (
@@ -131,6 +107,14 @@ const RecoverPasswordFormContainer: React.FC = () => {
           </form>
         )}
       </Formik>
+      <NotificationModal
+          isOpen={isOpen}
+          level="success"
+          title="Email enviado"
+          body="Revise su casilla de correo electronico para restaurar su contraseña"
+          labelOnClick="CERRAR"
+          setClose={setisOpen}
+        />
       </Box>
     </FormContainer>
   );

@@ -1,7 +1,9 @@
 package com.grupo1.canchalibre.service;
 
 import com.grupo1.canchalibre.dto.ShiftDTO;
+import com.grupo1.canchalibre.dto.UserWhitShiftDTO;
 import com.grupo1.canchalibre.entity.Shift;
+import com.grupo1.canchalibre.entity.User;
 import com.grupo1.canchalibre.repository.IShiftRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +18,12 @@ import java.util.List;
 @Service
 public class ShiftService {
     private final IShiftRepository iShiftRepository;
+    private final UserService userService;
 
     @Autowired
-    public ShiftService(IShiftRepository iShiftRepository) {
+    public ShiftService(IShiftRepository iShiftRepository, UserService userService) {
         this.iShiftRepository = iShiftRepository;
+        this.userService = userService;
     }
 
     public List<Shift> list() {
@@ -83,5 +87,20 @@ public class ShiftService {
             }
         }
         return shiftsAvailableBySoccerField;
+    }
+
+    public UserWhitShiftDTO findByUserId(Long id){
+        UserWhitShiftDTO userWhitShiftDTO = new UserWhitShiftDTO();
+        User user = this.userService.find(id);
+
+        userWhitShiftDTO.setId(user.getId());
+        userWhitShiftDTO.setUsername(user.getUsername());
+        userWhitShiftDTO.setName(user.getName());
+        userWhitShiftDTO.setLastName(user.getLastName());
+        userWhitShiftDTO.setEmail(user.getEmail());
+        userWhitShiftDTO.setPhone(user.getPhone());
+        userWhitShiftDTO.setShifts(this.iShiftRepository.findAllByUser_id(id));
+
+        return userWhitShiftDTO;
     }
 }

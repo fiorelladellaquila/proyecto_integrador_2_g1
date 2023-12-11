@@ -27,6 +27,8 @@ const NotificationModal = ({
 }: any) => {
   const [element] = useState(document.createElement('div'));
 
+  console.log('isOpen', isOpen)
+
   const stylesModal = useMemo(() => {
     if (level && level === LEVEL_MODAL.error) {
       return {
@@ -77,12 +79,16 @@ const NotificationModal = ({
   };
 
   useEffect(() => {
-    if (isOpen) {
+    // if (isOpen) {
+      console.log("Se suscribe al evento de teclado");
       document.addEventListener('keydown', (e) => closeModal(e));
-    }
-    return () => {
-      document.removeEventListener('keydown', closeModal);
-    };
+      const handleKeyDown = (e: any) => closeModal(e);
+      document.addEventListener('keydown', handleKeyDown);
+    
+      return () => {
+        console.log("Se desuscribe del evento de teclado");
+        document.removeEventListener('keydown', handleKeyDown);
+      };
   }, [closeModal, isOpen, level]);
 
   useEffect(() => {
@@ -158,13 +164,6 @@ const NotificationModal = ({
                     <ModalButtonSubmit
                       onClick={onClick ? () => onClick() : () => setClose(!isOpen)}
                       disabled={stateAnimation === STATE_ANIMATION.loading}
-                      // className={
-                      //   stateAnimation === STATE_ANIMATION.loading
-                      //     ? 'animation-button-disabled'
-                      //     : stateAnimation === STATE_ANIMATION.success
-                      //     ? 'animation-button-enabled '
-                      //     : 'animation-button-enabled-error '
-                      // }
                     >
                       {labelOnClick || 'Cancelar'}
                     </ModalButtonSubmit>

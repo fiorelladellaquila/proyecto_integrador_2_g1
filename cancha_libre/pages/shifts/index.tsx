@@ -10,13 +10,10 @@ interface Props {
 
 const Shifts: NextPage<Props> = ({ result }: any) => {
   return (
-  <>
-  {/* <Provider store={store}> */}
-  <BookingComponent result={result} />;
-  {/* </Provider> */}
-  
-  </>
- 
-  )};
+    <>
+      <BookingComponent result={result} />;
+    </>
+  );
+};
 
 export default Shifts;

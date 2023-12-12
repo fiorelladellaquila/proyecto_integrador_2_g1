@@ -382,7 +382,7 @@ const SignUpFormContainer: React.FC = () => {
           level="success"
           title="Registracion exitosa"
           body="Tu registración se ha realizado con exito. Por favor, inicia sesion para continuar"
-          labelOnClick="CERRAR"
+          labelOnClick="Iniciar Sesión"
           setClose={setisOpen}
         />
       </Box>

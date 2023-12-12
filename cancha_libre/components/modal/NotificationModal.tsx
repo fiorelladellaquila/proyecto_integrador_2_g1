@@ -12,6 +12,7 @@ import {
   ContainerModalImgInfo,
   ModalBackground, ModalButtonCancel, ModalButtonSubmit, ModalContainer, ModalSize, ModalTitleParagraph, ModalTitleParagraphAnimation, StyleBody,
 } from "./notificationModal.style";
+import { useRouter } from 'next/router';
 
 const NotificationModal = ({
   isOpen,
@@ -26,6 +27,7 @@ const NotificationModal = ({
   stateAnimation,
 }: any) => {
   const [element] = useState(document.createElement('div'));
+  const router = useRouter();
 
   console.log('isOpen', isOpen)
 
@@ -80,13 +82,11 @@ const NotificationModal = ({
 
   useEffect(() => {
     // if (isOpen) {
-      console.log("Se suscribe al evento de teclado");
       document.addEventListener('keydown', (e) => closeModal(e));
       const handleKeyDown = (e: any) => closeModal(e);
       document.addEventListener('keydown', handleKeyDown);
     
       return () => {
-        console.log("Se desuscribe del evento de teclado");
         document.removeEventListener('keydown', handleKeyDown);
       };
   }, [closeModal, isOpen, level]);
@@ -131,7 +131,13 @@ const NotificationModal = ({
                         </ModalButtonCancel>
                       )}
                       <ModalButtonSubmit
-                        onClick={onClick ? () => onClick() : () => setClose(!isOpen)}
+                        onClick={() => {
+                          if (labelOnClick === 'Iniciar Sesión') {
+                            router.push('/auth/login');
+                          } else {
+                            onClick ? onClick() : setClose(!isOpen);
+                          }
+                        }}
                         style={{ backgroundColor: stylesModal.colorButton }}
                       >
                         {labelOnClick || 'aceptar'}

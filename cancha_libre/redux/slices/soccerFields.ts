@@ -39,4 +39,7 @@ export const {
   fetchSoccerFieldsFailure,
 } = soccerFieldsSlice.actions;
 
+//selector
+export const soccerFieldsInformation = (state: {soccerFields: SoccerFieldsState}) => state.soccerFields.fields;
+
 export default soccerFieldsSlice.reducer;

@@ -16,6 +16,8 @@ import Image from "next/image";
 import GeneralFooter from "@/components/layouts/footer/general-footer.component";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 export enum TEXT_INFORMATION_COMIC {
   NOMBRE = "Cancha: ",
@@ -24,8 +26,9 @@ export enum TEXT_INFORMATION_COMIC {
 
 export enum TITLE_STEPPER {
   DATOS_PERSONALES = "Datos Personales,",
-  DIRECCION_DE_ENTREGA = "Dirección de Entrega",
-  DATOS_DEL_PAGO = "Datos del Pago",
+  DIRECCION = "Dirección",
+  FECHA = "Fecha",
+  HORA = 'Hora'
 }
 
 export enum TEXT_BUTTON {
@@ -48,6 +51,9 @@ const styles = {
 
 const ConfirmShiftComponent: FC = () => {
   const router = useRouter();
+  const selectedAppointment = useSelector(
+    (state: RootState) => state.booking.selectedAppointment
+  );
 
   const handleGoHome = () => {
     router.push("/home");
@@ -126,13 +132,25 @@ const ConfirmShiftComponent: FC = () => {
                   {TEXT_INFORMATION_COMIC.NOMBRE}
                 </Typography>
                 <Typography variant="h6" color="black">
-                  {/* Colocar nombre de cancha */}
+                {selectedAppointment
+                  ? selectedAppointment.court.description
+                  : ""}
                 </Typography>
                 <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-                  {TITLE_STEPPER.DIRECCION_DE_ENTREGA}
+                  {TITLE_STEPPER.FECHA}
                 </Typography>
                 <Typography variant="h5">
-                  {/* Colocar direccion de cancha */}
+                {selectedAppointment
+                  ? selectedAppointment.date
+                  : ""}
+                </Typography>
+                <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                  {TITLE_STEPPER.HORA}
+                </Typography>
+                <Typography variant="h5">
+                  {selectedAppointment
+                  ? selectedAppointment.time + ' hs'
+                  : ""}
                 </Typography>
               </Grid>
               <Box sx={{ ...styles, gap: "10px", width: "100%" }}>

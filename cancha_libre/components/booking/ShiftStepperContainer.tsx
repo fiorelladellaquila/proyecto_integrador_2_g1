@@ -88,7 +88,6 @@ const Calendar: React.FC<Props> = ({ handleNext, handleBack }) => {
     dispatch(selectDate(defaultDate));
   }, [dispatch]);
 
-  console.log("userData", userData);
 
   const fetchDataSoccerFields = async () => {
     try {
@@ -114,7 +113,6 @@ const Calendar: React.FC<Props> = ({ handleNext, handleBack }) => {
     console.log("time", time);
     console.log("court", court);
     if (selectedDate) {
-      console.log("entraaaaaaaaaaaaaaa");
       dispatch(toggleAppointment({ time, court, soccerFieldsData }));
     } else {
       setisOpen(true);

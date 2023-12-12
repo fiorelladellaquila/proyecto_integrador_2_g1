@@ -2,7 +2,7 @@ import { Box, Button, Grid, Link, Typography } from "@mui/material";
 import { FC, useEffect, useState } from "react";
 import Image from "next/image";
 import { URL_IMAGE_AWS } from "../../utils/constant/imagesAws";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
 interface OurFieldsMappingContainerProps {
   inLandingTemplate?: boolean; // Propiedad opcional para determinar el template
@@ -13,7 +13,7 @@ const OurFieldsMappingContainer: FC<OurFieldsMappingContainerProps> = ({
 }: OurFieldsMappingContainerProps) => {
   const router = useRouter();
   const [userData, setUserData] = useState(
-    typeof window !== 'undefined'
+    typeof window !== "undefined"
       ? JSON.parse(localStorage.getItem("user") || "{}")
       : {}
   );
@@ -21,18 +21,18 @@ const OurFieldsMappingContainer: FC<OurFieldsMappingContainerProps> = ({
   useEffect(() => {
     const handleStorageChange = () => {
       setUserData(
-        typeof window !== 'undefined'
+        typeof window !== "undefined"
           ? JSON.parse(localStorage.getItem("user") || "{}")
           : {}
       );
     };
 
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       window.addEventListener("storage", handleStorageChange);
     }
 
     return () => {
-      if (typeof window !== 'undefined') {
+      if (typeof window !== "undefined") {
         window.removeEventListener("storage", handleStorageChange);
       }
     };
@@ -40,9 +40,9 @@ const OurFieldsMappingContainer: FC<OurFieldsMappingContainerProps> = ({
 
   const handleReserveNow = () => {
     if (userData.token) {
-      router.push('/home');
+      router.push("/home");
     } else {
-      router.push('/auth/login');
+      router.push("/auth/login");
     }
   };
   return (
@@ -51,8 +51,8 @@ const OurFieldsMappingContainer: FC<OurFieldsMappingContainerProps> = ({
         container
         justifyContent="center"
         spacing={1}
-        style={{ padding: "0 5rem" }}
-        id='fields'
+        style={{ padding: "0 2rem" }}
+        id="fields"
       >
         {[
           { id: 1, teamNumber: "5", price: "15.000", img: "/sliderF5.png" },
@@ -71,20 +71,20 @@ const OurFieldsMappingContainer: FC<OurFieldsMappingContainerProps> = ({
             lg={3}
             style={{ borderRadius: "2rem" }}
           >
-            <Box
-              sx={{
-                backgroundColor: "#FFFFFF",
-                textAlign: "center",
-                width: "100%",
-              }}
-            >
-              <Box sx={{ backgroundColor: "#222222" }}>
-                <Typography variant="h6" color="#FFFFFF" padding="1rem 0">
-                  Fútbol {card.teamNumber}
-                </Typography>
-              </Box>
-              {inLandingTemplate ? (
-                <>
+            {inLandingTemplate ? (
+              <>
+                <Box
+                  sx={{
+                    backgroundColor: "#FFFFFF",
+                    textAlign: "center",
+                    width: "100%",
+                  }}
+                >
+                  <Box sx={{ backgroundColor: "#222222" }}>
+                    <Typography variant="h6" color="#FFFFFF" padding="1rem 0">
+                      Fútbol {card.teamNumber}
+                    </Typography>
+                  </Box>
                   <Box sx={{ backgroundColor: "#333333", color: "#FFFFFF" }}>
                     <Typography padding="0.5rem 0 0.2rem 0">Hora</Typography>
                     <Typography
@@ -117,59 +117,49 @@ const OurFieldsMappingContainer: FC<OurFieldsMappingContainerProps> = ({
                       Adicional nocturno $5.000
                     </Typography>
                   </Box>
-                </>
-              ) : (
+                </Box>
+              </>
+            ) : (
+              <>
                 <Box
                   sx={{
-                    width: "100%",
-                    paddingTop: "100%",
-                    position: "relative",
+                    backgroundColor: "#000000",
+                    textAlign: "center",
+                    width: "100%",   
                   }}
                 >
-                  <Image
-                    src={`${URL_IMAGE_AWS}${card.img}`}
-                    alt={`Imagen ${card.teamNumber}`}
-                    layout="fill"
-                    objectFit="cover"
-                  />
+                  <Box sx={{ backgroundColor: "#222222" }}>
+                    <Typography variant="h6" color="#FFFFFF" padding="1rem 0">
+                      Fútbol {card.teamNumber}
+                    </Typography>
+                  </Box>
+                    <Image
+                      src={`${URL_IMAGE_AWS}${card.img}`}
+                      alt={`Imagen ${card.teamNumber}`}
+                     width={185}
+                     height={150}
+                    />
                 </Box>
-              )}
-               {inLandingTemplate ? ( 
-               <Button
-                variant="contained"
-                sx={{
-                  backgroundColor: "#00CC00",
-                  "&:hover": {
-                    backgroundColor: "rgba(0,204,0, 0.8)",
-                  },
-                  textTransform: "capitalize",
-                  width: "100%",
-                }}
-                onClick={handleReserveNow}
-              >
-                Reservá
-              </Button>): null
-            //   ( 
-            //   <Link href="/shifts/1">
-            //      <Button
-            //     variant="contained"
-            //     sx={{
-            //       backgroundColor: "#EA4335",
-            //       "&:hover": {
-            //         backgroundColor: "rgba(234, 67, 53, 0.8)",
-            //       },
-            //       textTransform: "capitalize",
-            //       width: "100%",
-            //     }}    
-            //   >
-            //     Reservá
-            //   </Button>
-            //   </Link>
-            //  )
-             }
-             
-             
-            </Box>
+              </>
+            )}
+            {
+              inLandingTemplate ? (
+                <Button
+                  variant="contained"
+                  sx={{
+                    backgroundColor: "#00CC00",
+                    "&:hover": {
+                      backgroundColor: "rgba(0,204,0, 0.8)",
+                    },
+                    textTransform: "capitalize",
+                    width: "100%",
+                  }}
+                  onClick={handleReserveNow}
+                >
+                  Reservá
+                </Button>
+              ) : null
+            }
           </Grid>
         ))}
       </Grid>

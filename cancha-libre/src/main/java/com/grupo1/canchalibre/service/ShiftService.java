@@ -89,18 +89,23 @@ public class ShiftService {
         return shiftsAvailableBySoccerField;
     }
 
-    public UserWhitShiftDTO findByUserId(Long id){
-        UserWhitShiftDTO userWhitShiftDTO = new UserWhitShiftDTO();
-        User user = this.userService.find(id);
+    public List<UserWhitShiftDTO> findUsersWithShift(){
 
-        userWhitShiftDTO.setId(user.getId());
-        userWhitShiftDTO.setUsername(user.getUsername());
-        userWhitShiftDTO.setName(user.getName());
-        userWhitShiftDTO.setLastName(user.getLastName());
-        userWhitShiftDTO.setEmail(user.getEmail());
-        userWhitShiftDTO.setPhone(user.getPhone());
-        userWhitShiftDTO.setShifts(this.iShiftRepository.findAllByUser_id(id));
+        List<User> usersWithShifts = userService.findUsersWithShifts(); // Método que carga usuarios con sus turnos usando un Join Fetch en la consulta
 
-        return userWhitShiftDTO;
+        List<UserWhitShiftDTO> lista = new ArrayList<>();
+        for (User user : usersWithShifts) {
+            UserWhitShiftDTO userWhitShiftDTO = new UserWhitShiftDTO();
+            userWhitShiftDTO.setId(user.getId());
+            userWhitShiftDTO.setUsername(user.getUsername());
+            userWhitShiftDTO.setName(user.getName());
+            userWhitShiftDTO.setLastName(user.getLastName());
+            userWhitShiftDTO.setEmail(user.getEmail());
+            userWhitShiftDTO.setPhone(user.getPhone());
+            userWhitShiftDTO.setShifts(user.getShifts()); // Ahora los turnos están ya cargados junto con el usuario en la consulta
+            lista.add(userWhitShiftDTO);
+        }
+
+        return lista;
     }
 }

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -20,6 +21,6 @@ public class UserWhitShiftDTO {
     private String lastName;
     private String email;
     private int phone;
-    private List<Shift> shifts;
+    private Set<Shift> shifts;
 
 }

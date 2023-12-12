@@ -12,6 +12,7 @@ import { amiko } from "../../fonts"
 import { URL_IMAGE_AWS } from "@/utils/constant/imagesAws";
 import { theme } from "@/styles/material-theme";  
 const HomeComponent: FC = () => {
+    const [loading, setLoading] = React.useState<boolean>(true);
   return (
     <ThemeProvider theme={theme}>
 <LayoutGeneral title={"Home"} >
@@ -27,8 +28,8 @@ const HomeComponent: FC = () => {
       <Image
         src={`${URL_IMAGE_AWS}/imageHome.png`}
         alt={`Imagen Home`}
-        layout="fill"
-        objectFit="cover"
+        width={1385}
+        height={80}
       />
     </div>
     <Box
@@ -38,7 +39,7 @@ const HomeComponent: FC = () => {
         backgroundColor: "#2E2F33",
       }}
     >
-      <InformationHomeSectionContainer />
+      <InformationHomeSectionContainer loading={loading} setLoading={setLoading} />
       <CategoriesFieldsSectionContainer />
     </Box>
     <GeneralFooter />

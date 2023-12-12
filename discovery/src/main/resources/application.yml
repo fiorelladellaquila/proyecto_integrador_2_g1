@@ -6,9 +6,21 @@ spring:
     name: eureka-server
 eureka:
   instance:
-    hostname: localhost
+    hostname: ec2-54-174-87-60.compute-1.amazonaws.com
   client:
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+#spring:
+#  application:
+#    name: eureka-server
+#eureka:
+#  instance:
+#    hostname: localhost
+#  client:
+#    registerWithEureka: false
+#    fetchRegistry: false
+#    serviceUrl:
+#      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/

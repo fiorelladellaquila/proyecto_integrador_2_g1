@@ -11,7 +11,7 @@ interface Props {
 }
 
 const CheckShiftStepperContainer: FC<Props> = ({ handleBack, handleNext }) => {
-  const { handlerCustomer } = useContext(SteppersContext) ?? {};
+  const { handlerCustomer } = useContext(SteppersContext) || {};
   const selectedAppointment = useSelector(
     (state: RootState) => state.booking.selectedAppointment
   );

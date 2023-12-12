@@ -14,7 +14,7 @@ interface Props {
 }
 
 const CheckoutStepperContainer: FC<Props> = ({ handleBack, handleNext }) => {
-  const { handlerCustomer } = useContext(SteppersContext) ?? {};
+  const { handlerCustomer } = useContext(SteppersContext) || {};
   const [userData, setUserData] = useState(
     JSON.parse(localStorage.getItem("user") || "{}")
   );

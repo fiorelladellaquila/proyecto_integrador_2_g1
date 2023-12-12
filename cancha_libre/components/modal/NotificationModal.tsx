@@ -80,13 +80,11 @@ const NotificationModal = ({
 
   useEffect(() => {
     // if (isOpen) {
-      console.log("Se suscribe al evento de teclado");
       document.addEventListener('keydown', (e) => closeModal(e));
       const handleKeyDown = (e: any) => closeModal(e);
       document.addEventListener('keydown', handleKeyDown);
     
       return () => {
-        console.log("Se desuscribe del evento de teclado");
         document.removeEventListener('keydown', handleKeyDown);
       };
   }, [closeModal, isOpen, level]);

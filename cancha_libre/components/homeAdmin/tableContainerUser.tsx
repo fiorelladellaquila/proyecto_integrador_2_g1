@@ -18,18 +18,14 @@ import { amiko } from '../fonts';
 import { getSoccerFieldsUsers } from '@/services/soccerFields';
 
 // Definición de la función fetchDataUserAndSoccerFields
-const fetchDataUserAndSoccerFields = async () => {
-  let userData = {
-    token: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKdWFuTWFuczEiLCJpYXQiOjE3MDI0MTAxODAsImV4cCI6MTcwMjQxMTYyMH0.Jw7mms5MwReUXSDEPJRe-KwaNO-LEUwdWf5_O87sRlg', // Asegúrate de proporcionar un token válido
-  };
+// const fetchDataUserAndSoccerFields = async () => {
+//   let userData = {
+//     token: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKdWFuTWFuczEiLCJpYXQiOjE3MDIzNjQyNDUsImV4cCI6MTcwMjM2NTY4NX0.l-OtaG2Vx9KEEOiybpbtzhs9A1sUaoc6koGotNrIoOc', // Asegúrate de proporcionar un token válido
+//   };
 
-
-// MODIFICAR TOKEN
-
-
-  const response = await getSoccerFieldsUsers(userData.token);
-  return response;
-};
+//   const response = await getSoccerFieldsUsers(userData.token);
+//   return response;
+// };
 
 // Datos para la tabla A (Historial de alquiler de canchas)
 interface User {
@@ -47,12 +43,12 @@ interface User {
   }[];
 }
 
-let data: User[] = [];
+// let data: User[] = [];
 
 // Datos para la tabla B (Datos de usuarios)
 // const dataB = [
-//   { id: 1, firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com', password: '*********' },
-//   { id: 2, firstName: 'Jane', lastName: 'Doe', email: 'jane.doe@example.com', password: '*********' },
+//   { id: 1, firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com', password: '***' },
+//   { id: 2, firstName: 'Jane', lastName: 'Doe', email: 'jane.doe@example.com', password: '***' },
 //   // ... Agrega más datos según sea necesario
 // ];
 
@@ -86,13 +82,35 @@ function mapIdToGrassType(id: number): string {
 export default function CombinedTable() {
   const [data, setData] = useState<User[]>([]);
   const [page, setPage] = useState(1);
-  const rowsPerPage = 15;
+  const rowsPerPage = 5;
   const [expandedRows, setExpandedRows] = useState<number[]>([]);
+  const [userData, setUserData] = React.useState(() => {
+    if (typeof window !== "undefined") {
+      return JSON.parse(localStorage.getItem("user") || "{}");
+    } else {
+      return {};
+    }
+  });
+
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      const handleStorageChange = () => {
+        setUserData(JSON.parse(localStorage.getItem("user") || "{}"));
+      };
+
+      window.addEventListener("storage", handleStorageChange);
+
+      return () => {
+        window.removeEventListener("storage", handleStorageChange);
+      };
+    }
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetchDataUserAndSoccerFields();
+        const response = await getSoccerFieldsUsers(userData.token);
+        console.log('response', response)
         setData(response);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -111,10 +129,7 @@ export default function CombinedTable() {
   }
 
   // Manejar el cambio de página
-  const handlePageChange = (
-    event: React.ChangeEvent<unknown>,
-    value: number
-  ) => {
+  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
 
@@ -130,11 +145,9 @@ export default function CombinedTable() {
     });
   };
 
-  console.log(data)
-
   return (
-  
-      <div>
+   <>
+     <div>
         {/* Tabla combinada */}
         <TableContainer component={Paper}>
           <Table aria-label="collapsible table">
@@ -176,7 +189,7 @@ export default function CombinedTable() {
                             variant="h6"
                             gutterBottom
                             component="div"
-                            fontFamily={`${amiko}`}
+                            // fontFamily={${amiko}}
                           >
                             Historial reservas
                           </Typography>
@@ -220,6 +233,8 @@ export default function CombinedTable() {
           onChange={handlePageChange}
         />
       </div>
+   </>
+    
     
   );
 }

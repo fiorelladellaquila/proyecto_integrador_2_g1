@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Table,
   TableBody,
@@ -12,10 +12,10 @@ import {
   IconButton,
   Typography,
   Pagination,
-} from '@mui/material';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { amiko } from '../fonts';
-import { getSoccerFields } from '@/services/soccerFields';
+} from "@mui/material";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { amiko } from "../fonts";
+import { getSoccerFields } from "@/services/soccerFields";
 
 // Rest of the code...
 
@@ -42,34 +42,52 @@ export default function CombinedTable() {
   const rowsPerPage = 10;
   const [expandedRows, setExpandedRows] = useState<number[]>([]);
 
-  const fetchDataSoccerFields = async () => {
-    let userData = {
-      token: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKdWFuTWFuczEiLCJpYXQiOjE3MDI0MTAxODAsImV4cCI6MTcwMjQxMTYyMH0.Jw7mms5MwReUXSDEPJRe-KwaNO-LEUwdWf5_O87sRlg', // Asegúrate de proporcionar un token válido
-    };
-  
-   
-    const response = await getSoccerFields(userData.token);
-    return response;
-  };
- 
-  
-  
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const response = await fetchDataSoccerFields();
-          setData(response);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
+  const [userData, setUserData] = React.useState(() => {
+    if (typeof window !== "undefined") {
+      return JSON.parse(localStorage.getItem("user") || "{}");
+    } else {
+      return {};
+    }
+  });
+
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      const handleStorageChange = () => {
+        setUserData(JSON.parse(localStorage.getItem("user") || "{}"));
       };
-  
-      fetchData();
-    }, []);
-  
+
+      window.addEventListener("storage", handleStorageChange);
+
+      return () => {
+        window.removeEventListener("storage", handleStorageChange);
+      };
+    }
+  }, []);
+
+  const fetchDataSoccerFields = async () => {
+    try {
+      const response = await getSoccerFields(userData.token);
+      console.log("reponse", response);
+      return response;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetchDataSoccerFields();
+        setData(response);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   // MODIFICAR TOKEN
-  
- 
 
   // Lógica para mostrar las filas en la página actual
   let paginatedRows: SoccerField[] = [];
@@ -80,7 +98,10 @@ export default function CombinedTable() {
   }
 
   // Manejar el cambio de página
-  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
     setPage(value);
   };
 
@@ -130,8 +151,15 @@ export default function CombinedTable() {
                 </TableRow>
                 {/* Expandir la fila para mostrar historial */}
                 <TableRow>
-                  <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={5}>
-                    <Collapse in={expandedRows.includes(soccerField.id)} timeout="auto" unmountOnExit>
+                  <TableCell
+                    style={{ paddingBottom: 0, paddingTop: 0 }}
+                    colSpan={5}
+                  >
+                    <Collapse
+                      in={expandedRows.includes(soccerField.id)}
+                      timeout="auto"
+                      unmountOnExit
+                    >
                       <Box sx={{ margin: 1 }}>
                         <Typography
                           variant="h6"
@@ -154,7 +182,7 @@ export default function CombinedTable() {
                               <TableRow key={shift.id}>
                                 <TableCell>{shift.date_time}</TableCell>
                                 <TableCell>
-                                  {shift.reserved ? 'Efectuada' : 'Sin reserva'}
+                                  {shift.reserved ? "Efectuada" : "Sin reserva"}
                                 </TableCell>
                               </TableRow>
                             ))}
@@ -173,8 +201,10 @@ export default function CombinedTable() {
       {/* Paginación para la tabla Historial Reservas*/}
       <Pagination
         count={Math.ceil(
-          (data?.reduce((acc, soccerField) => acc + soccerField.shifts.length, 0) || 0) /
-            rowsPerPage
+          (data?.reduce(
+            (acc, soccerField) => acc + soccerField.shifts.length,
+            0
+          ) || 0) / rowsPerPage
         )}
         page={page}
         onChange={handlePageChange}

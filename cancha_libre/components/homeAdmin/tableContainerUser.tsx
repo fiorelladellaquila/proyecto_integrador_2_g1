@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Table,
   TableBody,
@@ -13,27 +13,39 @@ import {
   Typography,
   Checkbox,
   Pagination,
-} from '@mui/material';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { amiko } from '../fonts';
+} from "@mui/material";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { amiko } from "../fonts";
 
 // Datos para la tabla A (Historial de alquiler de canchas)
 const dataA = [
   {
-    date: '2022-01-01',
-    field: 'F5A',
+    date: "2022-01-01",
+    field: "F5A",
   },
   {
-    date: '2022-02-15',
-    field: 'F7',
+    date: "2022-02-15",
+    field: "F7",
   },
   // ... Agrega más datos según sea necesario
 ];
 
 // Datos para la tabla B (Datos de usuarios)
 const dataB = [
-  { id: 1, firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com', password: '*********' },
-  { id: 2, firstName: 'Jane', lastName: 'Doe', email: 'jane.doe@example.com', password: '*********' },
+  {
+    id: 1,
+    firstName: "John",
+    lastName: "Doe",
+    email: "john.doe@example.com",
+    password: "*********",
+  },
+  {
+    id: 2,
+    firstName: "Jane",
+    lastName: "Doe",
+    email: "jane.doe@example.com",
+    password: "*********",
+  },
   // ... Agrega más datos según sea necesario
 ];
 
@@ -51,7 +63,10 @@ export default function CombinedTable() {
   const paginatedRows = dataB.slice(startIndex, endIndex);
 
   // Manejar el cambio de página
-  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
     setPage(value);
   };
 
@@ -68,62 +83,101 @@ export default function CombinedTable() {
   };
 
   return (
-    <div>
+    <div style={{ width: "100%", padding: "1rem" }}>
       {/* Tabla combinada */}
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} sx={{ backgroundColor: "#555659" }}>
         <Table aria-label="collapsible table">
           <TableHead>
             <TableRow>
               <TableCell />
-              <TableCell>Name</TableCell>
-              <TableCell align="right">Email</TableCell>
-              <TableCell align="right">Password</TableCell>
-              <TableCell align="right">Delete</TableCell>
+              <TableCell sx={{ color: "#FFFFFF" }}>Name</TableCell>
+              <TableCell align="right" sx={{ color: "#FFFFFF" }}>
+                Email
+              </TableCell>
+              <TableCell align="right" sx={{ color: "#FFFFFF" }}>
+                Password
+              </TableCell>
+              <TableCell align="right" sx={{ color: "#FFFFFF" }}>
+                Delete
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {paginatedRows.map((user) => (
               <React.Fragment key={user.id}>
-                <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+                <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
                   <TableCell>
                     <IconButton
                       aria-label="expand row"
                       size="small"
                       onClick={() => handleExpandClick(user.id)}
+                      sx={{ color: "#FFFFFF" }}
                     >
                       <KeyboardArrowDownIcon />
                     </IconButton>
                   </TableCell>
-                  <TableCell component="th" scope="row">
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    sx={{ color: "#FFFFFF" }}
+                  >
                     {user.firstName} {user.lastName}
                   </TableCell>
-                  <TableCell align="right">{user.email}</TableCell>
-                  <TableCell align="right">{user.password}</TableCell>
-                  <TableCell align="right">
-                    <Checkbox onChange={() => console.log('Borrar: ', user.firstName)} />
+                  <TableCell align="right" sx={{ color: "#FFFFFF" }}>
+                    {user.email}
+                  </TableCell>
+                  <TableCell align="right" sx={{ color: "#FFFFFF" }}>
+                    {user.password}
+                  </TableCell>
+                  <TableCell align="right" sx={{ color: "#FFFFFF" }}>
+                    <Checkbox
+                      onChange={() => console.log("Borrar: ", user.firstName)}
+                      sx={{ color: "#FFFFFF" }}
+                    />
                   </TableCell>
                 </TableRow>
                 {/* Expandir la fila para mostrar historial */}
                 <TableRow>
-                  <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={5}>
-                    <Collapse in={expandedRows.includes(user.id)} timeout="auto" unmountOnExit>
+                  <TableCell
+                    style={{ paddingBottom: 0, paddingTop: 0 }}
+                    colSpan={5}
+                  >
+                    <Collapse
+                      in={expandedRows.includes(user.id)}
+                      timeout="auto"
+                      unmountOnExit
+                    >
                       <Box sx={{ margin: 1 }}>
-                        <Typography variant="h6" gutterBottom component="div" fontFamily={`${amiko}`}>
+                        <Typography
+                          variant="h6"
+                          gutterBottom
+                          component="div"
+                          fontFamily={`${amiko}`}
+                          sx={{ color: "#FFFFFF" }}
+                        >
                           History
                         </Typography>
                         {/* Mostrar historial desde la tabla A */}
                         <Table size="small" aria-label="history">
                           <TableHead>
                             <TableRow>
-                              <TableCell>Date</TableCell>
-                              <TableCell>Field</TableCell>
+                              <TableCell sx={{ color: "#FFFFFF" }}>
+                                Date
+                              </TableCell>
+                              <TableCell sx={{ color: "#FFFFFF" }}>
+                                Field
+                              </TableCell>
                             </TableRow>
                           </TableHead>
                           <TableBody>
                             {dataA.map((rental) => (
                               <TableRow key={rental.date}>
-                                <TableCell>{rental.date}</TableCell>
-                                <TableCell>{rental.field}</TableCell>
+                                <TableCell sx={{ color: "#FFFFFF" }}>
+                                  {rental.date}
+                                </TableCell>
+                                <TableCell sx={{ color: "#FFFFFF" }}>
+                                  {rental.field}
+                                </TableCell>
                               </TableRow>
                             ))}
                           </TableBody>

@@ -60,7 +60,6 @@ const LoginFormContainer: React.FC = () => {
     }
   }, [rememberMe]);
 
-
   return (
     <FormContainer>
       <Box
@@ -94,6 +93,7 @@ const LoginFormContainer: React.FC = () => {
           try {
             const response = await loginUser(values.username, values.password);
             const { token, name, username, id } = response;
+            console.log(name)
         
             if (rememberMe) {
               console.log('entraaaa')
@@ -104,8 +104,14 @@ const LoginFormContainer: React.FC = () => {
             localStorage.setItem("user", JSON.stringify({token, name, id}));
         
             dispatch(login({ token: token }));
+
+            if(name === "Cancha Libre") {
+              router.push("/admin")
+            } else {
+              router.push("/home");
+            }
         
-            router.push("/home");
+           
           } catch (error) {
             console.error("Error de inicio de sesión:", error);
             setisOpen(true);

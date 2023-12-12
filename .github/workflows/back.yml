@@ -75,9 +75,11 @@ jobs:
     - name: Deploy discovery
       run: |
         echo "Deploying started..."
-        ssh ubuntu@${HOST} sudo systemctl stop user.service
+        ssh ubuntu@${HOST} sudo systemctl stop systemd-sysusers.service
+        #ssh ubuntu@${HOST} sudo systemctl stop user.service
         scp /home/runner/work/proyecto_integrador_2_g1/discovery/target/discovery.jar ubuntu@${HOST}:~/user
-        ssh ubuntu@${HOST} sudo systemctl start user.service
+        ssh ubuntu@${HOST} systemctl start systemd-sysusers.service
+        #ssh ubuntu@${HOST} sudo systemctl start user.service
         echo "Finished deploying the app."
       env:
           HOST: ${{ secrets.DEPLOY_SERVER_IP_USER }}       
@@ -85,9 +87,11 @@ jobs:
     - name: Deploy Gateway
       run: |
         echo "Deploying started..."
-        ssh ubuntu@${HOST} sudo systemctl stop user.service
+        ssh ubuntu@${HOST} sudo systemctl stop systemd-sysusers.service
+        #ssh ubuntu@${HOST} sudo systemctl stop user.service
         scp /home/runner/work/proyecto_integrador_2_g1/Gateway/target/Gateway.jar ubuntu@${HOST}:~/user
-        ssh ubuntu@${HOST} sudo systemctl start user.service
+        ssh ubuntu@${HOST} systemctl start systemd-sysusers.service
+        #ssh ubuntu@${HOST} sudo systemctl start user.service
         echo "Finished deploying the app."
       env:
           HOST: ${{ secrets.DEPLOY_SERVER_IP_USER }}
@@ -95,9 +99,11 @@ jobs:
     - name: Deploy cancha-libre
       run: |
         echo "Deploying started..."
-        ssh ubuntu@${HOST} sudo systemctl stop user.service
+        sudo systemctl stop systemd-sysusers.service
+        #ssh ubuntu@${HOST} sudo systemctl stop user.service
         scp /home/runner/work/proyecto_integrador_2_g1/cancha-libre/target/cancha-libre.jar ubuntu@${HOST}:~/user
-        ssh ubuntu@${HOST} sudo systemctl start user.service
+        ssh ubuntu@${HOST} systemctl start systemd-sysusers.service
+        #ssh ubuntu@${HOST} sudo systemctl start user.service
         echo "Finished deploying the app."
       env:
           HOST: ${{ secrets.DEPLOY_SERVER_IP_USER }}    

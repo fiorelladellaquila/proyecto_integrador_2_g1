@@ -31,16 +31,14 @@ const CategoriesFieldsSectionContainer: FC = () => {
         <br />
       </Box>
       <Box
-          style={{
-            width: "90vw",
-            background:
-              "linear-gradient(180deg, rgba(10,113,27,1) 52%, rgba(0,204,0,1) 100%)",
-            padding: "2rem 0",
-            borderRadius: "15px",
-            marginBottom: "5rem",
-            
-          }}
-      >
+      style={{
+        width: "90vw", // Ajusta la anchura según tus necesidades
+        background: "linear-gradient(180deg, rgba(10,113,27,1) 52%, rgba(0,204,0,1) 100%)",
+        padding: "2rem 0",
+        borderRadius: "15px",
+        marginBottom: "5rem", // Ajusta el margen inferior según tus necesidades
+      }}
+    >
         <Typography
           fontWeight={"600"}
           variant="h4"
@@ -60,6 +58,7 @@ const CategoriesFieldsSectionContainer: FC = () => {
             padding: "2rem 0",
             borderRadius: "15px",
             marginBottom: "5rem",
+            
            
           }}
         >

@@ -20,7 +20,7 @@ import { getSoccerFieldsUsers } from '@/services/soccerFields';
 // Definición de la función fetchDataUserAndSoccerFields
 const fetchDataUserAndSoccerFields = async () => {
   let userData = {
-    token: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKdWFuTWFuczEiLCJpYXQiOjE3MDI0MDE0NzksImV4cCI6MTcwMjQwMjkxOX0.3I0IwEnbSDn3VXvkHw5LW2l2wfAL3Jqz3Ze0Nd3lgRg', // Asegúrate de proporcionar un token válido
+    token: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKdWFuTWFuczEiLCJpYXQiOjE3MDI0MTAxODAsImV4cCI6MTcwMjQxMTYyMH0.Jw7mms5MwReUXSDEPJRe-KwaNO-LEUwdWf5_O87sRlg', // Asegúrate de proporcionar un token válido
   };
 
 
@@ -127,8 +127,10 @@ export default function CombinedTable() {
     });
   };
 
+  console.log(data)
+
   return (
-   
+  
       <div>
         {/* Tabla combinada */}
         <TableContainer component={Paper}>

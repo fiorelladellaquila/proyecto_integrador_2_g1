@@ -1,167 +1,184 @@
-import * as React from 'react';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import React, { useState, useEffect } from 'react';
 import {
-  Button,
-  Modal,
-  Paper,
-  Typography,
-  TableContainer,
   Table,
+  TableBody,
+  TableCell,
+  TableContainer,
   TableHead,
   TableRow,
-  TableCell,
-  TableBody,
-  TablePagination,
+  Paper,
+  Box,
+  Collapse,
+  IconButton,
+  Typography,
+  Pagination,
 } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { amiko } from '../fonts';
 import { getSoccerFields } from '@/services/soccerFields';
-// import { deleteShift } from '@/services/shifts';
-//  DELETESHIFT ESTA IMPORTADO PERO NOSE SI ESTA EL ENDPOINT
 
+// Rest of the code...
+
+// Datos para la tabla B (Datos de usuarios)
 interface SoccerField {
   id: number;
   description: string;
   price: number;
   size: string;
   admin_id: number;
-  shifts: Shift[];
+  shifts: {
+    id: number;
+    date_time: number;
+    soccer_field_id: number;
+    user_id: number;
+    reserved: boolean;
+  }[];
 }
+let data: SoccerField[] = [];
 
-interface Shift {
-  id: number;
-  date_time: string;
-  soccer_field_id: number;
-  user_id: number;
-  reserved: boolean;
-}
+export default function CombinedTable() {
+  const [data, setData] = useState<SoccerField[]>([]);
+  const [page, setPage] = useState(1);
+  const rowsPerPage = 10;
+  const [expandedRows, setExpandedRows] = useState<number[]>([]);
 
-const fetchDataSoccerFields = async () => {
-  // Lógica para obtener datos de reservas aquí
-  let userData = {
-    token:
-      'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKdWFuTWFuczEiLCJpYXQiOjE3MDI0MDE0NzksImV4cCI6MTcwMjQwMjkxOX0.3I0IwEnbSDn3VXvkHw5LW2l2wfAL3Jqz3Ze0Nd3lgRg',
-  };
-// MODIFICAR TOKEN
-  const response = await getSoccerFields(userData.token);
-  return response;
-};
-
-
-
-
-
-const ReservationsTable: React.FC = () => {
-  const [rows, setRows] = React.useState<SoccerField[]>([]);
-  const [selectedShifts, setSelectedShifts] = React.useState<Shift[]>([]);
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  React.useEffect(() => {
-    const fetchAndSetData = async () => {
-      const data = await fetchDataSoccerFields();
-      setRows(data);
+  const fetchDataSoccerFields = async () => {
+    let userData = {
+      token: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKdWFuTWFuczEiLCJpYXQiOjE3MDI0MTAxODAsImV4cCI6MTcwMjQxMTYyMH0.Jw7mms5MwReUXSDEPJRe-KwaNO-LEUwdWf5_O87sRlg', // Asegúrate de proporcionar un token válido
     };
+  
+   
+    const response = await getSoccerFields(userData.token);
+    return response;
+  };
+ 
+  
+  
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetchDataSoccerFields();
+          setData(response);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+  
+      fetchData();
+    }, []);
+  
+  // MODIFICAR TOKEN
+  
+ 
 
-    fetchAndSetData();
-  }, []);
+  // Lógica para mostrar las filas en la página actual
+  let paginatedRows: SoccerField[] = [];
+  if (Array.isArray(data)) {
+    const startIndex = (page - 1) * rowsPerPage;
+    const endIndex = startIndex + rowsPerPage;
+    paginatedRows = data.slice(startIndex, endIndex);
+  }
 
-  const handleViewShifts = (shifts: Shift[]) => {
-    setSelectedShifts(shifts);
-    setPage(0); // Resetear a la primera página cuando se abre el modal
-    setIsModalOpen(true);
+  // Manejar el cambio de página
+  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
+  // Manejar la expansión del historial para una fila específica
+  const handleExpandClick = (rowId: number) => {
+    setExpandedRows((prevExpandedRows) => {
+      const isRowExpanded = prevExpandedRows.includes(rowId);
+      if (isRowExpanded) {
+        return prevExpandedRows.filter((id) => id !== rowId);
+      } else {
+        return [...prevExpandedRows, rowId];
+      }
+    });
   };
-
-  const columns: GridColDef[] = [
-    { field: 'id', headerName: 'ID', width: 200},
-    { field: 'description', headerName: 'Descripción' , width: 400},
-    { field: 'price', headerName: 'Precio', width: 200 },
-    { field: 'size', headerName: 'Tamaño' , width: 200},
-    {
-      field: 'shifts',
-      headerName: 'Turnos',
-      renderCell: (params) => (
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => handleViewShifts(params.row.shifts)}
-        >
-          Ver Turnos
-        </Button>
-      ),
-       width: 200,
-    },
-  ];
 
   return (
-    <div style={{ height: 650, width: '100%', background: 'white' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        // className="custom-data-grid"
-        // checkboxSelection
-        getRowId={(row) => row.id}
-        isRowSelectable={(params) => Boolean(params.row.shifts.length)}
-      />
-
-      <Modal open={isModalOpen} onClose={handleCloseModal}>
-        <Paper style={{ padding: '80px', backgroundColor: '#e0e0e0', borderRadius: '8px' , maxWidth: '800px', margin: 'auto' }}>
-          <Typography variant="h6">Turnos</Typography>
-
-          {/* Tabla combinada */}
-          <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
-              <TableHead>
+    <div>
+      {/* Tabla combinada */}
+      <TableContainer component={Paper}>
+        <Table aria-label="collapsible table">
+          <TableHead>
+            <TableRow>
+              <TableCell />
+              <TableCell>ID</TableCell>
+              <TableCell>Descripción</TableCell>
+              <TableCell>Precio</TableCell>
+              <TableCell>Tamaño</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {paginatedRows.map((soccerField) => (
+              <React.Fragment key={soccerField.id}>
                 <TableRow>
-                  <TableCell>ID</TableCell>
-                  <TableCell align='center'>Fecha y Hora</TableCell>
-                  <TableCell align='center'>Reserva</TableCell>
-                  <TableCell>Usuario Id</TableCell>
-                  <TableCell align='center'>Accion</TableCell>
+                  <TableCell>
+                    <IconButton
+                      aria-label="expand row"
+                      size="small"
+                      onClick={() => handleExpandClick(soccerField.id)}
+                    >
+                      <KeyboardArrowDownIcon />
+                    </IconButton>
+                  </TableCell>
+                  <TableCell>{soccerField.id}</TableCell>
+                  <TableCell>{soccerField.description}</TableCell>
+                  <TableCell>{soccerField.price}</TableCell>
+                  <TableCell>{soccerField.size}</TableCell>
                 </TableRow>
-              </TableHead>
-              <TableBody>
-                {selectedShifts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((shift) => (
-                  <TableRow key={shift.id}>
-                    <TableCell align='center'>{shift.id}</TableCell>
-                    <TableCell>{shift.date_time}</TableCell>
-                    <TableCell align='center'>{shift.reserved ? 'Efectuada' : 'Sin reserva'}</TableCell>
-                    <TableCell align='center'>{shift.user_id}</TableCell>
-                    <TableCell align='center'>
-                    <Button onClick={() => setIsModalOpen(true)}>Eliminar</Button>
+                {/* Expandir la fila para mostrar historial */}
+                <TableRow>
+                  <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={5}>
+                    <Collapse in={expandedRows.includes(soccerField.id)} timeout="auto" unmountOnExit>
+                      <Box sx={{ margin: 1 }}>
+                        <Typography
+                          variant="h6"
+                          gutterBottom
+                          component="div"
+                          fontFamily={`${amiko}`}
+                        >
+                          Historial reservas
+                        </Typography>
+                        {/* Mostrar historial desde la tabla A */}
+                        <Table>
+                          <TableHead>
+                            <TableRow>
+                              <TableCell>Fecha y Hora</TableCell>
+                              <TableCell>Reserva</TableCell>
+                            </TableRow>
+                          </TableHead>
+                          <TableBody>
+                            {soccerField.shifts.map((shift) => (
+                              <TableRow key={shift.id}>
+                                <TableCell>{shift.date_time}</TableCell>
+                                <TableCell>
+                                  {shift.reserved ? 'Efectuada' : 'Sin reserva'}
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                          </TableBody>
+                        </Table>
+                      </Box>
+                    </Collapse>
+                  </TableCell>
+                </TableRow>
+              </React.Fragment>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
 
-                    {/* <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
-                      <Paper>hola</Paper>
-                    </Modal> */}
-
-                    {/* ACAAAA ME QUEDEEE ERIIIIII */}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-
-          <TablePagination
-            rowsPerPageOptions={[5, 9]}
-            component="div"
-            count={selectedShifts.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={(event, newPage) => setPage(newPage)}
-            onRowsPerPageChange={(event) => {
-              setRowsPerPage(parseInt(event.target.value, 10));
-              setPage(0);
-            }}
-          />
-        </Paper>
-      </Modal>
+      {/* Paginación para la tabla Historial Reservas*/}
+      <Pagination
+        count={Math.ceil(
+          (data?.reduce((acc, soccerField) => acc + soccerField.shifts.length, 0) || 0) /
+            rowsPerPage
+        )}
+        page={page}
+        onChange={handlePageChange}
+      />
     </div>
   );
-};
-
-export default ReservationsTable;
+}

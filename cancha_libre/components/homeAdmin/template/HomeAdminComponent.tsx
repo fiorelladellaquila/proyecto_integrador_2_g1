@@ -14,36 +14,38 @@ import { theme } from "@/styles/material-theme";
 const HomeAdminComponent: FC = () => {
   return (
     <ThemeProvider theme={theme}>
-      <LayoutGeneral title={"Home"}>
-        <Box
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            width: "100%",
-            minHeight: "100vh",
-          }}
-        >
-          <div style={{ height: "5rem", position: "relative", width: "100%" }}>
-            <Image
-              src={`${URL_IMAGE_AWS}/imageHome.png`}
-              alt={`Imagen Home`}
-              width={1385}
-              height={80}
-            />
-          </div>
-          <Box
-            style={{
-              flex: 1,
-              display: "flex",
-              backgroundColor: "#2E2F33",
-            }}
-          >
-            <CategoriesFieldsSectionContainer />
-          </Box>
-          <GeneralFooter />
-        </Box>
-      </LayoutGeneral>
-    </ThemeProvider>
+<LayoutGeneral title={"Home"} >
+  <Box
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      width: "100%",
+      minHeight: "100vh",
+    }}
+  >
+    <div style={{ height: "5rem", position: "relative", width: "100%" }}>
+      <Image
+        src={`${URL_IMAGE_AWS}/imageHome.png`}
+        alt={`Imagen Home`}
+        layout="fill"
+        objectFit="cover"
+      />
+    </div>
+    <Box
+      style={{
+        flex: 1,
+        display: "flex",
+        backgroundColor: "#2E2F33",
+        justifyContent: "center",
+      }}
+    >
+     
+      <CategoriesFieldsSectionContainer />
+    </Box>
+    <GeneralFooter />
+  </Box>
+</LayoutGeneral>
+  </ThemeProvider>
   );
 };
 

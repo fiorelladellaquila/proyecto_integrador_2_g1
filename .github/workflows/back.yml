@@ -51,7 +51,7 @@ jobs:
         HOST: ${{ secrets.DEPLOY_SERVER_IP_USER }}
 
         
-    - name: Build & Deploy Gateway
+    - name: Build Gateway
       run: |
         echo "Building app..."
         cd Gateway

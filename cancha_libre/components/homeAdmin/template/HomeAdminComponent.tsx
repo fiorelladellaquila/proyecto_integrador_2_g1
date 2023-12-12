@@ -1,12 +1,9 @@
 import * as React from "react";
 import { FC } from "react";
 import LayoutGeneral from "../../layouts/layout-general";
-import { Box, ThemeProvider, Typography } from "@mui/material";
-
+import { Box, ThemeProvider } from "@mui/material";
 import Image from "next/image";
 import GeneralFooter from "@/components/layouts/footer/general-footer.component";
-import OurFieldsMappingContainer from "@/components/landing/OurFieldsMappingContainer";
-// import InformationHomeSectionContainer from "../InformationHomeSectionContainer";
 import CategoriesFieldsSectionContainer from "../CategoriesFieldsSectionContainer";
 import { amiko } from "../../fonts";
 import { URL_IMAGE_AWS } from "@/utils/constant/imagesAws";

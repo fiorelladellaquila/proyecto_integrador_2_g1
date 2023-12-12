@@ -7,78 +7,129 @@ import ReservationsTable from "./tableContainerFields";
 
 const CategoriesFieldsSectionContainer: FC = () => {
   return (
-    <div style={{ flexDirection: "column", alignItems: "center", justifyContent: "center", marginTop:"5rem"}}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignContent: "center",
+        width: "100%",
+        margin: "1rem",
+      }}
+    >
       <Box
-          style={{
-            width: "90vw",
-            background:
-              "linear-gradient(180deg, rgba(10,113,27,1) 52%, rgba(0,204,0,1) 100%)",
-            padding: "2rem 0",
-            borderRadius: "15px",
-            marginBottom: "5rem",
-            
-          }}
+        style={{
+          width: "100%",
+          background:
+            "linear-gradient(180deg, rgba(10,113,27,1) 52%, rgba(0,204,0,1) 100%)",
+          padding: "1rem 0",
+          borderRadius: "15px",
+          marginBottom: "1rem",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
         <Typography
           fontWeight={"600"}
-          variant="h4"
+          variant="h5"
           color="#FFFFFF"
           padding={"1rem"}
+          id="users"
         >
           Usuarios
         </Typography>
-        <CombinedTable />
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+          }}
+        >
+          <CombinedTable />
+        </Box>
         <br />
       </Box>
       <Box
-      style={{
-        width: "90vw", // Ajusta la anchura según tus necesidades
-        background: "linear-gradient(180deg, rgba(10,113,27,1) 52%, rgba(0,204,0,1) 100%)",
-        padding: "2rem 0",
-        borderRadius: "15px",
-        marginBottom: "5rem", // Ajusta el margen inferior según tus necesidades
-      }}
-    >
+        style={{
+          width: "100%",
+          background:
+            "linear-gradient(180deg, rgba(10,113,27,1) 52%, rgba(0,204,0,1) 100%)",
+          padding: "3rem 0",
+          borderRadius: "15px",
+          marginBottom: "1rem",
+          flexDirection: "column",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Typography
           fontWeight={"600"}
-          variant="h4"
+          variant="h5"
           color="#FFFFFF"
           padding={"1rem"}
+          id="shifts"
         >
-          Canchas Reservas
+          Reservas
         </Typography>
-        <ReservationsTable />
-      </Box>
-     
         <Box
-          style={{
-            width: "90vw",
-            background:
-              "linear-gradient(180deg, rgba(10,113,27,1) 52%, rgba(0,204,0,1) 100%)",
-            padding: "2rem 0",
-            borderRadius: "15px",
-            marginBottom: "5rem",
-            
-           
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
           }}
         >
-          <Typography
-            fontWeight={"600"}
-            variant="h4"
-            color="#FFFFFF"
-            padding={"1rem"}
-          >
-            Grafico
-          </Typography>
-          <iframe 
-            width="100%" 
-            height="600" 
-            src="https://lookerstudio.google.com/embed/reporting/415b64bc-5a01-4b57-a106-5ad42bd95ada/page/mziiD" 
-            frameBorder="0" 
-            style={{ border: 0, maxWidth: "100%"}} 
-            allowFullScreen 
+          <CombinedTableFields />
+        </Box>
+      </Box>
+      <Box
+        style={{
+          width: "100%",
+          background:
+            "linear-gradient(180deg, rgba(10,113,27,1) 52%, rgba(0,204,0,1) 100%)",
+          padding: "3rem 0",
+          borderRadius: "15px",
+          marginBottom: "1rem",
+          flexDirection: "column",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Typography
+          fontWeight={"600"}
+          variant="h5"
+          color="#FFFFFF"
+          padding={"1rem"}
+          id="report"
+        >
+          Reporte
+        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+          }}
+        >
+          <iframe
+            width="90%"
+            height="450"
+            src="https://lookerstudio.google.com/embed/reporting/415b64bc-5a01-4b57-a106-5ad42bd95ada/page/mziiD"
+            frameBorder="0"
+            style={{ border: 0 }}
+            allowFullScreen
           ></iframe>
         </Box>
+      </Box>
     </div>
   );
 };

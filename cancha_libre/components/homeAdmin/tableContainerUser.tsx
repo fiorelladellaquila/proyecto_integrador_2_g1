@@ -111,7 +111,10 @@ export default function CombinedTable() {
   }
 
   // Manejar el cambio de página
-  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
     setPage(value);
   };
 

@@ -12,6 +12,7 @@ import {
   ContainerModalImgInfo,
   ModalBackground, ModalButtonCancel, ModalButtonSubmit, ModalContainer, ModalSize, ModalTitleParagraph, ModalTitleParagraphAnimation, StyleBody,
 } from "./notificationModal.style";
+import { useRouter } from 'next/router';
 
 const NotificationModal = ({
   isOpen,
@@ -26,6 +27,7 @@ const NotificationModal = ({
   stateAnimation,
 }: any) => {
   const [element] = useState(document.createElement('div'));
+  const router = useRouter();
 
   console.log('isOpen', isOpen)
 
@@ -129,7 +131,13 @@ const NotificationModal = ({
                         </ModalButtonCancel>
                       )}
                       <ModalButtonSubmit
-                        onClick={onClick ? () => onClick() : () => setClose(!isOpen)}
+                        onClick={() => {
+                          if (labelOnClick === 'Iniciar Sesión') {
+                            router.push('/auth/login');
+                          } else {
+                            onClick ? onClick() : setClose(!isOpen);
+                          }
+                        }}
                         style={{ backgroundColor: stylesModal.colorButton }}
                       >
                         {labelOnClick || 'aceptar'}

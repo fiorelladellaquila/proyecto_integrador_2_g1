@@ -6,7 +6,7 @@ interface RecoverPassword {
 
 export const recoverPassword = async (email: string): Promise<RecoverPassword> => {
   try {
-    const response = await fetch(`${BASE_URL}canchas/auth`, {
+    const response = await fetch(`${BASE_URL}canchas/auth/mail`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

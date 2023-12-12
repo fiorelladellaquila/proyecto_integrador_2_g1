@@ -6,6 +6,8 @@ spring:
     name: gateway
   cloud:
     gateway:
+      globalcors:
+        add-to-simple-url-handler-mapping: true
       discovery:
         locator:
           enabled: true
@@ -14,6 +16,16 @@ spring:
           uri: lb://cancha-libre
           predicates:
             - Path=/canchas/**
+          metadata:
+            cors:
+              allowedOrigins: '*'
+              allowedMethods:
+                - GET
+                - POST
+                - PUT
+                - DELETE
+              allowedHeaders: '*'
+              maxAge: 30
 
 info:
   app:

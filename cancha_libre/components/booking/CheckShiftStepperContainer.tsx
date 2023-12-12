@@ -1,9 +1,9 @@
-import React, { FC, useContext, useEffect, useRef } from "react";
+import React, { FC, useContext, useEffect, useRef, useState } from "react";
 import { Typography, Button } from "@mui/material";
 import { SteppersContext } from "./context/SteppersContext";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { GoogleMap, Marker } from "@react-google-maps/api";
 
 interface Props {
   handleBack: () => void;
@@ -15,6 +15,9 @@ const CheckShiftStepperContainer: FC<Props> = ({ handleBack, handleNext }) => {
   const selectedAppointment = useSelector(
     (state: RootState) => state.booking.selectedAppointment
   );
+
+  const [mapLoaded, setMapLoaded] = useState(false);
+  const mapRef = useRef<any>(null);
 
   const mapContainerStyle = {
     width: "23rem",
@@ -32,26 +35,25 @@ const CheckShiftStepperContainer: FC<Props> = ({ handleBack, handleNext }) => {
     zoomControl: true,
   };
 
-  const mapRef = useRef<any>(null);
-
-  useEffect(() => {
-    if (mapRef.current) {
-      mapRef.current.panTo(center);
-    }
-  }, [center]);
-
-  if (!handlerCustomer) {
-    throw new Error("Componente debe estar dentro de CheckoutProvider");
-  }
-
   const handleBackButton = () => {
     handleBack();
   };
 
   const handleNextButton = () => {
-    console.log('selectedAppointment', selectedAppointment)
+    console.log("selectedAppointment", selectedAppointment);
     handleNext();
   };
+
+  useEffect(() => {
+    if (mapRef.current && !mapLoaded) {
+      mapRef.current.panTo(center);
+      setMapLoaded(true);
+    }
+  }, [center, mapLoaded]);
+
+  if (!handlerCustomer) {
+    throw new Error("Componente debe estar dentro de CheckoutProvider");
+  }
 
   return (
     <>
@@ -109,19 +111,23 @@ const CheckShiftStepperContainer: FC<Props> = ({ handleBack, handleNext }) => {
                 sx={{ color: "555659", padding: "0.5rem 2rem " }}
               >
                 <strong>Cancha Seleccionada:</strong>{" "}
-                {selectedAppointment ? selectedAppointment.court.description : ''}
+                {selectedAppointment
+                  ? selectedAppointment.court.description
+                  : ""}
               </Typography>
               <Typography
                 variant="body1"
                 sx={{ color: "555659", padding: "0.5rem 2rem " }}
               >
-                <strong>Fecha:</strong> {selectedAppointment ? selectedAppointment.date : ''}
+                <strong>Fecha:</strong>{" "}
+                {selectedAppointment ? selectedAppointment.date : ""}
               </Typography>
               <Typography
                 variant="body1"
                 sx={{ color: "555659", padding: "0.5rem 2rem " }}
               >
-                <strong>Hora:</strong> {selectedAppointment ? selectedAppointment.time : ''}
+                <strong>Hora:</strong>{" "}
+                {selectedAppointment ? selectedAppointment.time : ""}
               </Typography>
             </div>
             <div style={{ backgroundColor: "#B4FA8A", borderRadius: "20px" }}>
@@ -162,21 +168,19 @@ const CheckShiftStepperContainer: FC<Props> = ({ handleBack, handleNext }) => {
               variant="h6"
               sx={{ textAlign: "center", color: "white", padding: "0.5rem" }}
             >
-              ¿Donde estamos?
+              ¿Dónde estamos?
             </Typography>
-            <LoadScript googleMapsApiKey="AIzaSyCcnuzZZ7NFOoTSEtIrduLmTfRQb5dElzE">
-              <GoogleMap
-                mapContainerStyle={mapContainerStyle}
-                center={center}
-                zoom={14}
-                options={mapOptions}
-                onLoad={(map: any) => {
-                  mapRef.current = map;
-                }}
-              >
-                <Marker position={center} title="Cancha Libre" />
-              </GoogleMap>
-            </LoadScript>
+            <GoogleMap
+              mapContainerStyle={mapContainerStyle}
+              center={center}
+              zoom={14}
+              options={mapOptions}
+              onLoad={(map: any) => {
+                mapRef.current = map;
+              }}
+            >
+              <Marker position={center} title="Cancha Libre" />
+            </GoogleMap>
           </div>
         </div>
       </div>

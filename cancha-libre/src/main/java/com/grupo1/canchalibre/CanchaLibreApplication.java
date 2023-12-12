@@ -17,7 +17,7 @@ public class CanchaLibreApplication {
 		SpringApplication.run(CanchaLibreApplication.class, args);
 	}
 
-	@Configuration
+	/*@Configuration
 	@EnableWebMvc
 	public class CorsConfig implements WebMvcConfigurer {
 
@@ -31,5 +31,5 @@ public class CanchaLibreApplication {
 					.maxAge(3600);
 
 		}
-	}
+	}*/
 }

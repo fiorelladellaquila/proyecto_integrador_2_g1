@@ -3,10 +3,11 @@ import { FC } from "react";
 import { Box, Typography } from "@mui/material";
 import CombinedTable from "./tableContainerUser";
 import CombinedTableFields from "./tableContainerFields";
+import ReservationsTable from "./tableContainerFields";
 
 const CategoriesFieldsSectionContainer: FC = () => {
   return (
-    <div style={{ flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
+    <div style={{ flexDirection: "column", alignItems: "center", justifyContent: "center", marginTop:"5rem"}}>
       <Box
           style={{
             width: "90vw",
@@ -14,7 +15,7 @@ const CategoriesFieldsSectionContainer: FC = () => {
               "linear-gradient(180deg, rgba(10,113,27,1) 52%, rgba(0,204,0,1) 100%)",
             padding: "2rem 0",
             borderRadius: "15px",
-            marginBottom: "1rem",
+            marginBottom: "5rem",
             
           }}
       >
@@ -36,7 +37,7 @@ const CategoriesFieldsSectionContainer: FC = () => {
               "linear-gradient(180deg, rgba(10,113,27,1) 52%, rgba(0,204,0,1) 100%)",
             padding: "2rem 0",
             borderRadius: "15px",
-            marginBottom: "1rem",
+            marginBottom: "5rem",
             
           }}
       >
@@ -48,7 +49,7 @@ const CategoriesFieldsSectionContainer: FC = () => {
         >
           Canchas Reservas
         </Typography>
-        <CombinedTableFields />
+        <ReservationsTable />
       </Box>
      
         <Box
@@ -58,7 +59,7 @@ const CategoriesFieldsSectionContainer: FC = () => {
               "linear-gradient(180deg, rgba(10,113,27,1) 52%, rgba(0,204,0,1) 100%)",
             padding: "2rem 0",
             borderRadius: "15px",
-            marginBottom: "1rem",
+            marginBottom: "5rem",
            
           }}
         >

@@ -1,20 +1,42 @@
 import * as React from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
-import { getShiftsByField } from '../../services/shifts';
-import { log } from 'console';
+// import { getSoccerFields } from '@/services/soccerFields';
+// import { getSoccerFieldsIdUser } from '@/services/soccerFieldsIdUser';
+
+
+// const fetchDataSoccerFields = async () => {
+//   let userData = {
+//     token: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwYXRvYWxsb2NvMjMiLCJpYXQiOjE3MDIzMzM1MDMsImV4cCI6MTcwMjMzNDk0M30.z5kzMSaYjtMxr6K8OdoVkOj_PRdA3YSuqlP9jxS_aOo'
+//   };
+ 
+//     const response = await getSoccerFieldsIdUser(userData.token);
+
+//     console.log(response);
+//     console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+
+    
+  
+// }
 
 const columns: GridColDef[] = [
-  { field: 'id', headerName: 'ID', width: 230 },
-  { field: 'field', headerName: 'Cancha', width: 230 },
-  { field: 'datetime', headerName: 'Fecha y Hora', width: 230 },
+  { field: 'id', headerName: 'ID', },
+  { field: 'field', headerName: 'Cancha', },
+  { field: 'datetime', headerName: 'Fecha y Hora', },
 
-  { field: 'user', headerName: 'Usuario', width: 230 },
-  { field: 'delete', headerName: 'Cancelar Reserva', width: 230, renderCell: (params) => (
-    <Button variant="contained" color="warning">
-      Cancelar
-    </Button>
-  ) }
+  { field: 'user', headerName: 'Usuario', },
+  { 
+    field: 'delete', 
+    headerName: 'Cancelar Reserva', 
+     
+    align: 'right', // Alinea el contenido de la celda a la izquierda
+    headerAlign: 'right', // Alinea el encabezado de la columna a la izquierda
+    renderCell: (params) => (
+      <Button variant="contained" color="warning" onClick={() => console.log("hola"+ params.id)}>
+        Cancelar
+      </Button>
+    )
+  }
 ];
 
 const rows = [
@@ -37,13 +59,18 @@ const rows = [
 
 export default function ReservationsTable() {
   return (
+<>
+    {/* <div>
+      <button onClick={fetchDataSoccerFields}></button>
+    </div> */}
+
     <div style={{ height: 400, width: '100%' }}>
-<DataGrid
-  rows={rows}
-  columns={columns}
-  
-  style={{ background: 'white' ,fontFamily:'amiko' }}
-/>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        style={{ background: 'white' ,fontFamily:'amiko' }}
+      />
     </div>
+  </>
   );
 }

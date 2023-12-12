@@ -50,6 +50,13 @@ jobs:
       env:
         HOST: ${{ secrets.DEPLOY_SERVER_IP_USER }}
 
+    - name: Build & Deploy discovery
+      run: |
+        echo "Building app..."
+        cd discovery
+        mvn install --file pom.xml
+        echo "Finished building the app."
+        
         
     - name: Build Gateway
       run: |
@@ -57,8 +64,24 @@ jobs:
         cd Gateway
         mvn install --file pom.xml
         echo "Finished building the app."
-      
-          
+
+    - name: Build cancha-libre
+      run: |
+        echo "Building app..."
+        cd cancha-libre
+        mvn install --file pom.xml
+        echo "Finished building the app."
+
+    - name: Deploy discovery
+      run: |
+        echo "Deploying started..."
+        ssh ubuntu@${HOST} sudo systemctl stop user.service
+        scp /home/runner/work/proyecto_integrador_2_g1/discovery/target/discovery.jar ubuntu@${HOST}:~/user
+        ssh ubuntu@${HOST} sudo systemctl start user.service
+        echo "Finished deploying the app."
+      env:
+          HOST: ${{ secrets.DEPLOY_SERVER_IP_USER }}       
+        
     - name: Deploy Gateway
       run: |
         echo "Deploying started..."
@@ -68,5 +91,15 @@ jobs:
         echo "Finished deploying the app."
       env:
           HOST: ${{ secrets.DEPLOY_SERVER_IP_USER }}
+
+    - name: Deploy cancha-libre
+      run: |
+        echo "Deploying started..."
+        ssh ubuntu@${HOST} sudo systemctl stop user.service
+        scp /home/runner/work/proyecto_integrador_2_g1/cancha-libre/target/cancha-libre.jar ubuntu@${HOST}:~/user
+        ssh ubuntu@${HOST} sudo systemctl start user.service
+        echo "Finished deploying the app."
+      env:
+          HOST: ${{ secrets.DEPLOY_SERVER_IP_USER }}    
           
 

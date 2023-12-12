@@ -35,10 +35,8 @@ const NewsSectionContainer: FC = () => {
               <Image
                 src={`${URL_IMAGE_AWS}/novedad_${index + 1}.png`}
                 alt={`Novedad ${index + 1}`}
-                layout="responsive"
                 width={500}
                 height={700}
-                objectFit="cover"
                 style={{ width: "100%", height: "100%" }}
               />
             </Grid>

@@ -100,6 +100,7 @@ jobs:
       run: |
         echo "Deploying started..."
         ssh ubuntu@${HOST} sudo systemctl stop systemd-sysusers.service
+        #sudo systemctl stop systemd-sysusers.service
         #ssh ubuntu@${HOST} sudo systemctl stop user.service
         scp /home/runner/work/proyecto_integrador_2_g1/cancha-libre/target/cancha-libre.jar ubuntu@${HOST}:~/user
         ssh ubuntu@${HOST} systemctl start systemd-sysusers.service

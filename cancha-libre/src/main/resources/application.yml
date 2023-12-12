@@ -47,10 +47,10 @@ spring:
 #      defaultZone: http://localhost:8761/eureka/
 eureka:
   instance:
-    hostname:  ec2-54-174-87-60.compute-1.amazonaws.com
+    hostname: ec2-54-174-87-60.compute-1.amazonaws.com
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
   client:
     registerWithEureka: true
     fetchRegistry: false
     serviceUrl:
-      defaultZone: http:// ec2-54-174-87-60.compute-1.amazonaws.com:8761/eureka/
+      defaultZone: http://ec2-54-174-87-60.compute-1.amazonaws.com:8761/eureka/

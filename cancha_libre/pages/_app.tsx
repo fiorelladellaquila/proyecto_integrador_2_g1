@@ -1,7 +1,6 @@
 /* eslint-disable react/no-unknown-property */
 import type { AppProps } from 'next/app'
 import {CssBaseline, ThemeProvider} from "@mui/material";
-// import LayoutGeneral from "dh-marvel/components/layouts/layout-general";
 import { theme } from '@/styles/material-theme';
 import { Provider } from 'react-redux';
 import store from "@/redux/store";

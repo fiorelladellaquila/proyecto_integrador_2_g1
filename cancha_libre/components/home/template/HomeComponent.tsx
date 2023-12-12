@@ -27,8 +27,8 @@ const HomeComponent: FC = () => {
       <Image
         src={`${URL_IMAGE_AWS}/imageHome.png`}
         alt={`Imagen Home`}
-        layout="fill"
-        objectFit="cover"
+        width={1385}
+        height={80}
       />
     </div>
     <Box

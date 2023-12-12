@@ -13,11 +13,7 @@ import {
   StyledButton,
   Text,
   StyledValidationMessages,
-  StyledButtonGoogle,
 } from "./singUpFormContainer.style";
-import Checkbox from "@mui/material/Checkbox";
-import { useDispatch } from "react-redux";
-import { useRouter } from "next/router";
 import NextLink from "next/link";
 import { amiko } from "../fonts";
 import { createUser } from "@/services/createUser";

@@ -51,7 +51,7 @@ const OurFieldsMappingContainer: FC<OurFieldsMappingContainerProps> = ({
         container
         justifyContent="center"
         spacing={1}
-        style={{ padding: "0 5rem" }}
+        style={{ padding: "0 2rem" }}
         id="fields"
       >
         {[

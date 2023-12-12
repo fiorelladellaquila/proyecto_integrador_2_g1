@@ -3,6 +3,7 @@ import { Box, Paper } from "@mui/material";
 import CheckShiftStepperContainer from './CheckShiftStepperContainer';
 import Calendar from './ShiftStepperContainer';
 import CheckoutStepperContainer from './CheckoutStepperContainer';
+import { useRouter } from 'next/router';
 
 
 interface Props {
@@ -13,11 +14,12 @@ interface Props {
 }
 
 const SteppersSectionContainer: FC<Props> = ({ result, activeStep, handleBack, handleNext }) => {
+    const router = useRouter();
     
     const renderStepContent = (step: number) => {
         switch (step) {
             case 0:
-                return <Calendar handleBack={handleBack} handleNext={handleNext}/>;
+                return <Calendar handleBack={handleCustomBack} handleNext={handleNext}/>;
             case 1:
                 return <CheckShiftStepperContainer handleBack={handleBack} handleNext={handleNext} />;
             case 2:
@@ -25,6 +27,14 @@ const SteppersSectionContainer: FC<Props> = ({ result, activeStep, handleBack, h
                 
             default:
                 throw new Error("Paso no válido");
+        }
+    };
+
+    const handleCustomBack = () => {
+        if (activeStep === 0) {
+            router.push('/home');
+        } else {
+            handleBack();
         }
     };
 

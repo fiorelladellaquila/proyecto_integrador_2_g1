@@ -61,4 +61,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public List<User> findUsersWithShifts() {
+        return this.userRepository.findUsersWithShifts();
+    }
 }

@@ -74,8 +74,8 @@ public class ShiftController {
         return ResponseEntity.ok(shiftService.listAvailableBySoccerFields(id));
     }
 
-    @GetMapping("/shift/userId/{id}")
-    public ResponseEntity<UserWhitShiftDTO> findByUserId(@PathVariable Long id) {
-        return ResponseEntity.ok(shiftService.findByUserId(id));
+    @GetMapping("/shift/users")
+    public ResponseEntity<List<UserWhitShiftDTO>> findUsersWithShift() {
+        return ResponseEntity.ok(shiftService.findUsersWithShift());
     }
 }

@@ -94,7 +94,7 @@ const InformationHomeSectionContainer: FC<any> = ({loading, setLoading}: any) =>
             variant="h5"
             sx={{ padding: "2rem 0 1rem 0", color: "white" }}
           >
-            Tus próximas reservas son:
+            Historial de reservas
           </Typography>
           <Typography sx={{ color: "white" }}>
             Recordá que las reservas se efectivizan con seña del 50%. Tenés

@@ -1,20 +1,3 @@
-// import axios from 'axios';
-// import { BASE_URL } from '../utils/constant/urlBaseServices';
-
-// const apiService = axios.create({
-//   baseURL: BASE_URL,
-// });
-
-// export const getSoccerFields = async (): Promise<any> => {
-
-//   try {
-//     const response = await apiService.get('canchas/soccer-fields');
-//     console.log('response.data', response)
-//     return response.data;
-//   } catch (error) {
-//   }
-// };
-
 import { BASE_URL } from '../utils/constant/urlBaseServices';
 
 export const getSoccerFields = async (authToken:any): Promise<any> => {

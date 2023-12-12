@@ -37,6 +37,8 @@ public class User implements UserDetails {
     private Set<Shift> shifts;
     @Enumerated(EnumType.STRING)
     Rol rol;
+    private String verificationCode;
+    private boolean enabled;
 
 
     @Override

@@ -25,6 +25,17 @@ spring:
       ddl-auto: update
   application:
     name: cancha-libre
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: canchalibreapp@gmail.com
+    password: ohfhikwgnqdhzrxm
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+          auth: true
 eureka:
   instance:
     hostname: localhost

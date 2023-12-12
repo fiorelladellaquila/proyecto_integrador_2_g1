@@ -11,7 +11,8 @@ import {
   Collapse,
   IconButton,
   Typography,
-  Pagination
+  Pagination,
+  CircularProgress
 } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { amiko } from '../fonts';
@@ -82,7 +83,7 @@ function mapIdToGrassType(id: number): string {
 export default function CombinedTable() {
   const [data, setData] = useState<User[]>([]);
   const [page, setPage] = useState(1);
-  const rowsPerPage = 5;
+  const rowsPerPage = 10;
   const [expandedRows, setExpandedRows] = useState<number[]>([]);
   const [userData, setUserData] = React.useState(() => {
     if (typeof window !== "undefined") {
@@ -91,7 +92,7 @@ export default function CombinedTable() {
       return {};
     }
   });
-
+  const [loading, setLoading] = useState<boolean>(true);
   React.useEffect(() => {
     if (typeof window !== "undefined") {
       const handleStorageChange = () => {
@@ -109,11 +110,15 @@ export default function CombinedTable() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
         const response = await getSoccerFieldsUsers(userData.token);
         console.log('response', response)
         setData(response);
       } catch (error) {
         console.error('Error fetching data:', error);
+      }
+      finally {
+        setLoading(false);
       }
     };
 
@@ -147,17 +152,33 @@ export default function CombinedTable() {
 
   return (
    <>
-     <div>
+   {loading && (
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          height="100vh" // Ajusta según sea necesario
+        >
+          <CircularProgress />
+        </Box>
+      )}
+
+      {!loading && (
+        <>
+     <div style={{
+      width:"100%",
+      padding:"5rem",
+    }}>
         {/* Tabla combinada */}
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} style={{backgroundColor:"#4B4B4B"}}>
           <Table aria-label="collapsible table">
             <TableHead>
               <TableRow>
-                <TableCell />
-                <TableCell>ID</TableCell>
-                <TableCell>Nombre</TableCell>
-                <TableCell>Numero de contacto</TableCell>
-                <TableCell>Email</TableCell>
+                <TableCell style={{color:"#fff"}}/>
+                <TableCell style={{color:"#fff"}}>ID</TableCell>
+                <TableCell style={{color:"#fff"}}>Nombre</TableCell>
+                <TableCell style={{color:"#fff"}}>Numero de contacto</TableCell>
+                <TableCell style={{color:"#fff"}}>Email</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -173,12 +194,12 @@ export default function CombinedTable() {
                         <KeyboardArrowDownIcon />
                       </IconButton>
                     </TableCell>
-                    <TableCell> {data.id}</TableCell>
-                    <TableCell component="th" scope="row">
+                    <TableCell style={{color:"#fff"}}> {data.id}</TableCell>
+                    <TableCell component="th" scope="row" style={{color:"#fff"}}>
                       {data.name} {data.lastName}
                     </TableCell>
-                    <TableCell>{data.phone}</TableCell>
-                    <TableCell>{data.email}</TableCell>
+                    <TableCell style={{color:"#fff"}}>{data.phone}</TableCell>
+                    <TableCell style={{color:"#fff"}}>{data.email}</TableCell>
                   </TableRow>
                   {/* Expandir la fila para mostrar historial */}
                   <TableRow>
@@ -189,7 +210,7 @@ export default function CombinedTable() {
                             variant="h6"
                             gutterBottom
                             component="div"
-                            // fontFamily={${amiko}}
+                            style={{color:"#fff"}}
                           >
                             Historial reservas
                           </Typography>
@@ -197,17 +218,17 @@ export default function CombinedTable() {
                           <Table>
                             <TableHead>
                               <TableRow>
-                                <TableCell>Fecha y Hora</TableCell>
-                                <TableCell>Cancha</TableCell>
-                                <TableCell>Reserva</TableCell>
+                                <TableCell style={{color:"#fff"}}>Fecha y Hora</TableCell>
+                                <TableCell style={{color:"#fff"}}>Cancha</TableCell>
+                                <TableCell style={{color:"#fff"}}>Reserva</TableCell>
                               </TableRow>
                             </TableHead>
                             <TableBody>
                               {data.shifts.map((shift) => (
                                 <TableRow key={shift.id}>
-                                  <TableCell>{shift.date_time}</TableCell>
-                                  <TableCell>{mapIdToGrassType(shift.soccer_field_id)}</TableCell>
-                                  <TableCell>
+                                  <TableCell style={{color:"#fff"}}>{shift.date_time}</TableCell>
+                                  <TableCell style={{color:"#fff"}}>{mapIdToGrassType(shift.soccer_field_id)}</TableCell>
+                                  <TableCell style={{color:"#fff"}}>
                                     {shift.reserved ? 'Efectuada' : 'Sin reserva'}
                                   </TableCell>
                                 </TableRow>
@@ -233,8 +254,10 @@ export default function CombinedTable() {
           onChange={handlePageChange}
         />
       </div>
+      </>
+      )}
    </>
-    
+      
     
   );
 }

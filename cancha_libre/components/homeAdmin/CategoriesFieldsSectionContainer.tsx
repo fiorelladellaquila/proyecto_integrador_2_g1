@@ -1,11 +1,13 @@
 import * as React from "react";
-import { FC } from "react";
+import { FC, useState} from "react";
 import { Box, Typography } from "@mui/material";
 import CombinedTable from "./tableContainerUser";
 import CombinedTableFields from "./tableContainerFields";
 import ReservationsTable from "./tableContainerFields";
 
 const CategoriesFieldsSectionContainer: FC = () => {
+
+  
   return (
     <div
       style={{
@@ -85,7 +87,7 @@ const CategoriesFieldsSectionContainer: FC = () => {
             width: "100%",
           }}
         >
-          <CombinedTableFields />
+          <CombinedTableFields  />
         </Box>
       </Box>
       <Box

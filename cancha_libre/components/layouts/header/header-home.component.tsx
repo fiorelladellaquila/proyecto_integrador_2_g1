@@ -41,9 +41,9 @@ const HeaderHome: FC = () => {
         <Toolbar disableGutters sx={{ justifyContent: 'center', alignItems: 'center', height: '100%' }}>
         {isAdmin ? (
           <>
-             <MUILink href="/admin#users" underline="none" color={linkColor} sx={{ mx: 2, textTransform: 'uppercase' }}>
+             {/* <MUILink href="#" underline="none" color={linkColor} sx={{ mx: 2, textTransform: 'uppercase' }}>
               <Typography variant="body2" sx={{ fontFamily:"Montserrat, sans-serif" }}>Perfil <span style={{fontSize: '10px', textTransform: 'capitalize'}}>(Proximamente)</span></Typography>
-            </MUILink>
+            </MUILink> */}
             <MUILink href="/admin#users" underline="none" color={linkColor} sx={{ mx: 2, textTransform: 'uppercase' }}>
               <Typography variant="body2" sx={{ fontFamily:"Montserrat, sans-serif" }}>Usuarios</Typography>
             </MUILink>

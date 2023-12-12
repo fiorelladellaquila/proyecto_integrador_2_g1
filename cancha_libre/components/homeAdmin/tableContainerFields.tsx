@@ -39,7 +39,7 @@ let data: SoccerField[] = [];
 export default function CombinedTable() {
   const [data, setData] = useState<SoccerField[]>([]);
   const [page, setPage] = useState(1);
-  const rowsPerPage = 10;
+  const rowsPerPage = 12;
   const [expandedRows, setExpandedRows] = useState<number[]>([]);
 
   const [userData, setUserData] = React.useState(() => {
@@ -118,17 +118,20 @@ export default function CombinedTable() {
   };
 
   return (
-    <div>
+    <div style={{
+      width:"100%",
+      padding:"5rem"
+    }}>
       {/* Tabla combinada */}
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper}style={{backgroundColor:"#4B4B4B"}}>
         <Table aria-label="collapsible table">
           <TableHead>
             <TableRow>
               <TableCell />
-              <TableCell>ID</TableCell>
-              <TableCell>Descripción</TableCell>
-              <TableCell>Precio</TableCell>
-              <TableCell>Tamaño</TableCell>
+              <TableCell style={{color:"#fff"}}>ID</TableCell>
+              <TableCell style={{color:"#fff"}}>Descripción</TableCell>
+              <TableCell style={{color:"#fff"}}>Precio</TableCell>
+              <TableCell style={{color:"#fff"}}>Tamaño</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -144,10 +147,10 @@ export default function CombinedTable() {
                       <KeyboardArrowDownIcon />
                     </IconButton>
                   </TableCell>
-                  <TableCell>{soccerField.id}</TableCell>
-                  <TableCell>{soccerField.description}</TableCell>
-                  <TableCell>{soccerField.price}</TableCell>
-                  <TableCell>{soccerField.size}</TableCell>
+                  <TableCell style={{color:"#fff"}}>{soccerField.id}</TableCell>
+                  <TableCell style={{color:"#fff"}}>{soccerField.description}</TableCell>
+                  <TableCell style={{color:"#fff"}}>{soccerField.price}</TableCell>
+                  <TableCell style={{color:"#fff"}}>{soccerField.size}</TableCell>
                 </TableRow>
                 {/* Expandir la fila para mostrar historial */}
                 <TableRow>
@@ -166,6 +169,7 @@ export default function CombinedTable() {
                           gutterBottom
                           component="div"
                           fontFamily={`${amiko}`}
+                          style={{color:"#fff"}}
                         >
                           Historial reservas
                         </Typography>
@@ -173,15 +177,15 @@ export default function CombinedTable() {
                         <Table>
                           <TableHead>
                             <TableRow>
-                              <TableCell>Fecha y Hora</TableCell>
-                              <TableCell>Reserva</TableCell>
+                              <TableCell style={{color:"#fff"}}>Fecha y Hora</TableCell>
+                              <TableCell style={{color:"#fff"}}>Reserva</TableCell>
                             </TableRow>
                           </TableHead>
                           <TableBody>
                             {soccerField.shifts.map((shift) => (
                               <TableRow key={shift.id}>
-                                <TableCell>{shift.date_time}</TableCell>
-                                <TableCell>
+                                <TableCell style={{color:"#fff"}}>{shift.date_time}</TableCell>
+                                <TableCell style={{color:"#fff"}}>
                                   {shift.reserved ? "Efectuada" : "Sin reserva"}
                                 </TableCell>
                               </TableRow>

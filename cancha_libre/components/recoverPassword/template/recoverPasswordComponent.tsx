@@ -4,23 +4,20 @@ import RecoverPasswordFormContainer from "../RecoverPasswordFormContainer";
 import { Container } from "./recoverPasswordComponent.style";
 import { Provider } from "react-redux";
 import store from "../../../redux/store";
-import { ThemeProvider } from "@mui/system";
-import { theme } from "@/styles/material-theme";
-import { Box } from "@mui/material";
 import { amiko } from "@/components/fonts";
+import GeneralFooter from "@/components/layouts/footer/general-footer.component";
 
-const Register = () => {
+const RecoveryPassword = () => {
   return (
-    // <ThemeProvider theme={theme}>
       <Provider store={store} >
         <LayoutGeneral title={"RecoverPassword"} className={`${amiko.className}`} >
-          <Container style={{ height: "100vh" }}>
+          <Container>
             <RecoverPasswordFormContainer />
           </Container>
         </LayoutGeneral>
-      // </Provider>
-    // </ThemeProvider>
+        <GeneralFooter/>
+      </Provider>
   );
 };
 
-export default Register;
+export default RecoveryPassword;

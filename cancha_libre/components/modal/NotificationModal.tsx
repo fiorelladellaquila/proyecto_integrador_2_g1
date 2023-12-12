@@ -12,6 +12,7 @@ import {
   ContainerModalImgInfo,
   ModalBackground, ModalButtonCancel, ModalButtonSubmit, ModalContainer, ModalSize, ModalTitleParagraph, ModalTitleParagraphAnimation, StyleBody,
 } from "./notificationModal.style";
+import { useRouter } from 'next/router';
 
 const NotificationModal = ({
   isOpen,
@@ -26,6 +27,9 @@ const NotificationModal = ({
   stateAnimation,
 }: any) => {
   const [element] = useState(document.createElement('div'));
+  const router = useRouter();
+
+  console.log('isOpen', isOpen)
 
   const stylesModal = useMemo(() => {
     if (level && level === LEVEL_MODAL.error) {
@@ -77,12 +81,14 @@ const NotificationModal = ({
   };
 
   useEffect(() => {
-    if (isOpen) {
+    // if (isOpen) {
       document.addEventListener('keydown', (e) => closeModal(e));
-    }
-    return () => {
-      document.removeEventListener('keydown', closeModal);
-    };
+      const handleKeyDown = (e: any) => closeModal(e);
+      document.addEventListener('keydown', handleKeyDown);
+    
+      return () => {
+        document.removeEventListener('keydown', handleKeyDown);
+      };
   }, [closeModal, isOpen, level]);
 
   useEffect(() => {
@@ -125,7 +131,13 @@ const NotificationModal = ({
                         </ModalButtonCancel>
                       )}
                       <ModalButtonSubmit
-                        onClick={onClick ? () => onClick() : () => setClose(!isOpen)}
+                        onClick={() => {
+                          if (labelOnClick === 'Iniciar Sesión') {
+                            router.push('/auth/login');
+                          } else {
+                            onClick ? onClick() : setClose(!isOpen);
+                          }
+                        }}
                         style={{ backgroundColor: stylesModal.colorButton }}
                       >
                         {labelOnClick || 'aceptar'}
@@ -158,13 +170,6 @@ const NotificationModal = ({
                     <ModalButtonSubmit
                       onClick={onClick ? () => onClick() : () => setClose(!isOpen)}
                       disabled={stateAnimation === STATE_ANIMATION.loading}
-                      // className={
-                      //   stateAnimation === STATE_ANIMATION.loading
-                      //     ? 'animation-button-disabled'
-                      //     : stateAnimation === STATE_ANIMATION.success
-                      //     ? 'animation-button-enabled '
-                      //     : 'animation-button-enabled-error '
-                      // }
                     >
                       {labelOnClick || 'Cancelar'}
                     </ModalButtonSubmit>

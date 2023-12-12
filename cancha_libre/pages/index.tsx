@@ -10,7 +10,7 @@ const Home: FC = () => {
     <ThemeProvider theme={theme}>
       <LayoutGeneral title={'Login'}>
         <Stack direction="column" width="100%" margin="0">
-          <LandingComponent />
+        <LandingComponent />  
         </Stack>
       </LayoutGeneral>
     </ThemeProvider>

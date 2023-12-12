@@ -30,18 +30,19 @@ export const postShift = async (authToken: string, body: PostShift): Promise<Pos
   }
 };
 
+interface getShiftByIdUser {
+  authToken: string;
+  id: number;
+}
 
-export const deleteShift = async (authToken: string, body: PostShift): Promise<PostShift> => {
+export const getShiftByIdUser = async (authToken: string, id: number): Promise<getShiftByIdUser> => {
   try {
-    const response = await fetch(`${BASE_URL}canchas/shift`, {
-      // NOSE SI ESTA EL ENDPOINT DE BORRADOOOOOO
-      
-      method: 'DELETE',
+    const response = await fetch(`${BASE_URL}canchas/shift/shift/userId/${id}`, {
+      method: 'GET',
       headers: {
         'Authorization': authToken ? `Bearer ${authToken}` : '',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(body),
     });
 
     if (!response.ok) {
@@ -54,4 +55,4 @@ export const deleteShift = async (authToken: string, body: PostShift): Promise<P
   } catch (error) {
     throw error;
   }
-}; 
+};

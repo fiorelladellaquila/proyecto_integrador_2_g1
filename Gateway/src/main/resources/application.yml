@@ -6,6 +6,8 @@ spring:
     name: gateway
   cloud:
     gateway:
+      globalcors:
+        add-to-simple-url-handler-mapping: true
       discovery:
         locator:
           enabled: true
@@ -14,17 +16,42 @@ spring:
           uri: lb://cancha-libre
           predicates:
             - Path=/canchas/**
+          metadata:
+            cors:
+              allowedOrigins: '*'
+              allowedMethods:
+                - GET
+                - POST
+                - PUT
+                - DELETE
+              allowedHeaders: '*'
+              maxAge: 30
 
 info:
   app:
     name: ${spring.application.name}
+
+#eureka:
+#  client:
+#    registerWithEureka: false
+#    fetchRegistry: true
+#    serviceURL:
+#      defaultZone: http://localhost:8761/eureka
+#  management:
+#    endpoint:
+#      gateway:
+#        enabled: true
+#    endpoints:
+#      web:
+#        exposure:
+#          include: gateway
 
 eureka:
   client:
     registerWithEureka: false
     fetchRegistry: true
     serviceURL:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://ec2-54-174-87-60.compute-1.amazonaws.com:8761/eureka
   management:
     endpoint:
       gateway:

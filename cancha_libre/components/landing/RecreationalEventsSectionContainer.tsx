@@ -49,8 +49,8 @@ const RecreationalEventsSectionContainer: FC = () => {
               <Image
                 src={`${URL_IMAGE_AWS}/cumpleInfantil.png`}
                 alt={"Imagen"}
-                layout="fill"
-                objectFit="cover"
+                width={600}
+                height={700}
               />
             </Box>
           </Grid>

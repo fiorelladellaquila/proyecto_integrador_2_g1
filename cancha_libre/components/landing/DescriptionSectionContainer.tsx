@@ -80,14 +80,14 @@ const DescriptionSectionContainer: FC = () => {
                   sx={{
                     position: "relative",
                     width: "100%",
-                    paddingTop: "55%", // Hace que el contenedor tenga una relación de aspecto 1:1
+                    // paddingTop: "55%",
                   }}
                 >
                   <Image
                     src={`${URL_IMAGE_AWS}/${index}.jpg`}
                     alt={`Imagen ${index}`}
-                    layout="fill"
-                    objectFit="cover"
+                    width={330}
+                    height={250 }
                   />
                 </Box>
               </Grid>

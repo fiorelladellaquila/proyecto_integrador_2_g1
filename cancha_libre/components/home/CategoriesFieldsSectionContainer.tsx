@@ -9,7 +9,7 @@ const CategoriesFieldsSectionContainer: FC = () => {
       <Box
         style={{
           display: "flex",
-          flex: "70%",
+          flex: "80%",
           background:
             "linear-gradient(180deg, rgba(10,113,27,1) 52%, rgba(0,204,0,1) 100%)",
           padding: "3rem 0",
@@ -33,25 +33,30 @@ const CategoriesFieldsSectionContainer: FC = () => {
           CONOCÉ NUESTRAS CANCHAS
         </Typography>
         <OurFieldsMappingContainer inLandingTemplate={false} />
-        <Link href="/shifts" sx={{  display: 'flex',
-                  justifyContent: "center",
-                  alignItems: "center"}}>
-                 <Button
-                variant="contained"
-                sx={{
-                  backgroundColor: "#EA4335",
-                  "&:hover": {
-                    backgroundColor: "rgba(234, 67, 53, 0.8)",
-                  },
-                  textTransform: "capitalize",
-                  width: "85%",
-                
-                  margin: '1rem'
-                }}    
-              >
-                Quiero reservar un turno
-              </Button>
-              </Link>
+        <Link
+          href="/shifts"
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "#EA4335",
+              "&:hover": {
+                backgroundColor: "rgba(234, 67, 53, 0.8)",
+              },
+              textTransform: "capitalize",
+              width: "85%",
+
+              margin: "1rem",
+            }}
+          >
+            Quiero reservar un turno
+          </Button>
+        </Link>
       </Box>
     </>
   );

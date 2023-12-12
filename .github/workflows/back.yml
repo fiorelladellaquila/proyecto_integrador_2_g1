@@ -101,7 +101,6 @@ jobs:
         echo "Finished deploying the app."
       env:
           HOST: ${{ secrets.DEPLOY_SERVER_IP_USER }}    
-          
 
           
 

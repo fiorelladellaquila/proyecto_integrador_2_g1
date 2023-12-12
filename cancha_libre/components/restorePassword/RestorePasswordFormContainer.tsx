@@ -1,13 +1,8 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { Formik } from 'formik';
-import {
-  FormHelperText,
-  Box,
-  InputAdornment,
-  IconButton,
-} from '@mui/material';
-import * as Yup from 'yup';
+import React, { useState } from "react";
+import axios from "axios";
+import { Formik } from "formik";
+import { FormHelperText, Box, InputAdornment, IconButton } from "@mui/material";
+import * as Yup from "yup";
 import {
   FormContainer,
   StyledFormControl,
@@ -17,22 +12,22 @@ import {
   StyledButton,
   Text,
   StyledValidationMessages,
-} from './restorePasswordFormContainer.style';
-import { useDispatch } from 'react-redux';
-import { useRouter } from 'next/router';
+} from "./restorePasswordFormContainer.style";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { restorePassword } from '@/services/restorePassword';
-import NotificationModal from '../modal/NotificationModal';
+import { restorePassword } from "@/services/restorePassword";
+import NotificationModal from "../modal/NotificationModal";
 
-const RestorePasswordFormContainer: React.FC<any> = ({code, email}: any) => {
-    const [showPassword, setShowPassword] = useState(false);
-    const [isOpen, setisOpen] = useState<boolean>(false);
+const RestorePasswordFormContainer: React.FC<any> = ({ code, email }: any) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [isOpen, setisOpen] = useState<boolean>(false);
   const dispatch = useDispatch();
   const router = useRouter();
 
-  console.log('code',code)
-  console.log('email', email)
+  console.log("code", code);
+  console.log("email", email);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -43,41 +38,56 @@ const RestorePasswordFormContainer: React.FC<any> = ({code, email}: any) => {
   };
 
   return (
-    <FormContainer >
-      <Box sx={{ width: '100%' }}>
-      <Formik
-        initialValues={{
-          password: '',
-          confirmPassword: '',
-          submit: null,
-        }}
-        validationSchema={Yup.object().shape({
+    <FormContainer>
+      <Box sx={{ width: "100%" }}>
+        <Formik
+          initialValues={{
+            password: "",
+            confirmPassword: "",
+            submit: null,
+          }}
+          validationSchema={Yup.object().shape({
             password: Yup.string()
-            .max(255)
-            .required("La contraseña es requerida"),
-          confirmPassword: Yup.string().oneOf(
-            [Yup.ref("password")],
-            "Las contraseñas deben coincidir"
-          ),
-        })}
-        onSubmit={async (values) => {
+              .max(255)
+              .required("La contraseña es requerida"),
+            confirmPassword: Yup.string().oneOf(
+              [Yup.ref("password")],
+              "Las contraseñas deben coincidir"
+            ),
+          })}
+          onSubmit={async (values) => {
             try {
-                const response = await restorePassword(code, email, values.password);
-                setisOpen(true)
-              } catch (error) {
-                console.error("Error en el restablecimiento de contraseña:", error);
-              }
-        }}
-      >
-        {({ errors, handleBlur, handleChange, handleSubmit, touched, values }) => (
-          <form
-            noValidate
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleSubmit();
-            }}
-          >
-             <StyledInputLabel
+              const response = await restorePassword(
+                code,
+                email,
+                values.password
+              );
+              console.log("response", response);
+              setisOpen(true);
+            } catch (error) {
+              console.error(
+                "Error en el restablecimiento de contraseña:",
+                error
+              );
+            }
+          }}
+        >
+          {({
+            errors,
+            handleBlur,
+            handleChange,
+            handleSubmit,
+            touched,
+            values,
+          }) => (
+            <form
+              noValidate
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSubmit();
+              }}
+            >
+              <StyledInputLabel
                 htmlFor="outlined-adornment-password-login"
                 style={{ color: "black" }}
               >
@@ -193,33 +203,40 @@ const RestorePasswordFormContainer: React.FC<any> = ({code, email}: any) => {
                 </Box>
               )}
 
-            {errors.submit && (
-              <Box sx={{ mt: 3 }}>
-                <FormHelperText error>{errors.submit}</FormHelperText>
+              {errors.submit && (
+                <Box sx={{ mt: 3 }}>
+                  <FormHelperText error>{errors.submit}</FormHelperText>
+                </Box>
+              )}
+              <Box
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: "1.5rem 0 0 0",
+                }}
+              >
+                <ButtonContainer>
+                  <StyledButton size="large" type="submit" variant="contained">
+                    Enviar
+                  </StyledButton>
+                </ButtonContainer>
               </Box>
-            )}
-            <Box sx={{ width: '100%', display: "flex", alignItems: "center", justifyContent:"center", padding:'1.5rem 0 0 0' }}>
-            <ButtonContainer>
-              <StyledButton  size="large" type="submit" variant="contained">
-                Enviar
-              </StyledButton>
-            </ButtonContainer>
-            </Box>
-          </form>
-        )}
-      </Formik>
-      <NotificationModal
-          isOpen={isOpen}
-          level="success"
-          title="Se restauró su contraseña exitosamente"
-          body="Tu registración se ha realizado con exito. Por favor, inicia sesion para continuar"
-          labelOnClick="CERRAR"
-          setClose={setisOpen}
-        />
+              <NotificationModal
+                isOpen={isOpen}
+                level="success"
+                title="Se restauró su contraseña exitosamente"
+                body="Tu registración se ha realizado con exito. Por favor, inicia sesion para continuar"
+                labelOnClick="Iniciar Sesión"
+                setClose={setisOpen}
+              />
+            </form>
+          )}
+        </Formik>
       </Box>
     </FormContainer>
   );
 };
 
 export default RestorePasswordFormContainer;
-

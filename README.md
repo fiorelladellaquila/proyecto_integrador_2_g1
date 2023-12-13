@@ -7,7 +7,7 @@
 
 ---
 
-### Descubre CANCHA LIBRE ⚽
+### Descubrí CANCHA LIBRE ⚽
 
 CANCHA LIBRE es la respuesta a tus necesidades de reserva de canchas de fútbol, ya sea para eventos sociales, festivos o competitivos. Qué te ofrecemos:
 

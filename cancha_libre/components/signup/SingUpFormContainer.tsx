@@ -370,17 +370,17 @@ const SignUpFormContainer: React.FC = () => {
                   </Text>
                 </NextLink>
               </Box>
+              <NotificationModal
+                isOpen={isOpen}
+                level="success"
+                title="Registracion exitosa"
+                body="Tu registración se ha realizado con exito. Por favor, inicia sesion para continuar"
+                labelOnClick="Iniciar Sesión"
+                setClose={setisOpen}
+              />
             </form>
           )}
         </Formik>
-        <NotificationModal
-          isOpen={isOpen}
-          level="success"
-          title="Registracion exitosa"
-          body="Tu registración se ha realizado con exito. Por favor, inicia sesion para continuar"
-          labelOnClick="Iniciar Sesión"
-          setClose={setisOpen}
-        />
       </Box>
     </FormContainer>
   );

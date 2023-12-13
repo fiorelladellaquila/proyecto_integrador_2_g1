@@ -13,6 +13,7 @@ import { URL_IMAGE_AWS } from "@/utils/constant/imagesAws";
 import { theme } from "@/styles/material-theme";  
 const HomeComponent: FC = () => {
     const [loading, setLoading] = React.useState<boolean>(true);
+    
   return (
     <ThemeProvider theme={theme}>
 <LayoutGeneral title={"Home"} >

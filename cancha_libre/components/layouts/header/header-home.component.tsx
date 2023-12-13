@@ -32,7 +32,7 @@ const HeaderHome: FC = () => {
     }
   }, []);
 
-  const isAdmin = userData.name === 'Cancha Libre';
+  const isAdmin = userData.name === 'CanchaLibre';
 
 
   return (

@@ -105,7 +105,7 @@ const LoginFormContainer: React.FC = () => {
         
             dispatch(login({ token: token }));
 
-            if(name === "Cancha Libre") {
+            if(name === "CanchaLibre") {
               router.push("/admin")
             } else {
               router.push("/home");
